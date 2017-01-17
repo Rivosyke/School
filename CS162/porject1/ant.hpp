@@ -14,13 +14,14 @@
 class Ant
 {
     private:
-        
-    
-    
-    
+		int rowCoord;
+		int colCoord;
+		   
     public:
-        Ant();
+        Ant(int, int);
+        int getRowCoord();
+        int getColCoord();
     
     
-
+};
 #endif // ANT_HPP

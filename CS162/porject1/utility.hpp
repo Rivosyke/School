@@ -1,8 +1,8 @@
-#include "utility.hpp"
+#ifndef UTILITY_HPP
+#define UTILITY_HPP
 
 using namespace std;
 
-bool blah()
-{
-    return true;
-}
+bool blah();
+
+#endif // UTILITY_HPP

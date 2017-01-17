@@ -1,7 +1,17 @@
 #include "ant.hpp"
 #include <iostream>
 
-bool blah2()
+Ant::Ant(int row, int col)
 {
-    return false;
+	rowCoord = row;
+	colCoord = col;
+}
+
+int Ant::getRowCoord()
+{
+	return rowCoord;
+}
+int Ant::getColCoord()
+{
+	return colCoord;
 }

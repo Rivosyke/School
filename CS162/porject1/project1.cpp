@@ -5,9 +5,9 @@
 
 using namespace std;
 
-void displayBoard (char** board, int size);
+void displayBoard(Ant* ant, char** board, int size);
 
-void fillBoard(char** board, int size);
+void fillBoard(Ant* ant, char** board, int size);
 
 int main()
 {
@@ -15,8 +15,12 @@ int main()
     
     int boardSize = 0;
     
+
+    
     cout << "Number of rows and columns: ";
     cin >> boardSize;
+    
+    Ant* ant = new Ant(boardSize/2, boardSize/2);
     
     char **board = new char*[boardSize];
 
@@ -25,8 +29,8 @@ int main()
         board[x] = new char[boardSize];
     }
     
-    fillBoard(board, boardSize);
-    displayBoard(board, boardSize);
+    fillBoard(ant, board, boardSize);
+    displayBoard(ant, board, boardSize);
     
     
     
@@ -34,26 +38,33 @@ int main()
 }
 
 
-void displayBoard (char** board, int size)
+void displayBoard(Ant* ant, char** board, int size)
 {
-    for (int x = 0; x < size; x++)
+    for (int row = 0; row < size; row++)
     {
-        for (int y = 0; y < size; y++)
+        for (int col = 0; col < size; col++)
         {
-            cout << board[y][x];
+			if ((col == ant->getColCoord()) && (row == ant->getRowCoord()))
+			{
+				cout << "*";
+			}
+            else
+            {
+				cout << board[row][col];
+			}
         }
         cout << endl;
     }
 }
 
 
-void fillBoard(char** board, int size)
+void fillBoard(Ant* ant, char** board, int size)
 {
-    for (int x = 0; x < size; x++)
+    for (int row = 0; row < size; row++)
     {
-        for (int y = 0; y < size; y++)
+        for (int col = 0; col < size; col++)
         {
-            board[y][x] = ' ';
+            board[row][col] = ' ';
         }
     }
 }
