@@ -15,3 +15,11 @@ int Ant::getColCoord()
 {
 	return colCoord;
 }
+void Ant::setRowCoord(int row)
+{
+	rowCoord = row;
+}
+void Ant::setColCoord(int col)
+{
+	colCoord = col;
+}

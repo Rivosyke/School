@@ -11,17 +11,22 @@
 
 #ifndef ANT_HPP
 #define ANT_HPP
+
+enum Direction {Right, Left, Down};
+
 class Ant
 {
     private:
 		int rowCoord;
 		int colCoord;
+		Direction facing;
 		   
     public:
         Ant(int, int);
         int getRowCoord();
         int getColCoord();
-    
-    
+        void setRowCoord(int);
+        void setColCoord(int);
+        
 };
 #endif // ANT_HPP

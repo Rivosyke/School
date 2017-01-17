@@ -9,6 +9,8 @@ void displayBoard(Ant* ant, char** board, int size);
 
 void fillBoard(Ant* ant, char** board, int size);
 
+
+
 int main()
 {
     
