@@ -1,3 +1,5 @@
+# This is a test of the git
+
 CXX = g++
 CXXFLAGS = -std=c++0x
 CXXFLAGS += -Wall #Turns on all warnings
