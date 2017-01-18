@@ -12,7 +12,7 @@
 #ifndef ANT_HPP
 #define ANT_HPP
 
-enum Direction {Right, Left, Down};
+enum Direction {Up, Right, Left, Down};
 
 class Ant
 {
@@ -25,8 +25,10 @@ class Ant
         Ant(int, int);
         int getRowCoord();
         int getColCoord();
+        Direction getDirection();
         void setRowCoord(int);
         void setColCoord(int);
+        void setDirection(Direction);
         
 };
 #endif // ANT_HPP

@@ -5,6 +5,7 @@ Ant::Ant(int row, int col)
 {
 	rowCoord = row;
 	colCoord = col;
+    facing = Up;
 }
 
 int Ant::getRowCoord()
@@ -23,3 +24,14 @@ void Ant::setColCoord(int col)
 {
 	colCoord = col;
 }
+
+Direction Ant::getDirection()
+{
+    return facing;
+}
+
+void Ant::setDirection(Direction newDirection)
+{
+    facing = newDirection;
+}
+
