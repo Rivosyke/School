@@ -1,8 +1,8 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
-using namespace std;
-
-bool blah();
+int menu();
+void clearInput();
+bool invalidInput(int userInput);
 
 #endif // UTILITY_HPP

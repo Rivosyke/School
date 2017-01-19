@@ -100,7 +100,9 @@ Board::~Board()
 {
 	for (int x = 0; x < boardSize; x++)
 	{
-		delete board[x];
+        //cout << board[x] << endl;
+        //board[x] = NULL;
+		delete [] board[x];
 	}
-	delete board;
+	delete [] board;
 }
