@@ -1,7 +1,6 @@
 #include "ant.hpp"
 #include "utility.hpp"
 #include <iostream>
-#include <iomanip>
 #include <cstdlib>
 #include <stdlib.h>
 #include <unistd.h>
@@ -31,9 +30,24 @@ int main()
     programDesc();
     
     cout << "Number of rows and columns: ";
-    cin >> boardSize;
+    boardSize = getInt();
+    
+    while (boardSize < 1)
+    {
+        cout << endl << "Choice is not valid: Please a positive number greater than 0.";
+        cout << endl << "Choice: ";
+        boardSize = getInt();
+    }
+    
     cout << "Number of steps: ";
-    cin >> userSteps;
+    userSteps = getInt();
+    
+    while (userSteps < 1)
+    {
+        cout << endl << "Choice is not valid: Please a positive number greater than 0.";
+        cout << endl << "Choice: ";
+        userSteps = getInt();
+    }
     
     switch (startingPositionChoice())
     {
@@ -43,16 +57,28 @@ int main()
             ant = new Ant(boardSize/2, boardSize/2);
             break;
         case 3:
-            do
+            cout << "Starting row position: ";
+            userRowStart = getInt();
+            
+            while ((userRowStart < 0) || (userRowStart > (boardSize -1)))
             {
+                cout << "Starting position as to be within the bounds of the board. "
+                     << "Please choose a number between 0 and " 
+                     << (boardSize -1) << endl;
                 cout << "Starting row position: ";
-                cin >> userRowStart;
-            } while (0);
-            do
+                userRowStart = getInt();
+            }
+            cout << "Starting column position: ";
+            userColStart = getInt();
+            while ((userColStart < 0) || (userColStart > (boardSize -1)))
             {
-                cout << "Starting column position: ";
-                cin >> userColStart;
-            } while (0);
+                cout << "Starting position as to be within the bounds of the board. "
+                     << "Please choose a number between 0 and " 
+                     << (boardSize -1) << endl;
+                cout << "Starting col position: ";
+                userColStart = getInt();
+            }
+
             ant = new Ant(userRowStart, userColStart);
             break;
         default:
@@ -95,15 +121,19 @@ int startingPositionChoice()
 {
     int userInput = 0;
     
-    do 
+    cout << "Starting position options:" << endl;
+    cout << "1) Random" << endl;
+    cout << "2) Middle of the board" << endl;
+    cout << "3) User specified" << endl;
+    cout << "Choice: ";
+    userInput = getInt();
+    
+    while ((userInput < 1) || (userInput > 3))
     {
-        cout << "Starting position options:" << endl;
-        cout << "1) Random" << endl;
-        cout << "2) Middle of the board" << endl;
-        cout << "3) User specified" << endl;
-        cout << "Choice: ";
-        cin >> userInput;
-    } while(0);
+        cout << endl << "Choice is not valid: Please choose 1-3.";
+        cout << endl << "Choice: ";
+        userInput = getInt();
+    }
     
     return userInput;
     
@@ -111,29 +141,39 @@ int startingPositionChoice()
 
 int simSpeedChoice()
 {
+    const int SLOW = 1000000;
+    const int MEDIUM = 500000;
+    const int FAST = 100000;
+    const int LUDICROUS = 10000;
+    
     int userInput = 0;
-    do 
+    
+    cout << endl;
+    cout << "Simulation Speed:" << endl;
+    cout << "1) Slow (1 second per step)" << endl;
+    cout << "2) Medium (0.5 seconds per step)" << endl;
+    cout << "3) Fast (0.1 seconds per step)" << endl;
+    cout << "4) Ludicrous speed! (0.01 seconds per step)" << endl;
+    cout << "Choice: ";
+    userInput = getInt();
+    
+    while ((userInput < 1) || (userInput > 4))
     {
-        cout << endl;
-        cout << "Simulation Speed:" << endl;
-        cout << "1) Slow (1 second per step)" << endl;
-        cout << "2) Medium (0.5 seconds per step)" << endl;
-        cout << "3) Fast (0.1 seconds per step)" << endl;
-        cout << "4) Ludicrous speed! (0.01 seconds per step)" << endl;
-        cout << "Choice: ";
-        cin >> userInput;
-    } while(0);
+        cout << endl << "Choice is not valid: Please choose 1-4.";
+        cout << endl << "Choice: ";
+        userInput = getInt();
+    }
     
     switch (userInput)
     {
         case 1:
-            return 1000000;
+            return SLOW;
         case 2:
-            return 500000;
+            return MEDIUM;
         case 3:
-            return 100000;
+            return FAST;
         case 4:
-            return 10000;
+            return LUDICROUS;
         default:
             return 1;
     };

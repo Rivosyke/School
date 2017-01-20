@@ -3,6 +3,6 @@
 
 int menu();
 void clearInput();
-bool invalidInput(int userInput);
+int getInt();
 
 #endif // UTILITY_HPP
