@@ -52,19 +52,47 @@ void Board::makeMove(Ant* ant)
         {
             case Up: 
                 ant->setDirection(Right);
-                ant->setColCoord(ant->getColCoord() + 1);
+                if ((ant->getColCoord() + 1) == boardSize)
+                {
+					ant->setColCoord(0);
+				}
+				else
+				{
+					ant->setColCoord(ant->getColCoord() + 1);
+				}
                 break;
             case Right:
                 ant->setDirection(Down);
-                ant->setRowCoord(ant->getRowCoord() + 1);
+                if ((ant->getRowCoord() + 1) == boardSize)
+                {
+					ant->setRowCoord(0);
+				}
+				else
+				{
+					ant->setRowCoord(ant->getRowCoord() + 1);
+				}
                 break;
             case Left:
                 ant->setDirection(Up);
-                ant->setRowCoord(ant->getRowCoord() - 1);
+                if ((ant->getRowCoord() - 1) == -1)
+                {
+					ant->setRowCoord(boardSize - 1);
+				}
+				else
+				{
+					ant->setRowCoord(ant->getRowCoord() - 1);
+				}
                 break;
             case Down:
                 ant->setDirection(Left);
-                ant->setColCoord(ant->getColCoord() - 1);
+                if ((ant->getColCoord() - 1) == -1)
+                {
+					ant->setColCoord(boardSize - 1);
+				}
+				else
+				{
+					ant->setColCoord(ant->getColCoord() - 1);
+				}
                 break;
         }
     }
@@ -76,19 +104,47 @@ void Board::makeMove(Ant* ant)
         {
             case Up: 
                 ant->setDirection(Left);
-                ant->setColCoord(ant->getColCoord() - 1);
+                if ((ant->getColCoord() -1) == -1)
+                {
+					ant->setColCoord(boardSize -1);
+				}
+				else
+				{
+					ant->setColCoord(ant->getColCoord() - 1);
+				}
                 break;
             case Right:
                 ant->setDirection(Up);
-                ant->setRowCoord(ant->getRowCoord() - 1);
+                if ((ant->getRowCoord() - 1) == -1)
+                {
+					ant->setRowCoord(boardSize - 1);
+				}
+				else
+				{
+					ant->setRowCoord(ant->getRowCoord() - 1);
+				}
                 break;
             case Left:
                 ant->setDirection(Down);
-                ant->setRowCoord(ant->getRowCoord() + 1);
+                if ((ant->getRowCoord() + 1) == boardSize)
+                {
+					ant->setRowCoord(0);
+				}
+				else
+				{
+					ant->setRowCoord(ant->getRowCoord() + 1);
+				}
                 break;
             case Down:
                 ant->setDirection(Right);
-                ant->setColCoord(ant->getColCoord() + 1);
+                if ((ant->getColCoord() + 1) == boardSize)
+                {
+					ant->setColCoord(0);
+				}
+				else
+				{
+					ant->setColCoord(ant->getColCoord() + 1);
+				}
                 break;
         }
     }

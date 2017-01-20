@@ -29,10 +29,10 @@ int main()
     
     programDesc();
     
-    cout << "Number of rows and columns: ";
+    cout << "Number of rows and columns (minimum 2): ";
     boardSize = getInt();
     
-    while (boardSize < 1)
+    while (boardSize < 2)
     {
         cout << endl << "Choice is not valid: Please a positive number greater than 0.";
         cout << endl << "Choice: ";
