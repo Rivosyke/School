@@ -1,12 +1,32 @@
+/*********************************************************************
+** Program name: Lab 1
+** Author: Ryan McGinn
+** Date: 14 January 2017
+** Description: This program will ask the user to choose a 2x2 or a 
+** 3x3 matrix and then fill the matrix with integers. Once the user
+** is done filling in the integers, the matrix will be displayed to
+** the console followed by the determinant of the matrix.
+*********************************************************************/
+
+#include <iostream>
+#include <unistd.h>
 #include "ant.hpp"
 #include "utility.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <stdlib.h>
-#include <unistd.h>
 #include "board.hpp"
 
-using namespace std;
+/*********************************************************************
+** Description: This program will ask the user to choose a 2x2 or a 
+** 3x3 matrix and then fill the matrix with integers. Once the user
+** is done filling in the integers, the matrix will be displayed to
+** the console followed by the determinant of the matrix.
+** Running Instruction: This program doesn't use any command-line 
+** arguments and is executed on the command line using the executable's
+** name.
+*********************************************************************/
+
+using std::cout;
+using std::endl;
+
 
 void programDesc();
 int startingPositionChoice();
