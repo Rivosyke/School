@@ -1,4 +1,5 @@
-# This is a test of the git
+# Author: Ryan McGinn (mostly derived from the week 1 lecture videos)
+# Date: 21 January 2017
 
 CXX = g++
 CXXFLAGS = -std=c++0x

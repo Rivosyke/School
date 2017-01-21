@@ -1,11 +1,15 @@
 /*********************************************************************
-** Program name: Lab 1
+** Program Name: Project 1
 ** Author: Ryan McGinn
-** Date: 14 January 2017
-** Description: This program will ask the user to choose a 2x2 or a 
-** 3x3 matrix and then fill the matrix with integers. Once the user
-** is done filling in the integers, the matrix will be displayed to
-** the console followed by the determinant of the matrix.
+** Date: 20 January 2017
+** Description: This program will implement Langont's Ant, a Turing
+** machine that follow's two simple rules: 
+** 1) On a blank char, flip the space to a #, turn right, move one
+** 2) On a # char, flip the # to a blank, turn left, move one.
+** The user will be prompted for various information: grid size,
+** number of steps, speed of the simulation, and starting position of
+** the ant. The simulation will then display each step until it is 
+** finished.
 *********************************************************************/
 
 #include "ant.hpp"

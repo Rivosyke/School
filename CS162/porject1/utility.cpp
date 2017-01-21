@@ -1,11 +1,15 @@
 /*********************************************************************
-** Program name: Lab 1
+** Program Name: Project 1
 ** Author: Ryan McGinn
-** Date: 14 January 2017
-** Description: This program will ask the user to choose a 2x2 or a 
-** 3x3 matrix and then fill the matrix with integers. Once the user
-** is done filling in the integers, the matrix will be displayed to
-** the console followed by the determinant of the matrix.
+** Date: 20 January 2017
+** Description: This program will implement Langont's Ant, a Turing
+** machine that follow's two simple rules: 
+** 1) On a blank char, flip the space to a #, turn right, move one
+** 2) On a # char, flip the # to a blank, turn left, move one.
+** The user will be prompted for various information: grid size,
+** number of steps, speed of the simulation, and starting position of
+** the ant. The simulation will then display each step until it is 
+** finished.
 *********************************************************************/
 
 #include "utility.hpp"
@@ -19,12 +23,8 @@ using std::string;
 using std::cin;
 
 /*********************************************************************
-** Description: This function will accept two parameters: a pointer to
-** an array of pointers and an integer. There is no return type (void).
-** It will prompt the user to enter either 4 digits or 9 integers, 
-** depending on the int passed to it. Each integer input will fill a spot
-** in the matrix. Like determinant(), it requires that size be either
-** a 2 or a 3.
+** Description: This is a generic menu that will allow the user to
+** either run the program they executed or quit.
 *********************************************************************/
 
 int menu()
@@ -59,13 +59,62 @@ int menu()
     
 
 /*********************************************************************
-** Description: This function will accept two parameters: a pointer to
-** an array of pointers and an integer. There is no return type (void).
-** It will prompt the user to enter either 4 digits or 9 integers, 
-** depending on the int passed to it. Each integer input will fill a spot
-** in the matrix. Like determinant(), it requires that size be either
-** a 2 or a 3.
+** Description: This function will return an int that has been properly
+** input. It will test the user input for all non-digits and keep
+** having the user try inputs until a valid integer is input. This 
+** includes negative numbers as well.
 *********************************************************************/ 
+int getInt()
+{
+    string userInput;
+    getline(cin, userInput, '\n');
+    bool validInput;
+    
+    do
+    {
+        validInput = true;
+        
+        if (userInput.length() == 0)
+        {
+            validInput = false;
+        }
+
+        for (unsigned int x = 0; x < userInput.length(); x++)
+		{       
+			// This statement is here to ensure that a hyphen as the first
+			// character doesn't get flagged as invalid as this would 
+			// indicate negative numbers.
+			if ((x == 0 && userInput[x] == '-') && userInput.length() > 1)
+			{
+				continue;
+			}
+			// If the character is not a digit, flag it as false   
+			else if ((userInput[x] < '0') || (userInput[x] > '9'))
+			{
+				validInput = false;
+			}
+		}
+        
+     
+        if (!validInput)
+        {
+            cout << "Invalid Input - try again" << endl;
+            cout << "User input: ";
+            getline(cin, userInput, '\n');
+        }
+    } while (!validInput);
+    
+    return stoi(userInput);
+}
+
+/*********************************************************************
+** Description: This version of getInt has been left here, commented
+** out, in order to show what I would have had to do if I didn't use
+** the continue keyword. I found that I'd need to do two separate for 
+** loops to account for negative numbers. I thought that was far too
+** messy, code wise.
+*********************************************************************/ 
+/*
 int getInt()
 {
     string userInput;
@@ -110,6 +159,28 @@ int getInt()
     } while (!validInput);
     
     return stoi(userInput);
+}
+*/
+
+/*********************************************************************
+** Description: This function will generate a random number based
+** off of the number passed in. This will create a range from 0 to 
+** that number.
+*********************************************************************/
+int randomNum(int modNumber)
+{
+	return (rand() % modNumber);
+}	
+
+/*********************************************************************
+** Description: This function will generate a random number based
+** off of the number passed in. This will create a range from 0 to 
+** that number. This overloaded version will take another number that
+** will add a certain number to the final output.
+*********************************************************************/	
+int randomNum(int modNumber, int plusNumber)
+{
+	return (rand() % modNumber) + plusNumber;
 }
     
 
