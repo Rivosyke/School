@@ -1,32 +1,31 @@
-# This is a test of the git
 
 CXX = g++
-CXXFLAGS = -std=c++0x
+CXXFLAGS = -std=c++11
 CXXFLAGS += -Wall #Turns on all warnings
 CXXFLAGS += -pedantic-errors #Strictly enforce the standard
 CXXFLAGS += -g #Debugging info
 #CXXFLAGS += O3 #Optimation option
 
-OBJS = utility.o ant.o board.o project1.o 
+OBJS = Game.o utility.o Die.o LoadedDie.o lab3.o 
 	
-HEADERS = utility.hpp ant.hpp board.hpp
+HEADERS = Game.hpp Die.hpp LoadedDie.hpp utility.hpp
 
-SRCS = utility.cpp ant.cpp board.cpp project1.cpp
+SRCS = Game.cpp Die.cpp utility.cpp lab3.cpp LoadedDie.cpp
 
 
 #target: dependencies
 #	rule to build	
 
-default: clean project1
+default: clean lab3
 
-project1: ${HEADERS} ${OBJS}
-	${CXX} ${CXXFLAGS} ${OBJS} -o project1
+lab3: ${HEADERS} ${OBJS}
+	${CXX} ${CXXFLAGS} ${OBJS} -o lab3
 
 ${OBJS}: ${SRCS}
 	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
 
 clean: 
 	rm -f *.o
-	rm -f project1
+	rm -f lab3
 
 
