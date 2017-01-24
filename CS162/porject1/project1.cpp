@@ -1,12 +1,41 @@
+/*********************************************************************
+** Program Name: Project 1
+** Author: Ryan McGinn
+** Date: 20 January 2017
+** Description: This program will implement Langont's Ant, a Turing
+** machine that follow's two simple rules: 
+** 1) On a blank char, flip the space to a #, turn right, move one
+** 2) On a # char, flip the # to a blank, turn left, move one.
+** The user will be prompted for various information: grid size,
+** number of steps, speed of the simulation, and starting position of
+** the ant. The simulation will then display each step until it is 
+** finished.
+*********************************************************************/
+
+#include <iostream>
+#include <unistd.h>
 #include "ant.hpp"
 #include "utility.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <stdlib.h>
-#include <unistd.h>
 #include "board.hpp"
+#include <ctime>
 
-using namespace std;
+/*********************************************************************
+** Description: This program will implement Langont's Ant, a Turing
+** machine that follow's two simple rules: 
+** 1) On a blank char, flip the space to a #, turn right, move one
+** 2) On a # char, flip the # to a blank, turn left, move one.
+** The user will be prompted for various information: grid size,
+** number of steps, speed of the simulation, and starting position of
+** the ant. The simulation will then display each step until it is 
+** finished.
+** Running Instruction: This program doesn't use any command-line 
+** arguments and is executed on the command line using the executable's
+** name.
+*********************************************************************/
+
+using std::cout;
+using std::endl;
+
 
 void programDesc();
 int startingPositionChoice();
@@ -14,6 +43,9 @@ int simSpeedChoice();
 
 int main()
 {
+	// Seeds the Pseudo-random number generator 
+	srand(time(NULL));
+	
     int boardSize = 0;
     int userSteps = 0;
     int userRowStart = 0;
@@ -29,10 +61,10 @@ int main()
     
     programDesc();
     
-    cout << "Number of rows and columns: ";
+    cout << "Number of rows and columns (minimum 2): ";
     boardSize = getInt();
     
-    while (boardSize < 1)
+    while (boardSize < 2)
     {
         cout << endl << "Choice is not valid: Please a positive number greater than 0.";
         cout << endl << "Choice: ";
@@ -52,14 +84,21 @@ int main()
     switch (startingPositionChoice())
     {
         case 1:
-            break;
+		{
+			int randomRowStart = randomNum(boardSize - 1);
+			int randomColStart = randomNum(boardSize - 1);
+			// Random starting location
+			ant = new Ant(randomRowStart, randomColStart);
+			break;       
+		}
         case 2:
+			// Middle of the board starting position
             ant = new Ant(boardSize/2, boardSize/2);
             break;
         case 3:
             cout << "Starting row position: ";
             userRowStart = getInt();
-            
+            // Checks that the position entered doesn't exceed array bounds
             while ((userRowStart < 0) || (userRowStart > (boardSize -1)))
             {
                 cout << "Starting position as to be within the bounds of the board. "
@@ -70,6 +109,7 @@ int main()
             }
             cout << "Starting column position: ";
             userColStart = getInt();
+            // Checks that the position entered doesn't exceed array bounds
             while ((userColStart < 0) || (userColStart > (boardSize -1)))
             {
                 cout << "Starting position as to be within the bounds of the board. "
@@ -78,7 +118,7 @@ int main()
                 cout << "Starting col position: ";
                 userColStart = getInt();
             }
-
+			// User defined starting position
             ant = new Ant(userRowStart, userColStart);
             break;
         default:
@@ -87,12 +127,15 @@ int main()
     
     int simSpeed = simSpeedChoice();
 
+	// Creates a board based on the user-entered number of rows/columns
     Board* board = new Board(boardSize);
     
     int stepsTaken = 0;
     
+    // Main loop that performs the ant movements
     while (stepsTaken <= userSteps)
     {
+		// Clearing the screen each move allows the user to see each move
         system("clear");
         board->displayBoard(ant);
         board->makeMove(ant);
@@ -107,6 +150,10 @@ int main()
     return 0;
 }
 
+/*********************************************************************
+** Description: This function will output a simple description of what
+** the program does before the user input prompts start.
+*********************************************************************/
 void programDesc()
 {
         
@@ -117,6 +164,11 @@ void programDesc()
     cout << "You will need to enter a few pieces of information to continue." << endl;
     cout << "****************************************************************" << endl;
 }
+
+/*********************************************************************
+** Description: This function will prompt the user to choose an option
+** for the starting position of the ant. 
+*********************************************************************/
 int startingPositionChoice()
 {
     int userInput = 0;
@@ -139,6 +191,11 @@ int startingPositionChoice()
     
 }
 
+/*********************************************************************
+** Description: This function will prompt the user to choose an option
+** for the speed of the simulation. The options correspond to constant
+** ints that represent microseconds. 
+*********************************************************************/
 int simSpeedChoice()
 {
     const int SLOW = 1000000;
