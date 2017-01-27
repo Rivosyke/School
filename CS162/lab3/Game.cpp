@@ -1,11 +1,28 @@
+/*********************************************************************
+** Author: Ryan McGinn
+** Date: 26 January 2017
+** Description: This is the implementation file for the Game class.
+** It contains the function definitions, the constructor, and the 
+** destructor.
+*********************************************************************/
+
 #include "Game.hpp"
 #include "Die.hpp"
 #include "LoadedDie.hpp"
 #include "utility.hpp"
 #include <iostream>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
+
+
+/*********************************************************************
+** Description: This constructor will take the passed in values 
+** and assign them to the appropriate data members. The player type
+** ints will be used to determine which type of die that player will
+** use.
+*********************************************************************/
 Game::Game(int player1Sides, int player2Sides, int rounds, int player1Type, int player2Type)
 {
     
@@ -30,8 +47,16 @@ Game::Game(int player1Sides, int player2Sides, int rounds, int player1Type, int 
     player1Score = 0;
     player2Score = 0;
     roundsToPlay = rounds;
-}
     
+    play();
+}
+
+/*********************************************************************
+** Description: This function is the primary control of the class. It
+** will clear the screen and then do a for loop controlled by the 
+** roundsToPlay variable. Each iteration of the loop will call round(),
+** which determines the "meat" of the class.
+*********************************************************************/
 void Game::play()
 {
     clearScreen();
@@ -41,12 +66,13 @@ void Game::play()
     }
     results();
 }    
-Game::~Game()
-{
-    delete player1Die;
-    delete player2Die;
-}
 
+
+/*********************************************************************
+** Description: This function will call the player's rollDice function
+** in order to get their rolls for that round. Depending on the results
+** of the rolls, the player's scores will be updated or it's a draw.
+*********************************************************************/
 void Game::round()
 {
     int p1Roll = player1Die->rollDice();
@@ -72,6 +98,12 @@ void Game::round()
     sleep(.8);
  
 }
+
+/*********************************************************************
+** Description: This function will check which player won or if the
+** scores are tied. Depending on the result, it will output an 
+** appropriate message.
+*********************************************************************/
 void Game::results()
 {
     cout << endl << "***************************************************" << endl;
@@ -91,4 +123,12 @@ void Game::results()
 }
     
     
-
+/*********************************************************************
+** Description: This destructor will delete the dynamically allocated
+** Die objects. 
+*********************************************************************/
+Game::~Game()
+{
+    delete player1Die;
+    delete player2Die;
+}

@@ -1,15 +1,8 @@
 /*********************************************************************
-** Program Name: Project 1
 ** Author: Ryan McGinn
-** Date: 20 January 2017
-** Description: This program will implement Langont's Ant, a Turing
-** machine that follow's two simple rules: 
-** 1) On a blank char, flip the space to a #, turn right, move one
-** 2) On a # char, flip the # to a blank, turn left, move one.
-** The user will be prompted for various information: grid size,
-** number of steps, speed of the simulation, and starting position of
-** the ant. The simulation will then display each step until it is 
-** finished.
+** Date: 26 January 2017
+** Description: This is the implementation file for the utility library.
+** It contains the function definitions for this library.
 *********************************************************************/
 
 #include "utility.hpp"
@@ -18,6 +11,7 @@
 #include <stdlib.h>
 #include <string>
 #include <unistd.h>
+#include <ctime>
 
 using std::cout;
 using std::endl;
@@ -175,24 +169,30 @@ int randomNum(int modNumber)
 	return (rand() % modNumber);
 }	
 
+
 /*********************************************************************
-** Description: This function will generate a random number based
-** off of the number passed in. This will create a range from 0 to 
-** that number. This overloaded version will take another number that
-** will add a certain number to the final output.
-*********************************************************************/	
-int randomNum(int modNumber, int plusNumber)
-{
-	return (rand() % modNumber) + plusNumber;
-}
-    
+** Description: This function is just a wrapper for the system command
+** in order to not have those libraries be included on every file 
+** that needs to clear the screen.
+*********************************************************************/
 void clearScreen()
 {
     system("clear");
 }
 
+/*********************************************************************
+** Description: This function will prompt the user to choose an option
+** for the speed of the simulation. The options correspond to constant
+** ints that represent microseconds. 
+*********************************************************************/
 void sleep(double time)
 {
     int msToS = 1000000;
     usleep(msToS * time);
+}
+
+void seedRN()
+{
+    // Seeds the Pseudo-random number generator 
+	srand(time(NULL));
 }
