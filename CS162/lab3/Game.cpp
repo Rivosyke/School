@@ -21,7 +21,7 @@ using std::endl;
 ** Description: This constructor will take the passed in values 
 ** and assign them to the appropriate data members. The player type
 ** ints will be used to determine which type of die that player will
-** use.
+** use and the player scores will be set to 0.
 *********************************************************************/
 Game::Game(int player1Sides, int player2Sides, int rounds, int player1Type, int player2Type)
 {

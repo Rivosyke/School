@@ -1,7 +1,7 @@
 /*********************************************************************
 ** Author: Ryan McGinn
 ** Date: 26 January 2017
-** Description: This is the declaration file for the utility library.
+** Description: This is the specification file for the utility library.
 ** It contains the function declarations for this library. These 
 ** functions perform commonly called upon tasks in a program such as
 ** clearing the screen, making the program sleep (wait), and doing

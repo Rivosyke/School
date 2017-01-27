@@ -191,6 +191,11 @@ void sleep(double time)
     usleep(msToS * time);
 }
 
+/*********************************************************************
+** Description: This function is just a wrapper for seeding the random
+** number generator in order to not have those header files be included 
+** on every file that needs to clear the screen.
+*********************************************************************/
 void seedRN()
 {
     // Seeds the Pseudo-random number generator 

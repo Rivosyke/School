@@ -1,7 +1,7 @@
 /*********************************************************************
 ** Author: Ryan McGinn
 ** Date: 26 January 2017
-** Description: This is the definition file for the Game class.
+** Description: This is the specification file for the Game class.
 ** This class has five data members: two Die pointers, two ints to
 ** represent the player's scores, and an int for the number of rounds
 ** to play. 
