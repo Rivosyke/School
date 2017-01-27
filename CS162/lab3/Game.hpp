@@ -22,12 +22,16 @@ class Game
         int player1Score;
         int player2Score;
         int roundsToPlay;
+        int player1DieType;
+        int player2DieType;
+        int player1Sides;
+        int player2Sides;
         void round();
         void results();
         void play();
     
     public:
-        Game(int player1Sides, int player2Sides, int rounds, int player1Type, int player2Type);
+        Game();
         ~Game();
         
 }; 
