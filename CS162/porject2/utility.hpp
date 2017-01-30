@@ -13,6 +13,7 @@
 
 int menu();
 int getInt();
+double getDouble();
 int randomNum(int modNumber);
 void clearScreen();
 void sleep(double time);

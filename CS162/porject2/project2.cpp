@@ -30,13 +30,24 @@ using std::endl;
 
 int main()
 {
-	
-	Item soap("Zest Soap", "bar(s)", 2, 4.56);
-	
-	soap.displayItem();
-	
 	List list;
-	list.addItem();
+    
+	Item* soap = new Item("Zest Soap", "bar(s)", 2, 4.56);
+	Item* protein = new Item("Protein Bars", "bar(s)", 12, 1.79);
+    Item* lego = new Item("Legos", "box(s)", 5, 54.30);
+    Item* bath = new Item("Bath Salts", "ounce(s)", 20, 2.90);
+    Item* tissue = new Item("Tissue", "packet(s)", 15, 4.99);
+    
+	list.addItem(soap);
+    list.addItem(protein);
+    list.addItem(lego);
+    list.addItem(bath);
+    list.addItem(tissue);
+    
+	
+	
+    list.printList();
+
 	
 	return 0;
 }

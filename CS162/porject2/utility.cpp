@@ -104,6 +104,28 @@ int getInt()
     return stoi(userInput);
 }
 
+double getDouble()
+{
+    double userInput = 0;
+    bool validInput;
+    
+    do 
+    {
+        validInput = true;
+        
+        cin >> userInput;
+        if (cin.fail())
+        {
+            cout << "Invalid Input - try again" << endl;
+            cout << "User input: ";
+            validInput = false;
+        }
+        cin.clear();
+        cin.ignore(500, '\n');
+    } while (!validInput);
+    
+    return userInput;
+}
 /*********************************************************************
 ** Description: This version of getInt has been left here, commented
 ** out, in order to show what I would have had to do if I didn't use

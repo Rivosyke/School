@@ -25,8 +25,10 @@ class List
 		List();
 		~List();
 		void addItem();
+        void addItem(Item*);
 		void deleteItem(Item& oldItem);
 		void expandArray();
+        void printList();
 		
 };
 

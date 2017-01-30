@@ -23,6 +23,10 @@ List::List()
 }
 List::~List()
 {
+    for (int x = 0; x < listSize; x++)
+    {
+        delete groceryList[x];
+    }
 	delete [] groceryList;
 }
 void List::addItem()
@@ -40,16 +44,42 @@ void List::addItem()
 	cout << "******* New Item Input *******";
 	cout << endl << "Item Name : ";
 	getline(cin, tempName);
+    
 	cout << endl << "Item type : ";
 	getline(cin, tempType);
+    
 	cout << endl << "Item qty  : ";
 	tempQty = getInt();
+    while (tempQty < 1)
+    {
+        cout << "Error - Quantity to order must be at least 1" << endl;
+        cout << "Item qty   :";
+        tempQty = getInt();
+    }
+    
 	cout << endl << "Item price: ";
-	cin >> tempPrice;
+	tempPrice = getDouble();
+    while (tempPrice < 0.01)
+    {
+        cout << "Error - cost of the item must be at least $0.01" << endl;
+        cout << "Item Price:";
+        tempPrice = getDouble();
+    }
 	
 	groceryList[itemsUsed] = new Item(tempName, tempType, tempQty, tempPrice);
 	itemsUsed++;
 	
+}
+
+void List::addItem(Item* newItem)
+{
+    if (itemsUsed == listSize)
+	{
+		expandArray();
+	}
+    
+    groceryList[itemsUsed] = newItem;
+    itemsUsed++;
 }
 
 void List::deleteItem(Item& oldItem)
@@ -70,4 +100,28 @@ void List::expandArray()
 	groceryList = tempArray;
 	tempArray = nullptr;
 
+}
+
+void List::printList()
+{
+    double totalPrice = 0;
+    clearScreen();
+    cout << "Current contents of the grocery list:" << endl;
+    cout << "**************************************" << endl;
+    
+    if (itemsUsed == 0)
+    {
+        cout << "There are no items in the list." << endl;
+    }
+    else
+    {
+        for (int x = 0; x < itemsUsed; x++)
+        {
+            cout << endl << "Item # " << x + 1;
+            groceryList[x]->displayItem();
+            totalPrice += groceryList[x]->extendedPrice();
+        }
+    }
+    cout << "**************************************" << endl;
+    cout << "Total cost of all items: $" << totalPrice << endl;
 }

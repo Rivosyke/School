@@ -10,8 +10,13 @@
 #include "utility.hpp"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::setprecision;
+using std::fixed;
 
 
 Item::Item(string name, string type, int quantity, double price)
@@ -31,7 +36,8 @@ double Item::extendedPrice()
 void Item::displayItem()
 {
 	cout << endl;
-	cout << "Item name : " << itemName << endl;
-	cout << "Item price: " << itemPrice << endl;
-	cout << "Item qty  : " << itemQuantity << " " << unitType << endl;
+	cout << "Item name     : " << itemName << endl;
+	cout << fixed << setprecision(2) << "Item price    : $" << itemPrice << endl;
+	cout << "Item qty      : " << itemQuantity << " " << unitType << endl;
+    cout << fixed << setprecision(2) << "Extended Price: $" << extendedPrice() << endl;
 }
