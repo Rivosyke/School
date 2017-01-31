@@ -19,6 +19,7 @@
 
 using std::cout;
 using std::endl;
+using std::cin;
 
 /*********************************************************************
 ** Description: 
@@ -27,6 +28,7 @@ using std::endl;
 ** name.
 *********************************************************************/
 
+void listOperations(List *list);
 
 int main()
 {
@@ -44,10 +46,58 @@ int main()
     list.addItem(bath);
     list.addItem(tissue);
     
+ //   list.printList();
+    
+    
+	listOperations(&list);
 	
-	
-    list.printList();
+  //  list.printList();
 
 	
 	return 0;
+}
+
+void listOperations(List *list)
+{
+    
+    int userInput;
+    string userString;
+    do
+    {
+        cout << "1) Print List" << endl;
+        cout << "2) Add Item" << endl;
+        cout << "3) Delete Item" << endl;
+        cout << "4) Exit" << endl;
+        cout << "User Input: ";
+    
+        userInput = getInt();
+    
+        while ((userInput < 1) || (userInput > 4))
+        {
+            cout << endl << "Choice is not valid: Please choose 1-4.";
+            cout << endl << "Choice: ";
+            userInput = getInt();
+        }
+        
+        switch (userInput)
+        {
+            case 1:
+                list->printList();
+                break;
+            case 2:
+                list->addItem();
+                break;
+            case 3:
+                cout << "Enter item name to delete: ";
+                getline(cin, userString);
+                if (!(list->deleteItem(userString)))
+                {
+                    cout << endl << "Item not found in the list" << endl;
+                }
+                break;
+            case 4:
+                break;
+        }
+        
+    } while (userInput != 4);
 }

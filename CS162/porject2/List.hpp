@@ -26,7 +26,7 @@ class List
 		~List();
 		void addItem();
         void addItem(Item*);
-		void deleteItem(Item& oldItem);
+		bool deleteItem(string searchTerm);
 		void expandArray();
         void printList();
 		

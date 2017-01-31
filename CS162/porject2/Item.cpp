@@ -41,3 +41,8 @@ void Item::displayItem()
 	cout << "Item qty      : " << itemQuantity << " " << unitType << endl;
     cout << fixed << setprecision(2) << "Extended Price: $" << extendedPrice() << endl;
 }
+
+string Item::getName()
+{
+    return itemName;
+}

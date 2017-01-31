@@ -26,6 +26,7 @@ List::~List()
     for (int x = 0; x < listSize; x++)
     {
         delete groceryList[x];
+        groceryList[x] = nullptr;
     }
 	delete [] groceryList;
 }
@@ -82,8 +83,32 @@ void List::addItem(Item* newItem)
     itemsUsed++;
 }
 
-void List::deleteItem(Item& oldItem)
+bool List::deleteItem(string searchTerm)
 {
+    bool foundValue = false;
+    int itemPos = 0;
+    
+    for (int x = 0; x < itemsUsed; x++)
+    {
+        if (groceryList[x]->getName() == searchTerm)
+        {
+            itemPos = x;
+            foundValue = true;
+        }
+    }
+    if (!foundValue)
+    {
+        return false;
+    }
+    delete groceryList[itemPos];
+    
+    for (int x = itemPos; x < itemsUsed; x++)
+    {
+        groceryList[x] = groceryList[x+1];
+    }
+    itemsUsed--;
+    return true;
+    
 }
 void List::expandArray()
 {
@@ -105,7 +130,7 @@ void List::expandArray()
 void List::printList()
 {
     double totalPrice = 0;
-    clearScreen();
+    //clearScreen();
     cout << "Current contents of the grocery list:" << endl;
     cout << "**************************************" << endl;
     
@@ -123,5 +148,6 @@ void List::printList()
         }
     }
     cout << "**************************************" << endl;
+    cout << "Total items in the cart: " << itemsUsed << endl;
     cout << "Total cost of all items: $" << totalPrice << endl;
 }

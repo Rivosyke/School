@@ -25,6 +25,7 @@ class Item
 		Item(string name, string type, int quantity, double price);
 		double extendedPrice();
 		void displayItem();
+        string getName();
         
 };
 
