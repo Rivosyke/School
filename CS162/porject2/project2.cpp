@@ -45,15 +45,9 @@ int main()
     list.addItem(lego);
     list.addItem(bath);
     list.addItem(tissue);
-    
- //   list.printList();
-    
-    
+   
 	listOperations(&list);
-	
-  //  list.printList();
-
-	
+    
 	return 0;
 }
 
