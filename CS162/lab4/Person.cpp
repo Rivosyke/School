@@ -1,13 +1,18 @@
 #include "Person.hpp"
 
-People::People(string tempName, int tempAge)
+Person::Person(string tempName, int tempAge)
 {
 	name = tempName;
 	age = tempAge;
 }
 	
-People::~People()
+Person::~Person()
 {}
-void do_work(int work)
+void Person::do_work(int work)
 {
 }
+string Person::getName()
+{
+    return name;
+}
+

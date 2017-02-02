@@ -223,3 +223,8 @@ void seedRN()
     // Seeds the Pseudo-random number generator 
 	srand(time(NULL));
 }
+
+double randomDouble(int modNumber)
+{
+    return static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/modNumber));
+}

@@ -10,7 +10,7 @@ class Student : public Person
 		
 	public:
 		Student(string tempName, int tempAge);
-		int do_work(int work);
+		void do_work(int work);
 };
 
 #endif // STUDENT_HPP

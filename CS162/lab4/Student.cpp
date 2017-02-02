@@ -1,11 +1,15 @@
 #include "Student.hpp"
 #include "Person.hpp"
+#include <iostream>
+#include "utility.hpp"
 
-Student::Student(string tempName, int tempAge) : People(tempName, tempAge)
+using namespace std;
+
+Student::Student(string tempName, int tempAge) : Person(tempName, tempAge)
 {
-	gpa = 0.0;
+	gpa = randomDouble(4);
 }
-int Student::do_work(int work)
+void Student::do_work(int work)
 {
-	return 0;
+    cout << name << " did " << work << " hours of homework." << endl;
 }

@@ -18,5 +18,6 @@ int randomNum(int modNumber);
 void clearScreen();
 void sleep(double time);
 void seedRN();
+double randomDouble(int modNumber);
 
 #endif // UTILITY_HPP

@@ -6,15 +6,16 @@
 
 using std::string;
 
-class People
+class Person
 {
 	protected:
 		string name;
 		int age;
 	public:
-		People(string tempName, int tempAge);
-		virtual ~People();
+		Person(string tempName, int tempAge);
+		virtual ~Person();
 		virtual void do_work(int work);
+        string getName();
 };
 
 
