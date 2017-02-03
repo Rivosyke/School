@@ -15,6 +15,14 @@ University::University()
 }
 University::~University()
 {
+    for (unsigned int x = 0; x < personListing.size(); x++)
+    {
+        delete personListing[x];
+    }
+    for (unsigned int x = 0; x < buildingListing.size(); x++)
+    {
+        delete buildingListing[x];
+    }
 }
 
 void University::addPerson(Person* newPerson)
@@ -29,6 +37,7 @@ void University::addBuilding(Building* newBuilding)
 void University::printPeople()
 {
     clearScreen();
+    cout << "University name: " << uniName << endl;
     cout << "Listing of all personnel in the system: " << endl;
     cout << "************************************************" << endl;
     
@@ -40,7 +49,7 @@ void University::printPeople()
 
 void University::printBuildings()
 {
-    clearScreen();
+    cout << "University name: " << uniName << endl;
     cout << "Listing of all buildings in the system: " << endl;
     cout << "************************************************" << endl;
     
@@ -51,3 +60,83 @@ void University::printBuildings()
         cout << endl;
     }
 }
+
+void University::programMenu()
+{
+    int userInput;
+    do
+    {
+        //clearScreen();
+        printMenu();
+        userInput = getInt();
+    
+        while ((userInput < 1) || (userInput > 4))
+        {
+            cout << endl << "Choice is not valid: Please choose 1-4.";
+            cout << endl << "Choice: ";
+            userInput = getInt();
+        }
+        
+        switch (userInput)
+        {
+            case 1:
+                printBuildings();
+                break;
+            case 2:
+                printPeople();
+                break;
+            case 3:
+                subPeopleMenu();
+                break;
+            case 4:
+                break;
+        }
+        
+    } while (userInput != 4);
+    
+}
+
+void University::printMenu()
+{
+    cout << "************************************************" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*            Oregon State University           *" << endl;
+    cout << "*               Information System             *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "************************************************" << endl << endl;
+    
+    cout << "1) Print Buildings" << endl;
+    cout << "2) Print Personnel" << endl;
+    cout << "3) Initiate Work" << endl;
+    cout << "4) Exit Program" << endl;
+    cout << "User Input: ";
+}
+
+void University::subPeopleMenu()
+{
+    cout << endl;
+    
+    unsigned int userInput = 0;
+    
+    cout << "************************************************" << endl;
+    cout << "Choose a person: " << endl;
+    for (unsigned int x = 0; x < personListing.size(); x++)
+    {
+        cout << x + 1 << ") " << personListing[x]->getName() << endl;
+    }
+    
+    userInput = getInt();
+    
+    while ((userInput < 1) || (userInput > personListing.size()))
+    {
+        cout << endl << "Choice is not valid: Please choose 1-" << personListing.size();
+        cout << endl << "Choice: ";
+        userInput = getInt();
+    }
+    
+    personListing[userInput-1]->do_work(randomNum(1000));
+    
+}
+    

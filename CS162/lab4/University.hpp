@@ -26,6 +26,9 @@ class University
         void addBuilding(Building* newBuilding);
         void printPeople();
         void printBuildings();
+        void programMenu();
+        void printMenu();
+        void subPeopleMenu();
 };
 
 

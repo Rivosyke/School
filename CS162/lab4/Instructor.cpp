@@ -6,7 +6,7 @@
 using std::cout;
 using std::endl;
 
-Instructor::Instructor(string tempName, int tempAge) : Person(tempName, tempAge)
+Instructor::Instructor(string tempName) : Person(tempName)
 {
 	rating = randomDouble(5);
 }

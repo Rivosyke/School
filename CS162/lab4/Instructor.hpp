@@ -8,7 +8,7 @@ class Instructor : public Person
     private:
         double rating;
     public:
-        Instructor(string tempName, int tempAge);
+        Instructor(string tempName);
         void do_work(int work);
 };        
 

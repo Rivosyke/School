@@ -12,7 +12,7 @@ class Person
 		string name;
 		int age;
 	public:
-		Person(string tempName, int tempAge);
+		Person(string tempName);
 		virtual ~Person();
 		virtual void do_work(int work);
         string getName();

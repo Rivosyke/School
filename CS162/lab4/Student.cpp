@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Student::Student(string tempName, int tempAge) : Person(tempName, tempAge)
+Student::Student(string tempName) : Person(tempName)
 {
 	gpa = randomDouble(4);
 }

@@ -1,9 +1,8 @@
 #include "Person.hpp"
 
-Person::Person(string tempName, int tempAge)
+Person::Person(string tempName)
 {
 	name = tempName;
-	age = tempAge;
 }
 	
 Person::~Person()

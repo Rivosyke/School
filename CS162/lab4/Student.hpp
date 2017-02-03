@@ -9,7 +9,7 @@ class Student : public Person
 		double gpa;
 		
 	public:
-		Student(string tempName, int tempAge);
+		Student(string tempName);
 		void do_work(int work);
 };
 
