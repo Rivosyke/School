@@ -9,6 +9,7 @@ using std::endl;
 Instructor::Instructor(string tempName) : Person(tempName)
 {
 	rating = randomDouble(5);
+	age = randomNum(55) + 18;
 }
 void Instructor::do_work(int work)
 {

@@ -7,6 +7,7 @@
 
 using std::cout;
 using std::endl;
+using std::cin;
 
 University::University()
 {
@@ -66,7 +67,7 @@ void University::programMenu()
     int userInput;
     do
     {
-        //clearScreen();
+        clearScreen();
         printMenu();
         userInput = getInt();
     
@@ -80,10 +81,16 @@ void University::programMenu()
         switch (userInput)
         {
             case 1:
+				clearScreen();
                 printBuildings();
+                cout << endl << "Hit enter to continue...";
+                cin.get();
                 break;
             case 2:
+				clearScreen();
                 printPeople();
+				cout << endl << "Hit enter to continue...";
+                cin.get();
                 break;
             case 3:
                 subPeopleMenu();
@@ -116,7 +123,7 @@ void University::printMenu()
 
 void University::subPeopleMenu()
 {
-    cout << endl;
+    clearScreen();
     
     unsigned int userInput = 0;
     
@@ -126,6 +133,7 @@ void University::subPeopleMenu()
     {
         cout << x + 1 << ") " << personListing[x]->getName() << endl;
     }
+    cout << endl << "User Input: ";
     
     userInput = getInt();
     
@@ -136,7 +144,11 @@ void University::subPeopleMenu()
         userInput = getInt();
     }
     
+    cout << endl;
     personListing[userInput-1]->do_work(randomNum(1000));
+    
+	cout << endl << "Hit enter to continue...";
+	cin.get();
     
 }
     

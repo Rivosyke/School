@@ -8,6 +8,7 @@ using namespace std;
 Student::Student(string tempName) : Person(tempName)
 {
 	gpa = randomDouble(4);
+	age = randomNum(55) + 18;
 }
 void Student::do_work(int work)
 {
