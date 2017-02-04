@@ -1,10 +1,4 @@
-#include "Person.hpp"
 #include "Instructor.hpp"
-#include "utility.hpp"
-#include <iostream>
-
-using std::cout;
-using std::endl;
 
 Instructor::Instructor(string tempName) : Person(tempName)
 {

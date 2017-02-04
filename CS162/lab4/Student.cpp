@@ -1,9 +1,4 @@
 #include "Student.hpp"
-#include "Person.hpp"
-#include <iostream>
-#include "utility.hpp"
-
-using namespace std;
 
 Student::Student(string tempName) : Person(tempName)
 {

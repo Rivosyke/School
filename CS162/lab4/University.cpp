@@ -1,13 +1,7 @@
-#include "Person.hpp"
 #include "University.hpp"
-#include "Building.hpp"
-#include "Student.hpp"
-#include "Instructor.hpp"
 #include "utility.hpp"
 
-using std::cout;
-using std::endl;
-using std::cin;
+
 
 University::University()
 {

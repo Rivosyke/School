@@ -2,6 +2,11 @@
 #define STUDENT_HPP
 
 #include "Person.hpp"
+#include <iostream>
+#include "utility.hpp"
+
+using std::cout;
+using std::endl;
 
 class Student : public Person 
 {

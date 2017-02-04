@@ -2,6 +2,11 @@
 #define INSTRUCTOR_HPP
 
 #include "Person.hpp"
+#include "utility.hpp"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 class Instructor : public Person 
 {
