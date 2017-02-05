@@ -18,5 +18,6 @@ int randomNum(int modNumber);
 void clearScreen();
 void sleep(double time);
 void seedRN();
+void pauseScreen();
 
 #endif // UTILITY_HPP

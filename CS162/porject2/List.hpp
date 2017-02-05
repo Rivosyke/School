@@ -1,10 +1,11 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 26 January 2017
-** Description: This is the specification file for the Die class.
-** This class has one data member: an int to hold the number of sides
-** that the Die will have. Input validation in main() will ensure
-** that the number will be greater than 1.
+** Date: 05 February 2017
+** Description: This is the specification file for the List class.
+** This class has three data members: an array of pointers to Items,
+** and int to represent the total size of the array, and an int to
+** represent the amount of items used in the array. There are various
+** methods that perform operations on the array.
 *********************************************************************/
 
 #ifndef LIST_HPP
@@ -13,7 +14,11 @@
 #include <string>
 #include "Item.hpp"
 
+
 using std::string;
+using std::cout;
+using std::endl;
+
 
 class List
 {
@@ -24,11 +29,12 @@ class List
 	public:
 		List();
 		~List();
-		void addItem();
+		void addItem(string tempName, string tempType, int tempQty, double tempPrice);
         void addItem(Item*);
 		bool deleteItem(string searchTerm);
 		void expandArray();
         void printList();
+        bool operator== (const string searchTerm);
 		
 };
 

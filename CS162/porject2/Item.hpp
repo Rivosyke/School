@@ -1,17 +1,25 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 26 January 2017
-** Description: This is the specification file for the Die class.
-** This class has one data member: an int to hold the number of sides
-** that the Die will have. Input validation in main() will ensure
-** that the number will be greater than 1.
+** Date: 05 February 2017
+** Description: This is the specification file for the Item class.
+** This class has four data members: two strings, an int, and a 
+** double. This class represents one element in the grocery list.
 *********************************************************************/
 
 #ifndef ITEM_HPP
 #define ITEM_HPP
 
 #include <string>
+#include "utility.hpp"
+#include <iostream>
+#include <string>
+#include <iomanip>
 
+using std::cout;
+using std::endl;
+using std::string;
+using std::setprecision;
+using std::fixed;
 using std::string;
 
 class Item

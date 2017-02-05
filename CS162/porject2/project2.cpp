@@ -29,6 +29,7 @@ using std::cin;
 *********************************************************************/
 
 void listOperations(List *list);
+void addItemInput(List* tempList);
 
 int main()
 {
@@ -47,10 +48,14 @@ int main()
     list.addItem(tissue);
    
 	listOperations(&list);
-    
+ 
 	return 0;
 }
 
+/*********************************************************************
+** Description: This constructor takes in a string and assigns it to
+** the name data member.
+*********************************************************************/
 void listOperations(List *list)
 {
     
@@ -79,7 +84,7 @@ void listOperations(List *list)
                 list->printList();
                 break;
             case 2:
-                list->addItem();
+                addItemInput(list);
                 break;
             case 3:
                 cout << "Enter item name to delete: ";
@@ -87,11 +92,75 @@ void listOperations(List *list)
                 if (!(list->deleteItem(userString)))
                 {
                     cout << endl << "Item not found in the list" << endl;
+					pauseScreen();
                 }
+                else
+                {
+					cout << "Item successfully deleted. " << endl;
+					pauseScreen();
+				}
                 break;
             case 4:
                 break;
         }
         
     } while (userInput != 4);
+}
+
+/*********************************************************************
+** Description: This constructor takes in a string and assigns it to
+** the name data member.
+*********************************************************************/
+void addItemInput(List* tempList)
+{
+	string tempName;
+	string tempType;
+	int tempQty;
+	double tempPrice;
+	bool itemExists = false;
+	
+	do
+	{
+		cout << "******* New Item Input *******";
+		cout << endl << "Item Name : ";
+		getline(cin, tempName);
+	
+		if (*tempList == tempName)
+		{
+			itemExists = true;
+			cout << "Item already exists in the cart, please enter a new item" << endl;
+		}
+		else
+		{
+			itemExists = false;
+		}
+	} while (itemExists);
+	
+    
+	cout << "Item type : ";
+	getline(cin, tempType);
+    
+	cout << "Item qty  : ";
+	tempQty = getInt();
+    while (tempQty < 1)
+    {
+        cout << "Error - Quantity to order must be at least 1" << endl;
+        cout << "Item qty   :";
+        tempQty = getInt();
+    }
+    
+	cout << "Item price: ";
+	tempPrice = getDouble();
+    while (tempPrice < 0.01)
+    {
+        cout << "Error - cost of the item must be at least $0.01" << endl;
+        cout << "Item Price:";
+        tempPrice = getDouble();
+    }
+    
+    tempList->addItem(tempName, tempType, tempQty, tempPrice);
+    cout << "Item successfully added. " << endl;
+    pauseScreen();
+    clearScreen();
+    
 }

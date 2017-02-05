@@ -223,3 +223,14 @@ void seedRN()
     // Seeds the Pseudo-random number generator 
 	srand(time(NULL));
 }
+
+/*********************************************************************
+** Description: This function will pause the screen and prompt the 
+** user to hit enter to continue.
+*********************************************************************/
+void pauseScreen()
+{
+	cout << "Hit enter to continue...";
+	cout << endl;
+	cin.get();	
+}

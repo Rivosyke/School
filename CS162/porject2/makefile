@@ -1,4 +1,5 @@
-
+# Author: Ryan McGinn (mostly derived from the week 1 lecture videos)
+# Date: 05 February 2017
 CXX = g++
 CXXFLAGS = -std=c++11
 CXXFLAGS += -Wall #Turns on all warnings
