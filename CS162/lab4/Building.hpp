@@ -1,3 +1,11 @@
+/*********************************************************************
+** Author: Ryan McGinn
+** Date: 04 February 2017
+** Description: This is the specification file for the Building class.
+** This class has three data members: two strings and one int. There 
+** are three get functions, a constructor, and a destructor.
+*********************************************************************/
+
 #ifndef BUILDING_HPP
 #define BUILDING_HPP
 

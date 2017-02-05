@@ -1,7 +1,16 @@
+/*********************************************************************
+** Author: Ryan McGinn
+** Date: 04 February 2017
+** Description: This is the specification file for the University class.
+** This class has three data members: two vectors to hold people and
+** buildings and a string for the university name. There are two setters
+** and 4 printing functions.
+*********************************************************************/
+
 #ifndef UNIVERSITY_HPP
 #define UNIVERSITY_HPP
 
-#include "Person.hpp"
+#include "People.hpp"
 #include "Building.hpp"
 #include "Student.hpp"
 #include "Instructor.hpp"
@@ -18,14 +27,14 @@ using std::cin;
 class University 
 {
     private:
-        vector <Person*> personListing;
+        vector <People*> peopleListing;
         vector <Building*> buildingListing;
         string uniName;
         
     public:
         University();
         ~University();
-        void addPerson(Person* newPerson);
+        void addPeople(People* newPeople);
         void addBuilding(Building* newBuilding);
         void printPeople();
         void printBuildings();

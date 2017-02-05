@@ -1,50 +1,40 @@
 /*********************************************************************
 ** Author: Ryan McGinn
 ** Date: 04 February 2017
-** Description: This is the implementation file for the Building class.
+** Description: This is the implementation file for the People class.
 ** It contains the function definitions, the constructor, and the 
 ** destructor.
 *********************************************************************/
 
-#include "Building.hpp"
+#include "People.hpp"
 
 /*********************************************************************
-** Description: This constructor takes in two stings and an int. It 
-** then assigns them to the appropriate data members.
+** Description: This constructor takes in a string and assigns it to
+** the name data member.
 *********************************************************************/
-Building::Building(string tempName, string tempAddress, int tempSqft)
+People::People(string tempName)
 {
 	name = tempName;
-	address = tempAddress;
-	sqft = tempSqft;
 }
 
 /*********************************************************************
 ** Description: This destructor does nothing.
 *********************************************************************/
-Building::~Building()
+People::~People()
 {}
 
 /*********************************************************************
-** Description: This function returns the address data member.
+** Description: This function is overloaded by the two inherited 
+** classes and does nothing on its own.
 *********************************************************************/
-string Building::getAddress()
+void People::do_work(int work)
 {
-	return address;
 }
 
 /*********************************************************************
 ** Description: This function returns the name data member.
 *********************************************************************/
-string Building::getName()
+string People::getName()
 {
-	return name;
-}
-
-/*********************************************************************
-** Description: This function returns the sqft data member.
-*********************************************************************/
-int Building::getSqft()
-{
-	return sqft;
+    return name;
 }

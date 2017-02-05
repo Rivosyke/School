@@ -1,18 +1,34 @@
+/*********************************************************************
+** Author: Ryan McGinn
+** Date: 04 February 2017
+** Description: This is the implementation file for the University class.
+** It contains the function definitions, the constructor, and the 
+** destructor.
+*********************************************************************/
+
 #include "University.hpp"
 #include "utility.hpp"
 
 
-
+/*********************************************************************
+** Description: This constructor will seed the random number generator
+** and set the uniName.
+*********************************************************************/
 University::University()
 {
     seedRN();
     uniName = "Oregon State University";
 }
+
+/*********************************************************************
+** Description: This destructor will iterate through both vectors and 
+** delete all the elements within them.
+*********************************************************************/
 University::~University()
 {
-    for (unsigned int x = 0; x < personListing.size(); x++)
+    for (unsigned int x = 0; x < peopleListing.size(); x++)
     {
-        delete personListing[x];
+        delete peopleListing[x];
     }
     for (unsigned int x = 0; x < buildingListing.size(); x++)
     {
@@ -20,15 +36,28 @@ University::~University()
     }
 }
 
-void University::addPerson(Person* newPerson)
+/*********************************************************************
+** Description: This function takes in a pointer to people object
+** and then pushes it onto the vector.
+*********************************************************************/
+void University::addPeople(People* newPeople)
 {
-    personListing.push_back(newPerson);
+    peopleListing.push_back(newPeople);
 }
+
+/*********************************************************************
+** Description: This function takes in a pointer to building object
+** and then pushes it onto the vector.
+*********************************************************************/
 void University::addBuilding(Building* newBuilding)
 {
     buildingListing.push_back(newBuilding);
 }
 
+/*********************************************************************
+** Description: This function outputs the names of the people in the
+** peopleListing vector.
+*********************************************************************/
 void University::printPeople()
 {
     clearScreen();
@@ -36,12 +65,16 @@ void University::printPeople()
     cout << "Listing of all personnel in the system: " << endl;
     cout << "************************************************" << endl;
     
-    for (unsigned int x = 0; x < personListing.size(); x++)
+    for (unsigned int x = 0; x < peopleListing.size(); x++)
     {
-        cout << personListing[x]->getName() << endl;
+        cout << peopleListing[x]->getName() << endl;
     }
 }
 
+/*********************************************************************
+** Description: This function outputs the buildings in the
+** buildingsListing vector.
+*********************************************************************/
 void University::printBuildings()
 {
     cout << "University name: " << uniName << endl;
@@ -56,6 +89,12 @@ void University::printBuildings()
     }
 }
 
+
+/*********************************************************************
+** Description: This function implements the functionality outputted
+** by the menu() function. It handles the user input, the input
+** validation, and the resulting function calls based on the output.
+*********************************************************************/
 void University::programMenu()
 {
     int userInput;
@@ -97,6 +136,10 @@ void University::programMenu()
     
 }
 
+/*********************************************************************
+** Description: This function outputs a menu showing the options 
+** available to this information system
+*********************************************************************/
 void University::printMenu()
 {
     cout << "************************************************" << endl;
@@ -115,6 +158,12 @@ void University::printMenu()
     cout << "User Input: ";
 }
 
+/*********************************************************************
+** Description: This function will implement the functionality from
+** option 3 in the programMenu function. It will print out the names
+** of all personnel in the peopleListing vector and prompt the user to
+** choose a person to perform the work.
+*********************************************************************/
 void University::subPeopleMenu()
 {
     clearScreen();
@@ -123,23 +172,28 @@ void University::subPeopleMenu()
     
     cout << "************************************************" << endl;
     cout << "Choose a person: " << endl;
-    for (unsigned int x = 0; x < personListing.size(); x++)
+    
+    // Iterates through the peopleListing vector to print all names
+    for (unsigned int x = 0; x < peopleListing.size(); x++)
     {
-        cout << x + 1 << ") " << personListing[x]->getName() << endl;
+        cout << x + 1 << ") " << peopleListing[x]->getName() << endl;
     }
     cout << endl << "User Input: ";
     
     userInput = getInt();
     
-    while ((userInput < 1) || (userInput > personListing.size()))
+    // This ensure the user chooses a valid input
+    while ((userInput < 1) || (userInput > peopleListing.size()))
     {
-        cout << endl << "Choice is not valid: Please choose 1-" << personListing.size();
+        cout << endl << "Choice is not valid: Please choose 1-" << peopleListing.size();
         cout << endl << "Choice: ";
         userInput = getInt();
     }
     
     cout << endl;
-    personListing[userInput-1]->do_work(randomNum(1000));
+    
+    // Uses the user's input to call the appropriate person's do_work function
+    peopleListing[userInput-1]->do_work(randomNum(1000));
     
 	cout << endl << "Hit enter to continue...";
 	cin.get();

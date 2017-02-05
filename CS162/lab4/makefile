@@ -6,11 +6,11 @@ CXXFLAGS += -pedantic-errors #Strictly enforce the standard
 CXXFLAGS += -g #Debugging info
 #CXXFLAGS += O3 #Optimation option
 
-OBJS = Person.o utility.o Instructor.o Student.o University.o lab4.o Building.o
+OBJS = People.o utility.o Instructor.o Student.o University.o lab4.o Building.o
 	
-HEADERS = Person.hpp Instructor.hpp utility.hpp Student.hpp University.hpp Building.hpp
+HEADERS = People.hpp Instructor.hpp utility.hpp Student.hpp University.hpp Building.hpp
 
-SRCS = Person.cpp Student.cpp utility.cpp Instructor.cpp University.cpp Building.cpp
+SRCS = People.cpp Student.cpp utility.cpp Instructor.cpp University.cpp Building.cpp
  
 
 #target: dependencies

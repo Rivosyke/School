@@ -104,6 +104,12 @@ int getInt()
     return stoi(userInput);
 }
 
+/*********************************************************************
+** Description: This function will return a double that has been properly
+** input. It will test the user input for all non-digits and keep
+** having the user try inputs until a valid double is input. This 
+** includes negative numbers as well.
+*********************************************************************/ 
 double getDouble()
 {
     double userInput = 0;
