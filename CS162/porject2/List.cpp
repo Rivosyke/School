@@ -19,6 +19,10 @@ List::List()
 {
 	listSize = 4;
 	groceryList = new Item*[listSize];
+    for (int x = 0; x < listSize; x++)
+    {
+        groceryList[x] = nullptr;
+    }
 	itemsUsed= 0;
 }
 
@@ -28,12 +32,16 @@ List::List()
 *********************************************************************/
 List::~List()
 {
-    for (int x = 0; x < listSize; x++)
+    if (listSize != 0)
     {
-        delete groceryList[x];
-        groceryList[x] = nullptr;
+        for (int x = 0; x < listSize; x++)
+        {
+            delete groceryList[x];
+            groceryList[x] = nullptr;
+        }
     }
 	delete [] groceryList;
+    groceryList = nullptr;
 }
 
 /*********************************************************************
@@ -114,6 +122,10 @@ void List::expandArray()
 {
 	// Creates an array that is 4 larger than the existing array
 	Item** tempArray = new Item*[listSize+4];
+    for (int x = 0; x < listSize + 4; x++)
+    {
+        tempArray[x] = nullptr;
+    }
 	
 	// Iterates through and assigns the existing values to the new array
 	for (int x = 0; x < itemsUsed; x++)
@@ -127,6 +139,7 @@ void List::expandArray()
 	listSize += 4;
 	groceryList = tempArray;
 	tempArray = nullptr;
+    delete [] tempArray;
 
 }
 

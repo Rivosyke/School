@@ -48,7 +48,6 @@ int main()
     list.addItem(tissue);
    
 	listOperations(&list);
- 
 	return 0;
 }
 
