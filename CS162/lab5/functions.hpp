@@ -7,3 +7,5 @@ using std::cout;
 using std::endl;
 
 void reverse(string str);
+
+int sumArray(int array[], int elements);

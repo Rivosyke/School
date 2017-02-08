@@ -11,7 +11,12 @@ int main()
 {
 	//menuFunctionality();
 	reverse("This is a test");
-	
+    
+    int array[] = {10,10,10};
+    
+    sumArray(array, 3);
+    
+    
 	return 0;
 }
 
