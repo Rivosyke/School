@@ -15,7 +15,11 @@
 void printMenu();
 void menuFunctionality();
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+
 
 /*********************************************************************
 ** Running Instruction: This program doesn't use any command-line 
@@ -40,7 +44,12 @@ void menuFunctionality()
     int arrayInput;
     int tNumInput = 0;
     
-    int* array = new int[100];
+    // Large array to hold enough ints for a determined user to input
+    int* array = new int[10000];
+    for (int x = 0; x < 10000; x++)
+    {
+		array[x] = 0;
+	}
     int counter = 0;
     
     do
@@ -104,8 +113,10 @@ void menuFunctionality()
                 cout << "Enter a number to calculate the triangular number." << endl;
                 cout << "User Input: ";
                 tNumInput = getInt();
+                
                 cout << "Triangular Number is: ";
                 cout << triangleSum(tNumInput) << endl;
+                
                 pauseScreen();
                 break;
             case 4:
