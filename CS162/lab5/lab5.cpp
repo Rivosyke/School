@@ -46,14 +46,15 @@ void menuFunctionality()
     
     // Large array to hold enough ints for a determined user to input
     int* array = new int[10000];
-    for (int x = 0; x < 10000; x++)
-    {
-		array[x] = 0;
-	}
-    int counter = 0;
+
     
     do
     {
+        for (int x = 0; x < 10000; x++)
+        {
+            array[x] = 0;
+        }
+        int counter = 0;
         // Clears the screen and prints the menu
         clearScreen();
         printMenu();
