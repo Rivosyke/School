@@ -29,6 +29,20 @@ using namespace std;
 *********************************************************************/
 int main()
 {
+    seedRN();
+    Creature* b1 = new Barbarian();
+    Creature* b2 = new Barbarian();
+    
+    //cout << "Attack Roll: " << b1->attack() << endl;
+    b2->defense(b1->attack());
+    cout << b2->getStr() << endl;
+    
+    
+    
+    
+    
+    
+    
 	return 0;
 }
 

@@ -13,5 +13,23 @@
 #include "Creature.hpp"
 #include "Die.hpp"
 #include "utility.hpp"
+#include <iostream>
+
+using namespace std;
+
+class Barbarian: public Creature
+{
+    private:
+        Die* attackDie1;
+        Die* attackDie2;
+        Die* defenseDie1;
+        Die* defenseDie2;
+    
+    public:
+        Barbarian();
+        int attack();
+        void defense(int attackRating);
+        ~Barbarian();
+};
 
 #endif // BARBARIAN_HPP

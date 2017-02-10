@@ -18,6 +18,14 @@ class Creature
 	protected:
 		int strengthRating;
 		int armorRating;
+    public:
+        Creature(int tempStr, int tempArmor);
+        virtual int attack() = 0;
+        virtual void defense(int attackRating) = 0;
+        virtual ~Creature();
+        int getStr();
+        int getArmor();
+        
 };
 
 
