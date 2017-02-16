@@ -12,12 +12,10 @@ Creature::Creature(int tempStr, int tempArmor)
 {
     strengthRating = tempStr;
     armorRating = tempArmor;
+    alive = true;
 }
-//int Creature::attack();
-//void Creature::defense(int attackRating);
 Creature::~Creature()
-{
-}
+{}
 
 int Creature::getStr()
 {
@@ -26,4 +24,8 @@ int Creature::getStr()
 int Creature::getArmor()
 {
     return armorRating;
+}
+bool Creature::living()
+{
+    return alive;
 }

@@ -16,4 +16,21 @@
 #include "Die.hpp"
 #include "utility.hpp"
 
+
+class Vampire: public Creature
+{
+    private:
+        Die* attackDie1;
+        Die* defenseDie1;
+
+    
+    public:
+        Vampire();
+        int attack();
+        void defense(int attackRating);
+        ~Vampire();
+};
+
+
+
 #endif // VAMPIRE_HPP

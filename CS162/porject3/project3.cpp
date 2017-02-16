@@ -30,19 +30,21 @@ using namespace std;
 int main()
 {
     seedRN();
-    Creature* b1 = new Barbarian();
-    Creature* b2 = new Barbarian();
+    Creature* b1 = new Medusa();
+    Creature* b2 = new HarryPotter();
     
-    //cout << "Attack Roll: " << b1->attack() << endl;
-    b2->defense(b1->attack());
-    cout << b2->getStr() << endl;
+    int rounds = 0;
     
+    while (b2->living())
+    {
+        b2->defense(b1->attack());
+        cout << "Str rating    : " << b2->getStr() << endl;
+        rounds++;
+        cout << endl;
+    }
     
-    
-    
-    
-    
-    
+    cout << endl << "It took " << rounds << " rounds." << endl;
+
 	return 0;
 }
 

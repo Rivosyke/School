@@ -11,7 +11,22 @@
 #define BLUEMEN_HPP
 
 #include "Creature.hpp"
-#include "Die.hpp"
-#include "utility.hpp"
+#include <vector>
 
+class BlueMen: public Creature
+{
+    private:
+        Die* attackDie1;
+        Die* attackDie2;
+        vector<Die*> defenseDie;
+        bool firstDieLost;
+        bool secondDieLost;
+        
+    
+    public:
+        BlueMen();
+        int attack();
+        void defense(int attackRating);
+        ~BlueMen();
+};
 #endif // BLUEMEN_HPP

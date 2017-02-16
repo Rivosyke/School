@@ -11,7 +11,21 @@
 #define HARRYPOTTER_HPP
 
 #include "Creature.hpp"
-#include "Die.hpp"
-#include "utility.hpp"
+
+class HarryPotter: public Creature
+{
+    private:
+        Die* attackDie1;
+        Die* attackDie2;
+        Die* defenseDie1;
+        Die* defenseDie2;
+        bool firstLife;
+
+    public:
+        HarryPotter();
+        int attack();
+        void defense(int attackRating);
+        ~HarryPotter();
+};
 
 #endif // HARRYPOTTER_HPP

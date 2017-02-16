@@ -12,12 +12,16 @@
 
 #include "Die.hpp"
 #include "utility.hpp"
+#include <iostream>
+
+using namespace std;
 
 class Creature
 {
 	protected:
 		int strengthRating;
 		int armorRating;
+        bool alive;
     public:
         Creature(int tempStr, int tempArmor);
         virtual int attack() = 0;
@@ -25,6 +29,7 @@ class Creature
         virtual ~Creature();
         int getStr();
         int getArmor();
+        bool living();
         
 };
 

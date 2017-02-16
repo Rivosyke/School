@@ -11,7 +11,21 @@
 #define MEDUSA_HPP
 
 #include "Creature.hpp"
-#include "Die.hpp"
-#include "utility.hpp"
+
+class Medusa: public Creature
+{
+    private:
+        Die* attackDie1;
+        Die* attackDie2;
+        Die* defenseDie1;
+
+    
+    public:
+        Medusa();
+        int attack();
+        void defense(int attackRating);
+        ~Medusa();
+};
+
 
 #endif // MEDUSA_HPP

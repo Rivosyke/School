@@ -37,6 +37,7 @@ void Barbarian::defense(int attackRating)
     if ((strengthRating - roundResult) <= 0)
     {
         strengthRating = 0;
+        alive = false;
     }
     else
     {

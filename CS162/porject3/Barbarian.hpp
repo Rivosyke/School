@@ -11,11 +11,6 @@
 #define BARBARIAN_HPP
 
 #include "Creature.hpp"
-#include "Die.hpp"
-#include "utility.hpp"
-#include <iostream>
-
-using namespace std;
 
 class Barbarian: public Creature
 {
