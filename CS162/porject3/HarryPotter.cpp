@@ -8,7 +8,7 @@
 
 #include "HarryPotter.hpp"
 
-HarryPotter::HarryPotter() : Creature(10, 0)
+HarryPotter::HarryPotter() : Creature(10, 0, "Harry Potter")
 {
     attackDie1 = new Die(6);
     attackDie2 = new Die(6);

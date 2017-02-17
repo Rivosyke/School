@@ -8,7 +8,7 @@
 
 #include "BlueMen.hpp"
 
-BlueMen::BlueMen() : Creature(12, 3)
+BlueMen::BlueMen() : Creature(12, 3, "Blue Men")
 {
     attackDie1 = new Die(10);
     attackDie2 = new Die(10);

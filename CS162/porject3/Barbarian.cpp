@@ -8,7 +8,7 @@
 
 #include "Barbarian.hpp"
 
-Barbarian::Barbarian() : Creature(12, 0)
+Barbarian::Barbarian() : Creature(12, 0, "Barbarian")
 {
     attackDie1 = new Die(6);
     attackDie2 = new Die(6);

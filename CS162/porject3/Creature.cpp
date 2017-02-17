@@ -8,11 +8,12 @@
 
 #include "Creature.hpp"
 
-Creature::Creature(int tempStr, int tempArmor)
+Creature::Creature(int tempStr, int tempArmor, string tempName)
 {
     strengthRating = tempStr;
     armorRating = tempArmor;
     alive = true;
+    name = tempName;
 }
 Creature::~Creature()
 {}
@@ -28,4 +29,9 @@ int Creature::getArmor()
 bool Creature::living()
 {
     return alive;
+}
+
+string Creature::getName()
+{
+    return name;
 }

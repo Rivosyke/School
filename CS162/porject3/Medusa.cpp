@@ -8,7 +8,7 @@
 
 #include "Medusa.hpp"
 
-Medusa::Medusa() : Creature(8, 3)
+Medusa::Medusa() : Creature(8, 3, "Medusa")
 {
     attackDie1 = new Die(6);
     attackDie2 = new Die(6);

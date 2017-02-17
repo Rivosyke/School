@@ -9,7 +9,7 @@
 #include "Vampire.hpp"
 
 
-Vampire::Vampire() : Creature(18, 1)
+Vampire::Vampire() : Creature(18, 1, "Vampire")
 {
     attackDie1 = new Die(12);
     defenseDie1 = new Die(6);

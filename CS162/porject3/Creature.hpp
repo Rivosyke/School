@@ -13,6 +13,7 @@
 #include "Die.hpp"
 #include "utility.hpp"
 #include <iostream>
+#include <string> 
 
 using namespace std;
 
@@ -22,14 +23,16 @@ class Creature
 		int strengthRating;
 		int armorRating;
         bool alive;
+        string name;
     public:
-        Creature(int tempStr, int tempArmor);
+        Creature(int tempStr, int tempArmor, string tempName);
         virtual int attack() = 0;
         virtual void defense(int attackRating) = 0;
         virtual ~Creature();
         int getStr();
         int getArmor();
         bool living();
+        string getName();
         
 };
 
