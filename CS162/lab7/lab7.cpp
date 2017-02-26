@@ -1,10 +1,10 @@
 /*********************************************************************
-** Program Name: Lab 5
+** Program Name: Lab 7
 ** Author: Ryan McGinn
-** Date: 09 February 2017
-** Description: This program will output a menu that gives the user
-** four different options: 1) Reverse a String, 2) Sum an array of ints,
-** 3) Calculate a Triangular Number, 4) Exit.
+** Date: 26 February 2017
+** Description: This program will implement a basic queue that adds
+** items to the back and gets them from the front. Various options
+** are presented to the user to perform operations on the queue.
 *********************************************************************/
 
 #include <iostream>
@@ -12,7 +12,8 @@
 #include "utility.hpp"
 
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 void printMenu();
 void queueOperations(Queue* queue);
