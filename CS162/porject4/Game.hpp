@@ -24,17 +24,28 @@
 #include "Vampire.hpp"
 #include "utility.hpp"
 #include <iostream>
+#include "CreatureList.hpp"
+
+using namespace std;
 
 class Game
 {
 	private:
-		int blah;
+		int playerOneWins;
+		int playerTwoWins;
+		CreatureList playerOneFighters;
+		CreatureList playerTwoFighters;
+		void printInitialMenu();
+		void monsterInput(int playerNum, int monsterNum);
+		void printMonsters();
+		Creature* monsterChoice(int choice);
+		
 	public:
 		Game();
-		~Game();
-		void printMenu();
-		Creature* monsterChoice(int choice);
-		void menuFunctionality();
+	//	~Game();
+		void play();
+
+		//void menuFunctionality();
 };
 
 #endif // GAME_HPP

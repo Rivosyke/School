@@ -1,5 +1,5 @@
 /*********************************************************************
-** Program Name: Project 3
+** Program Name: Project 4
 ** Author: Ryan McGinn
 ** Date: 18 February 2017
 ** Description: This program will pit 5 monster types against each 
@@ -16,10 +16,6 @@
 
 
 
-using namespace std;
-
-
-
 /*********************************************************************
 ** Running Instruction: This program doesn't use any command-line 
 ** arguments and is executed on the command line using the executable's
@@ -27,9 +23,9 @@ using namespace std;
 *********************************************************************/
 int main()
 {
-    menuFunctionality();
-
+	Game monsterTourney;
+	
+	monsterTourney.play();
+	
 	return 0;
 }
-
-

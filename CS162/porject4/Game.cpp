@@ -1,20 +1,137 @@
 #include "Game.hpp"
 
-using namespace std;
+
+Game::Game()
+{
+	playerOneWins = 0;
+	playerTwoWins = 0;
+}
+
+void Game::play()
+{
+	bool playerOneChosen  = false;
+	bool playerTwoChosen  = false;
+	int initialMenuChoice = 0;
+	int numOfMonsters = -1;
+	
+	do
+	{
+		clearScreen();
+		printInitialMenu();
+		
+		cout << "User Input: ";
+		initialMenuChoice = getInt();
+		
+		while ((initialMenuChoice < 1) || (initialMenuChoice > 5))
+        {
+            cout << endl << "Choice is not valid: Please choose 1-5.";
+            cout << endl << "User Input: ";
+            initialMenuChoice = getInt();
+        }
+		
+		// Checks to see if player one has already chosen fighters
+		if (initialMenuChoice == 2 and playerOneChosen)
+		{
+			cout << "Player one has already chosen!" << endl;
+			cout << "Please choose again." << endl;
+			pauseScreen();
+		}
+		// Checks to see if player two has already chosen fighters
+		else if (initialMenuChoice == 2 and playerTwoChosen)
+		{
+			cout << "Player two has already chosen!" << endl;
+			cout << "Please choose again." << endl;
+			pauseScreen();
+		}
+		else
+		{
+			switch(initialMenuChoice)
+			{
+				case 1:
+					cout << "Number of monsters on both sides: ";
+					numOfMonsters = getInt();
+					
+					while (numOfMonsters < 1)
+					{
+						cout << "There must be at least one monster on each side!" << endl;
+						cout << "Number of monsters on both sides: ";
+						numOfMonsters = getInt();
+					}
+					pauseScreen();
+					break;
+				case 2:
+					if (numOfMonsters == -1)
+					{
+						cout << "You must first choose the monster number!" << endl;
+						pauseScreen();
+					}
+					else
+					{
+						monsterInput(1, numOfMonsters);
+						pauseScreen();
+						playerOneChosen = true;
+					}
+					break;
+				case 3:
+					if (numOfMonsters == -1)
+					{
+						cout << "You must first choose the monster number!" << endl;
+						pauseScreen();
+					}
+					else
+					{
+						monsterInput(2, numOfMonsters);
+						pauseScreen();
+						playerTwoChosen = true;
+					}
+					break;
+				case 4:
+					break;
+				case 5:
+					break;
+			}
+		}
+	} while (initialMenuChoice != 5);		
+}		
+		
+		
+/*********************************************************************
+** Description: This method will populate the player lists with monsters
+** based on the player's choices.
+*********************************************************************/			
+void Game::monsterInput(int playerNum, int monsterNum)
+{
+	CreatureList* temp = nullptr;
+	
+	if (playerNum == 1)
+	{
+		temp = &playerOneFighters;
+		clearScreen();
+		cout << "Player One - How many monsters?";
+	}
+	else
+	{
+		temp = &playerTwoFighters;
+	}
+	
+	temp = nullptr;
+}
+	
+	
 
 /*********************************************************************
 ** Description: This function outputs a menu showing the options 
 ** available to the user.
 *********************************************************************/
-void Game::printMenu()
+void Game::printMonsters()
 {
     cout << "************************************************" << endl;
     cout << "*                                              *" << endl;
     cout << "*                                              *" << endl;
-    cout << "*             Monster Fighting!                *" << endl;
+    cout << "*                         		                *" << endl;
+    cout << "*             Choose your monsters!            *" << endl;
     cout << "*                                              *" << endl;
-    cout << "*            Choose two monsters               *" << endl;
-    cout << "*              to duke it out!                 *" << endl;
+    cout << "*                                              *" << endl;
     cout << "*                                              *" << endl;
     cout << "*                                              *" << endl;
     cout << "************************************************" << endl << endl;
@@ -28,10 +145,33 @@ void Game::printMenu()
     
 }
 
+void Game::printInitialMenu()
+{
+    cout << "************************************************" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*             Monster Tournament!              *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*           Have both players choose           *" << endl;
+    cout << "*               their fighters!                *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "*                                              *" << endl;
+    cout << "************************************************" << endl << endl;
+    
+    cout << "1) Choose number of fighters" << endl;
+    cout << "2) Player One Fighter Input" << endl;
+    cout << "3) Player Two Fighter Input" << endl;
+    cout << "4) Duke it out!" << endl;
+    cout << "5) Exit" << endl;
+    cout << endl;
+    
+}
+
 /*********************************************************************
 ** Description: This function will implement the functionality of the 
 ** options presented by the printMenu() function.
 *********************************************************************/
+/*
 void Game::menuFunctionality()
 {
     seedRN();
@@ -156,7 +296,7 @@ void Game::menuFunctionality()
     } while (userInput != 'n');
     
 }
-
+*/
 /*********************************************************************
 ** Description: This function takes in an int and uses a switch to 
 ** create and return a new object based on the choice.
@@ -184,3 +324,4 @@ Creature* Game::monsterChoice(int choice)
                 return nullptr;
         };
 }
+
