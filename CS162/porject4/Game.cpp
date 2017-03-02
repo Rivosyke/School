@@ -28,6 +28,7 @@ void Game::play()
             cout << endl << "User Input: ";
             initialMenuChoice = getInt();
         }
+        
 		
 		// Checks to see if player one has already chosen fighters
 		if (initialMenuChoice == 2 and playerOneChosen)
@@ -37,7 +38,7 @@ void Game::play()
 			pauseScreen();
 		}
 		// Checks to see if player two has already chosen fighters
-		else if (initialMenuChoice == 2 and playerTwoChosen)
+		else if (initialMenuChoice == 3 and playerTwoChosen)
 		{
 			cout << "Player two has already chosen!" << endl;
 			cout << "Please choose again." << endl;
@@ -47,6 +48,7 @@ void Game::play()
 		{
 			switch(initialMenuChoice)
 			{
+				// Choosing the number of monsters
 				case 1:
 					cout << "Number of monsters on both sides: ";
 					numOfMonsters = getInt();
@@ -59,6 +61,7 @@ void Game::play()
 					}
 					pauseScreen();
 					break;
+				// Player one monster inputs
 				case 2:
 					if (numOfMonsters == -1)
 					{
@@ -71,7 +74,9 @@ void Game::play()
 						pauseScreen();
 						playerOneChosen = true;
 					}
+
 					break;
+				// Player two monster inputs
 				case 3:
 					if (numOfMonsters == -1)
 					{
@@ -85,8 +90,13 @@ void Game::play()
 						playerTwoChosen = true;
 					}
 					break;
+				// Starting the fights
 				case 4:
+					playerOneFighters.printList();
+					playerTwoFighters.printList();
+					pauseScreen();
 					break;
+				// Exit
 				case 5:
 					break;
 			}
@@ -101,23 +111,95 @@ void Game::play()
 *********************************************************************/			
 void Game::monsterInput(int playerNum, int monsterNum)
 {
-	CreatureList* temp = nullptr;
+	int userChoice = 0;
 	
 	if (playerNum == 1)
 	{
-		temp = &playerOneFighters;
-		clearScreen();
-		cout << "Player One - How many monsters?";
+		for (int x = 0; x < monsterNum; x++)
+		{
+			clearScreen();
+			printMonsters();
+			cout << "Monster #" << x+1 << " choice: ";
+			userChoice = getInt();
+			
+			// Ensures the monster choice is valid
+			while ((userChoice < 1) || (userChoice > 5))
+			{
+				cout << endl << "Choice is not valid: Please choose 1-5.";
+				cout << endl << "Choice: ";
+				userChoice = getInt();
+			}		
+			playerOneFighters.addNodeTail(monsterChoice(userChoice));
+		}
 	}
 	else
-	{
-		temp = &playerTwoFighters;
+	{		
+		for (int x = 0; x < monsterNum; x++)
+		{
+			clearScreen();
+			printMonsters();
+			cout << "Monster #" << x+1 << " choice: ";
+			userChoice = getInt();
+			
+			// Ensures the monster choice is valid
+			while ((userChoice < 1) || (userChoice > 5))
+			{
+				cout << endl << "Choice is not valid: Please choose 1-5.";
+				cout << endl << "Choice: ";
+				userChoice = getInt();
+			}
+			
+			playerTwoFighters.addNodeTail(monsterChoice(userChoice));
+		}
 	}
-	
-	temp = nullptr;
 }
 	
-	
+void Game::monsterFighting()
+{
+		// Determines which fighter goes first
+        int startingFighter = randomNum(2);
+        
+        
+	    // Loop that handles the monster fighting based on the living
+	   	// status of each monster
+        while (monsters[0]->living() and monsters[1]->living())
+        {
+			cout << "***********************************************" << endl;
+			cout << "Round #" << rounds +1 << endl;
+			
+            cout << endl << "Attack: " << monsters[0]->getName() << endl;
+            monsters[1]->defense(monsters[0]->attack());
+            cout << "Remaining str for " << monsters[1]->getName() 
+				 << " : " << monsters[1]->getStr() << endl;
+            
+            // Checks to see if the first attack of the round killed the 
+            // second monster
+            if (monsters[1]->living())
+            {
+                cout << endl << "Attack: " << monsters[1]->getName() << endl;
+                monsters[0]->defense(monsters[1]->attack());
+                cout << "Remaining str for " << monsters[0]->getName() 
+                     << " : " << monsters[0]->getStr() << endl;
+            }
+            
+            cout << endl;
+            rounds++;
+        }
+        
+		cout << "***********************************************" << endl;
+		
+		// Checks to see if monster 2 has died
+        if (!monsters[1]->living())
+        {
+            cout << "Monster #1, " << monsters[0]->getName() 
+				 << " is the winner!" << endl;
+        }
+        else
+        {
+            cout << "Monster #2, " << monsters[1]->getName() 
+				 << " is the winner!" << endl;
+        }
+}
 
 /*********************************************************************
 ** Description: This function outputs a menu showing the options 
@@ -166,6 +248,9 @@ void Game::printInitialMenu()
     cout << endl;
     
 }
+
+
+
 
 /*********************************************************************
 ** Description: This function will implement the functionality of the 

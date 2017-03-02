@@ -66,6 +66,7 @@ void CreatureList::printTail()
 	}
 }	
 
+
 /*********************************************************************
 ** Description: This method will print the list, provided it isn't
 ** empty.
@@ -121,23 +122,23 @@ void CreatureList::deleteTail()
 ** Description: This method will delete the first element in the list,
 ** provided the list isn't empty.
 *********************************************************************/
-void CreatureList::deleteHead()
+Creature* CreatureList::getHead()
 {
 	if (numOfElements == 0)
 	{
-		cout << "The list is currently empty!" << endl;
+		return nullptr;
 	}
 	else if (numOfElements == 1)
 	{
-		delete head;
+		Creature* temp = head -> monster;
 		tail = nullptr;
 		head = nullptr;
 		numOfElements--;
-		cout << "The list is now empty!" << endl;
+		return temp;
 	}
 	else
 	{
-		ListNode* temp = head -> next;
+		Creature* temp = head -> next;
 		temp -> prev = nullptr;
 		delete head;
 		head = temp;

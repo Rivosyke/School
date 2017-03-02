@@ -18,6 +18,7 @@ class CreatureList
 		CreatureList();
 		~CreatureList();
 		void printListReverse();
+		Creature* getHead();
 		void printTail();
 		void printList();
 		void deleteTail();

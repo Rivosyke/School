@@ -39,6 +39,7 @@ class Game
 		void monsterInput(int playerNum, int monsterNum);
 		void printMonsters();
 		Creature* monsterChoice(int choice);
+		void monsterFighting();
 		
 	public:
 		Game();
