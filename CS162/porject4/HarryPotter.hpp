@@ -1,10 +1,11 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 14 February 2017
-** Description: This is the specification file for the Die class.
-** This class has one data member: an int to hold the number of sides
-** that the Die will have. Input validation in main() will ensure
-** that the number will be greater than 1.
+** Date: 18 February 2017
+** Description: This is the specification file for the Harry Potter class.
+** This class has 5 data members: four pointers to Die objects that 
+** represent attack/defense die and a bool to represent if Harry is on
+** his first life. It inherits other data members and methods from the 
+** Creature super class.
 *********************************************************************/
 
 #ifndef HARRYPOTTER_HPP

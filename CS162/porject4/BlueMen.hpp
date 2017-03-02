@@ -1,10 +1,11 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 14 February 2017
-** Description: This is the specification file for the Die class.
-** This class has one data member: an int to hold the number of sides
-** that the Die will have. Input validation in main() will ensure
-** that the number will be greater than 1.
+** Date: 18 February 2017
+** Description: This is the specification file for the Blue Men class.
+** This class has five data members: two pointers to Die objects that 
+** represent attack die, a vector of Die pointers to hold the defense 
+** die, and two bools to represent when the defense die are lost. It 
+** inherits other data members and methods from the Creature super class.
 *********************************************************************/
 
 #ifndef BLUEMEN_HPP

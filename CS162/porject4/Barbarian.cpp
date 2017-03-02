@@ -1,13 +1,18 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 14 February 2017
-** Description: This is the implementation file for the Die class.
+** Date: 18 February 2017
+** Description: This is the implementation file for the Barbarian class.
 ** It contains the function definitions, the constructor, and the 
 ** destructor.
 *********************************************************************/
 
 #include "Barbarian.hpp"
 
+
+/*********************************************************************
+** Description: Constructor that calls the Creature constructor and
+** allocates the memory for the Die objects.
+*********************************************************************/
 Barbarian::Barbarian() : Creature(12, 0, "Barbarian")
 {
     attackDie1 = new Die(6);
@@ -15,16 +20,32 @@ Barbarian::Barbarian() : Creature(12, 0, "Barbarian")
     defenseDie1 = new Die(6);
     defenseDie2 = new Die(6);
 }
+
+/*********************************************************************
+** Description: This method will return an int that contains the sum
+** of rolling both attack die.
+*********************************************************************/
 int Barbarian::attack()
 {
     return ((attackDie1->rollDice()) + (attackDie2->rollDice()));
 }
+
+/*********************************************************************
+** Description: This method will take in the int that is the attack 
+** roll and calculate if the attack was successful or not and update
+** the strenthRating accordingly.
+*********************************************************************/
 void Barbarian::defense(int attackRating)
 {
     cout << "Attack Rating : " << attackRating << endl;
+    
+    // Rolls both defense Die 
     int defenseRating = (defenseDie1->rollDice() + defenseDie2->rollDice());
     cout << "Defense Rating: " << defenseRating << endl;
+    
     int roundResult;
+	// Checks to see if the defense rolls combined with the armor is 
+	// greater than the attack roll
     if ((attackRating - defenseRating) - armorRating <= 0 )
     {
         roundResult = 0;
@@ -34,6 +55,7 @@ void Barbarian::defense(int attackRating)
         roundResult = (attackRating - defenseRating) - armorRating;
     }
     
+    // Checks to see if the attack kills the monster
     if ((strengthRating - roundResult) <= 0)
     {
         strengthRating = 0;
@@ -41,11 +63,14 @@ void Barbarian::defense(int attackRating)
     }
     else
     {
-        cout << "Round Result  : " << roundResult << endl;
+        cout << "Damage Dealt  : " << roundResult << endl;
         strengthRating -= roundResult;
     }
 }
 
+/*********************************************************************
+** Description: Destructor that deletes the allocated Die objects
+*********************************************************************/
 Barbarian::~Barbarian()
 {
     delete attackDie1;
