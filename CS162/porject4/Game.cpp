@@ -92,8 +92,7 @@ void Game::play()
 					break;
 				// Starting the fights
 				case 4:
-					playerOneFighters.printList();
-					playerTwoFighters.printList();
+					monsterFighting();
 					pauseScreen();
 					break;
 				// Exit
@@ -156,61 +155,178 @@ void Game::monsterInput(int playerNum, int monsterNum)
 	
 void Game::monsterFighting()
 {
-		// Determines which fighter goes first
-        int startingFighter = randomNum(2);
+        int startingFighter = 0;
+        int rounds = 1;
         
+        // Array of Creature pointers to handle which fighter goes first
+        Creature* fightOrder[2];
         
-	    // Loop that handles the monster fighting based on the living
-	   	// status of each monster
-        while (monsters[0]->living() and monsters[1]->living())
+        Creature* p1Fighter = playerOneFighters.getHead();
+        Creature* p2Fighter = playerTwoFighters.getHead();
+
+        // Loop that determines when either player is out of fighters
+        while (p1Fighter and p2Fighter)
         {
-			cout << "***********************************************" << endl;
-			cout << "Round #" << rounds +1 << endl;
+			// Sets which fighter goes first
+			startingFighter = randomNum(2);
 			
-            cout << endl << "Attack: " << monsters[0]->getName() << endl;
-            monsters[1]->defense(monsters[0]->attack());
-            cout << "Remaining str for " << monsters[1]->getName() 
-				 << " : " << monsters[1]->getStr() << endl;
+			if (startingFighter == 0)
+			{
+				fightOrder[0] = p1Fighter;
+				fightOrder[1] = p2Fighter;
+			}
+			else
+			{
+				fightOrder[0] = p2Fighter;
+				fightOrder[1] = p1Fighter;
+			}
+			
+			while (p1Fighter -> living() and p2Fighter -> living())
+			{
+					//cout << endl << "Attack: " << fightOrder[0] -> getName() << endl;
+					fightOrder[1] -> defense(fightOrder[0] -> attack());
+					//cout << "Remaining str for " << fightOrder[1] -> getName() 
+					//	 << " : " << fightOrder[1] -> getStr() << endl;
             
-            // Checks to see if the first attack of the round killed the 
-            // second monster
-            if (monsters[1]->living())
-            {
-                cout << endl << "Attack: " << monsters[1]->getName() << endl;
-                monsters[0]->defense(monsters[1]->attack());
-                cout << "Remaining str for " << monsters[0]->getName() 
-                     << " : " << monsters[0]->getStr() << endl;
-            }
-            
-            cout << endl;
-            rounds++;
-        }
-        
-		cout << "***********************************************" << endl;
+					// Checks to see if the first attack of the round killed the 
+					// second monster
+					if (fightOrder[1] -> living())
+					{
+					//	cout << endl << "Attack: " << fightOrder[1] -> getName() << endl;
+						fightOrder[0] -> defense(fightOrder[1] -> attack());
+					//	cout << "Remaining str for " << fightOrder[0] -> getName() 
+					//		 << " : " << fightOrder[0] -> getStr() << endl;
+					}
+			}
+			
+			cout << endl;
+			cout << "***********************************************" << endl;
+			cout << "Round #" << rounds << endl;
+			cout << "Fighter One : " << fightOrder[0] -> getName() << endl;
+			cout << "Fighter Two : " << fightOrder[1] -> getName() << endl;
+			
+			// Checks to see if monster 2 has died
+			if (!(fightOrder[1] -> living()))
+			{
+				// If Player one's monster went first
+				if (startingFighter == 0)
+				{
+					playerOneWins++;
+					cout << "Round winner: Player One's " 
+					     << fightOrder[0] -> getName() << endl;
+					// Winning monster gets put on the back of the lineup
+					p1Fighter -> restoreHP();
+					playerOneFighters.addNodeTail(p1Fighter);
+					// Losing monster gets added to the loser pile
+					playerTwoLosers.addNodeHead(p2Fighter);
+				}
+				else
+				{
+					playerTwoWins++;
+					cout << "Round winner: Player Two's " 
+					     << fightOrder[0] -> getName() << endl;
+					// Winning monster gets put on the back of the lineup
+					p2Fighter -> restoreHP();
+					playerTwoFighters.addNodeTail(p2Fighter);
+					// Losing monster gets added to the loser pile
+					playerOneLosers.addNodeHead(p1Fighter);
+
+				}
+			}
+			else
+			{
+				// If player two's monster went first
+				if (startingFighter == 0)
+				{
+					playerTwoWins++;
+					cout << "Round winner: Player Two's " 
+					     << fightOrder[1] -> getName() << endl;
+					// Winning monster gets put on the back of the lineup
+					p2Fighter -> restoreHP();
+					playerTwoFighters.addNodeTail(p2Fighter);
+					// Losing monster gets added to the loser pile
+					playerOneLosers.addNodeHead(p1Fighter);
+				}
+				else
+				{
+					playerOneWins++;
+					cout << "Round winner: Player One's " 
+					     << fightOrder[1] -> getName() << endl;
+ 					// Winning monster gets put on the back of the lineup
+ 					p1Fighter -> restoreHP();
+					playerOneFighters.addNodeTail(p1Fighter);
+					// Losing monster gets added to the loser pile
+					playerTwoLosers.addNodeHead(p2Fighter);
+
+				}
+			}
+			
+			// Get new fighters from the respective lists
+			p1Fighter = playerOneFighters.getHead();
+			p2Fighter = playerTwoFighters.getHead();
+			rounds++;
+			pauseScreen();
+		} 
 		
-		// Checks to see if monster 2 has died
-        if (!monsters[1]->living())
-        {
-            cout << "Monster #1, " << monsters[0]->getName() 
-				 << " is the winner!" << endl;
-        }
-        else
-        {
-            cout << "Monster #2, " << monsters[1]->getName() 
-				 << " is the winner!" << endl;
-        }
+		// Output the tourney winner
+		winner();
 }
 
 /*********************************************************************
-** Description: This function outputs a menu showing the options 
-** available to the user.
+** Description: This method will determine and output the winner of the
+** tournament.
+*********************************************************************/
+void Game::winner()
+{
+	cout << "***********************************************" << endl;
+	cout << "--------------Tournament results---------------" << endl;
+	cout << "Player One Wins: " << playerOneWins << endl;
+	cout << "Player Two Wins: " << playerTwoWins << endl;
+	cout << endl;
+	cout << "Tourney winner: ";
+	
+	if (playerOneWins > playerTwoWins)
+	{
+		cout << "Player One!" << endl;
+	}
+	else
+	{
+		cout << "Player Two!" << endl;
+	}
+}
+
+/*********************************************************************
+** Description: This method will output the loser lists
+*********************************************************************/
+void Game::losers()
+{
+	cout << "***********************************************" << endl;
+	cout << "--------------Tournament results---------------" << endl;
+	cout << "Player One Wins: " << playerOneWins << endl;
+	cout << "Player Two Wins: " << playerTwoWins << endl;
+	cout << endl;
+	cout << "Tourney winner: ";
+	
+	if (playerOneWins > playerTwoWins)
+	{
+		cout << "Player One!" << endl;
+	}
+	else
+	{
+		cout << "Player Two!" << endl;
+	}
+}
+
+/*********************************************************************
+** Description: This method will print out the list of monsters
+** available to the players.
 *********************************************************************/
 void Game::printMonsters()
 {
     cout << "************************************************" << endl;
     cout << "*                                              *" << endl;
     cout << "*                                              *" << endl;
-    cout << "*                         		                *" << endl;
+	cout << "*                                              *" << endl;
     cout << "*             Choose your monsters!            *" << endl;
     cout << "*                                              *" << endl;
     cout << "*                                              *" << endl;

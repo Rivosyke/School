@@ -37,11 +37,11 @@ int Barbarian::attack()
 *********************************************************************/
 void Barbarian::defense(int attackRating)
 {
-    cout << "Attack Rating : " << attackRating << endl;
+ //   cout << "Attack Rating : " << attackRating << endl;
     
     // Rolls both defense Die 
     int defenseRating = (defenseDie1->rollDice() + defenseDie2->rollDice());
-    cout << "Defense Rating: " << defenseRating << endl;
+  //  cout << "Defense Rating: " << defenseRating << endl;
     
     int roundResult;
 	// Checks to see if the defense rolls combined with the armor is 
@@ -63,7 +63,7 @@ void Barbarian::defense(int attackRating)
     }
     else
     {
-        cout << "Damage Dealt  : " << roundResult << endl;
+  //      cout << "Damage Dealt  : " << roundResult << endl;
         strengthRating -= roundResult;
     }
 }

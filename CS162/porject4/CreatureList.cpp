@@ -114,13 +114,12 @@ void CreatureList::deleteTail()
 		delete tail;
 		tail = temp;
 		numOfElements--;
-	//	cout << "The new tail is now: " << tail -> value << endl;
 	}
 }
 		
 /*********************************************************************
-** Description: This method will delete the first element in the list,
-** provided the list isn't empty.
+** Description: This method will return a Creature pointer from the head
+** node. If the list is empty, a nullptr is returned.
 *********************************************************************/
 Creature* CreatureList::getHead()
 {
@@ -138,12 +137,11 @@ Creature* CreatureList::getHead()
 	}
 	else
 	{
-		Creature* temp = head -> next;
-		temp -> prev = nullptr;
-		delete head;
-		head = temp;
+		Creature* temp = head -> monster;
+		head = head -> next;
+		head -> prev = nullptr;
 		numOfElements--;
-	//	cout << "The new head is now: " << head -> value << endl;
+		return temp;
 	}
 }
 		

@@ -40,7 +40,7 @@ int BlueMen::attack()
 *********************************************************************/
 void BlueMen::defense(int attackRating)
 {
-    cout << "Attack Rating : " << attackRating << endl;
+  //  cout << "Attack Rating : " << attackRating << endl;
     
     int defenseRating = 0;
     
@@ -49,7 +49,7 @@ void BlueMen::defense(int attackRating)
     {
         defenseRating += defenseDie.at(x)->rollDice();
     }
-    cout << "Defense Rating: " << defenseRating << endl;
+ //   cout << "Defense Rating: " << defenseRating << endl;
     
     int roundResult;
     
@@ -72,7 +72,7 @@ void BlueMen::defense(int attackRating)
     }
     else
     {
-        cout << "Damage Dealt  : " << roundResult << endl;
+ //       cout << "Damage Dealt  : " << roundResult << endl;
         strengthRating -= roundResult;
         
         // Checks to see if 4 points of damage have been dealt
@@ -87,7 +87,7 @@ void BlueMen::defense(int attackRating)
             defenseDie.pop_back();
             secondDieLost = true;
         }
-        cout << "Defense Die   : " << defenseDie.size() << endl;
+  //      cout << "Defense Die   : " << defenseDie.size() << endl;
     }
 }
 

@@ -35,18 +35,19 @@ class Game
 		int playerTwoWins;
 		CreatureList playerOneFighters;
 		CreatureList playerTwoFighters;
+		CreatureList playerOneLosers;
+		CreatureList playerTwoLosers;
 		void printInitialMenu();
 		void monsterInput(int playerNum, int monsterNum);
 		void printMonsters();
 		Creature* monsterChoice(int choice);
 		void monsterFighting();
+		void winner();
 		
 	public:
 		Game();
 	//	~Game();
 		void play();
-
-		//void menuFunctionality();
 };
 
 #endif // GAME_HPP

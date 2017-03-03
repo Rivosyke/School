@@ -57,3 +57,22 @@ string Creature::getName()
 {
     return name;
 }
+
+/*********************************************************************
+** Description: This method will restore a portion of hit points after
+** the Creature has won a fight.
+*********************************************************************/
+
+void Creature::restoreHP()
+{
+	// This will determine if the Creature restores between 10-50% of HP
+	double percentageMultiplier = (randomNum(4) + 1) / 10;
+	
+	strengthRating += (strengthRating * percentageMultiplier);
+}
+	
+	
+	
+	
+	
+	

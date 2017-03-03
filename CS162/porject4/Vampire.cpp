@@ -39,10 +39,10 @@ void Vampire::defense(int attackRating)
     if (randomNum(2) == 0)
     {
 		int roundResult;
-        cout << "Attack Rating : " << attackRating << endl;
+   //     cout << "Attack Rating : " << attackRating << endl;
         
         int defenseRating = defenseDie1->rollDice();
-        cout << "Defense Rating: " << defenseRating << endl;
+   //     cout << "Defense Rating: " << defenseRating << endl;
               
         // Checks to see if the defense rolls combined with the armor is 
 		// greater than the attack roll
@@ -63,13 +63,13 @@ void Vampire::defense(int attackRating)
         }
         else
         {
-            cout << "Damage Dealt  : " << roundResult << endl;
+   //         cout << "Damage Dealt  : " << roundResult << endl;
             strengthRating -= roundResult;
         }
     }
     else
     {
-        cout << "Charm Successful - No Damage!" << endl;
+    //    cout << "Charm Successful - No Damage!" << endl;
     }
     
 }

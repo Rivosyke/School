@@ -13,9 +13,6 @@
 
 #include "Game.hpp"
 
-
-
-
 /*********************************************************************
 ** Running Instruction: This program doesn't use any command-line 
 ** arguments and is executed on the command line using the executable's

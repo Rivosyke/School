@@ -14,8 +14,10 @@
 #include "utility.hpp"
 #include <iostream>
 #include <string> 
+#include <vector>
 
-using namespace std;
+using std::string;
+using std::vector;
 
 class Creature
 {
@@ -33,7 +35,7 @@ class Creature
         int getArmor();
         bool living();
         string getName();
-        
+        void restoreHP();
 };
 
 
