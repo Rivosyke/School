@@ -8,18 +8,16 @@
 *********************************************************************/
 
 #include "Space.hpp"
+#include "Cockpit.hpp"
+#include "CryoChamber.hpp"
+#include "Corridor.hpp"
+#include "Airlock.hpp"
+#include "CargoHold.hpp"
+#include "O2Room.hpp"
+#include "StorageRoom.hpp"
+#include "Player.hpp"
 
-#ifndef CRYOCHAMBER_HPP
-#define CRYOCHAMBER_HPP
+#ifndef GAME_HPP
+#define GAME_HPP
 
-class CryoChamber: public Space
-{
-	private:
-		bool actionStatus;
-	public:
-		CryoChamber(Space* tempUp, Space* tempRight, Space* tempDown, Space* tempLeft);
-		void displayDesc();
-		void specialAction();
-};
-
-#endif // CRYOCHAMBER_HPP
+#endif // GAME_HPP

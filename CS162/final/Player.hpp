@@ -7,19 +7,7 @@
 ** and methods from the Creature super class.
 *********************************************************************/
 
-#include "Space.hpp"
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
-#ifndef CRYOCHAMBER_HPP
-#define CRYOCHAMBER_HPP
-
-class CryoChamber: public Space
-{
-	private:
-		bool actionStatus;
-	public:
-		CryoChamber(Space* tempUp, Space* tempRight, Space* tempDown, Space* tempLeft);
-		void displayDesc();
-		void specialAction();
-};
-
-#endif // CRYOCHAMBER_HPP
+#endif // PLAYER_HPP
