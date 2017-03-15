@@ -16,6 +16,9 @@
 #include "O2Room.hpp"
 #include "StorageRoom.hpp"
 #include "Player.hpp"
+#include "Item.hpp"
+
+
 
 #ifndef GAME_HPP
 #define GAME_HPP

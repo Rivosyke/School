@@ -6,17 +6,6 @@
 *********************************************************************/
 
 #include "utility.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <stdlib.h>
-#include <string>
-#include <unistd.h>
-#include <ctime>
-
-using std::cout;
-using std::endl;
-using std::string;
-using std::cin;
 
 /*********************************************************************
 ** Description: This is a generic menu that will allow the user to
@@ -234,3 +223,15 @@ void pauseScreen()
 	cout << endl;
 	cin.get();	
 }
+
+/*********************************************************************
+** Description: This function will output your string with colors
+** Code obtained from:
+** http://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal
+*********************************************************************/
+void printColor(const string str,c_color color,c_decoration decoration)
+{
+  cout<<"\033["<<decoration<<";"<<color<<"m"<<str<<"\033[0m";
+}
+
+

@@ -7,11 +7,11 @@ CXXFLAGS += -pedantic-errors #Strictly enforce the standard
 CXXFLAGS += -g #Debugging info
 #CXXFLAGS += O3 #Optimation option
 
-OBJS = utility.o Space.o CryoChamber.o final.o
+OBJS = utility.o Space.o CryoChamber.o Item.o Player.o final.o
 	
-HEADERS = utility.hpp Space.hpp CryoChamber.hpp
+HEADERS = utility.hpp Space.hpp CryoChamber.hpp Item.hpp Player.hpp
 
-SRCS = utility.cpp Space.cpp final.cpp CryoChamber.cpp
+SRCS = utility.cpp Space.cpp final.cpp CryoChamber.cpp Item.cpp Player.cpp
 
 
 #target: dependencies

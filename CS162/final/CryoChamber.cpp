@@ -12,10 +12,28 @@
 ** Description: Constructor that will take in pointers to Space objects
 ** that are then passed to the Space base class constructor.
 *********************************************************************/
-CryoChamber::CryoChamber(Space* tempUp, Space* tempRight, Space* tempDown, Space* tempLeft)
-			:Space(tempUp, tempRight, tempDown, tempLeft)
+CryoChamber::CryoChamber(Space* tempUp, 
+                         Space* tempRight, 
+                         Space* tempDown, 
+                         Space* tempLeft,
+                         string tempName)
+			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
 	actionStatus = false;
+    pressureSuit = new Item("Pressure Suit");
+}
+
+/*********************************************************************
+** Description: Destructor that will delete the pressureSuit item
+** if it exists.
+*********************************************************************/
+CryoChamber::~CryoChamber()
+{
+    if (pressureSuit)
+    {
+        delete pressureSuit;
+        pressureSuit = nullptr;
+    }
 }
 
 /*********************************************************************
@@ -23,13 +41,29 @@ CryoChamber::CryoChamber(Space* tempUp, Space* tempRight, Space* tempDown, Space
 ** Chamber
 *********************************************************************/ 
 void CryoChamber::displayDesc()
-{}
+{
+    
+}
 
 /*********************************************************************
 ** Description: Method that will initiate the derived class' special 
 ** action(s) 
 *********************************************************************/
 void CryoChamber::specialAction()
-{}
+{
+    
+}
+
+/*********************************************************************
+** Description: Virtual function that will return the item(s) in the 
+** chamber
+*********************************************************************/
+Item* CryoChamber::getItem()
+{
+    Item* temp = pressureSuit;
+    pressureSuit = nullptr;
+    return temp;
+}
+
 
 

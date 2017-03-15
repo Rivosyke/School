@@ -9,6 +9,7 @@
 
 #include "Space.hpp"
 
+
 #ifndef CRYOCHAMBER_HPP
 #define CRYOCHAMBER_HPP
 
@@ -16,10 +17,17 @@ class CryoChamber: public Space
 {
 	private:
 		bool actionStatus;
+        Item* pressureSuit;
 	public:
-		CryoChamber(Space* tempUp, Space* tempRight, Space* tempDown, Space* tempLeft);
+		CryoChamber(Space* tempUp, 
+                    Space* tempRight, 
+                    Space* tempDown, 
+                    Space* tempLeft,
+                    string tempName);
+        ~CryoChamber();
 		void displayDesc();
 		void specialAction();
+        Item* getItem();
 };
 
 #endif // CRYOCHAMBER_HPP

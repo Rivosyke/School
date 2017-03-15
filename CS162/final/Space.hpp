@@ -9,6 +9,14 @@
 #ifndef SPACE_HPP
 #define SPACE_HPP
 
+#include "Item.hpp"
+#include <string>
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::string;
+
 class Space
 {
     protected:
@@ -16,12 +24,19 @@ class Space
         Space* Right;
         Space* Down;
         Space* Left;
+        string name;
     
     public:
-        Space(Space* tempUp, Space* tempRight, Space* tempDown, Space* tempLeft);
+        Space(Space* tempUp, 
+              Space* tempRight, 
+              Space* tempDown, 
+              Space* tempLeft, 
+              string tempName);
         virtual ~Space();
         virtual void displayDesc();
         virtual void specialAction();
+        virtual Item* getItem();
+        string getName();
 };
 
 #endif // SPACE_HPP
