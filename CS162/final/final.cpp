@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Player.hpp"
 #include "Item.hpp"
+#include "CryoChamber.hpp"
 
 //using namespace std;
 
@@ -10,7 +11,11 @@ int main()
 {
     Player player;
     
-    player.putOnPressureSuit();
+    CryoChamber Cryo(nullptr, nullptr, nullptr, nullptr, "Cryo Chamber");
+    
+    player.pickUpItem(Cryo.getItem());
+    
+    //player.putOnPressureSuit();
     player.printInventory();
     
     player.pickUpItem(new Item("Flashlight"));
@@ -19,6 +24,11 @@ int main()
     player.pickUpItem(new Item("EM Field Regulator"));
     
     player.printInventory();
+    
+    //Item* temp = player.removeItem(3);
+    player.printInventory();
+    //delete temp;
+    
     
     return 0;
 }

@@ -29,11 +29,12 @@ class Player
         
     public:
         Player();
+        ~Player();
         bool pressureSuitEquipped();
         void printInventory();
         bool pickUpItem(Item* newItem);
-        bool putOnPressureSuit();
-        bool 
+        //bool putOnPressureSuit();
+        Item* removeItem(int playerChoice);
 };
 
 #endif // PLAYER_HPP

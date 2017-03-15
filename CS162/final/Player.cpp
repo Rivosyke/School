@@ -17,6 +17,17 @@ Player::Player()
 }
 
 /*********************************************************************
+** Description: Constructor that will set the pressure suit status
+*********************************************************************/
+Player::~Player()
+{
+	for (unsigned int x = 0; x < suitInventory.size(); x++)
+	{
+		delete suitInventory.at(x);
+		suitInventory.at(x) = nullptr;
+	}
+}
+/*********************************************************************
 ** Description: Method that returns the whether or not the player
 ** is wearing the pressure suit.
 *********************************************************************/ 
@@ -59,7 +70,12 @@ void Player::printInventory()
 *********************************************************************/ 
 bool Player::pickUpItem(Item* newItem)
 {
-    if (!hasPressureSuit)
+	if (newItem -> getName() == "Pressure Suit")
+	{
+		hasPressureSuit = true;
+		return true;
+	}
+	else if (!hasPressureSuit)
     {
         cout << "You haven't put on the pressure suit yet and therefore have no "
              << "pockets with which to store this item." << endl;
@@ -79,11 +95,12 @@ bool Player::pickUpItem(Item* newItem)
     }
 }
 
+
 /*********************************************************************
 ** Description: Method that returns false if the player is already
 ** wearing the pressure suit and if not, sets the pressure suit status
 ** to true and returns true.
-*********************************************************************/ 
+********************************************************************* 
 bool Player::putOnPressureSuit()
 {
     if (hasPressureSuit)
@@ -96,3 +113,16 @@ bool Player::putOnPressureSuit()
         return true;
     }
 }
+*/
+
+/*********************************************************************
+** Description: Method that takes in an int that represents the index
+** that the item is at that needs to be returned to the caller.
+*********************************************************************/
+Item* Player::removeItem(int playerChoice)
+{
+	Item* temp = suitInventory.at(playerChoice - 1);
+	suitInventory.erase(suitInventory.begin()+(playerChoice -1));
+	return temp;
+}
+
