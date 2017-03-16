@@ -73,6 +73,7 @@ bool Player::pickUpItem(Item* newItem)
 	if (newItem -> getName() == "Pressure Suit")
 	{
 		hasPressureSuit = true;
+        delete newItem;
 		return true;
 	}
 	else if (!hasPressureSuit)

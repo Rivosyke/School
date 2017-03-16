@@ -12,6 +12,7 @@
 #include "Item.hpp"
 #include <string>
 #include <iostream>
+#include "utility.hpp"
 
 using std::cout;
 using std::endl;
@@ -33,10 +34,11 @@ class Space
               Space* tempLeft, 
               string tempName);
         virtual ~Space();
-        virtual void displayDesc();
-        virtual void specialAction();
-        virtual Item* getItem();
+        virtual void displayDesc() = 0;
+        virtual bool specialAction() = 0;
+        virtual Item* getItem() = 0;
         string getName();
+        virtual bool canUseItems() = 0;
 };
 
 #endif // SPACE_HPP

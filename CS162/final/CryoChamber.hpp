@@ -18,6 +18,7 @@ class CryoChamber: public Space
 	private:
 		bool actionStatus;
         Item* pressureSuit;
+        string specialActionName;
 	public:
 		CryoChamber(Space* tempUp, 
                     Space* tempRight, 
@@ -26,8 +27,9 @@ class CryoChamber: public Space
                     string tempName);
         ~CryoChamber();
 		void displayDesc();
-		void specialAction();
+		bool specialAction();
         Item* getItem();
+        bool canUseItems();
 };
 
 #endif // CRYOCHAMBER_HPP

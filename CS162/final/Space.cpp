@@ -32,36 +32,13 @@ Space::~Space()
 {}
 
 /*********************************************************************
-** Description: Virtual function that will display the description
-** of the space - needs to be implemented by derived classes
-*********************************************************************/
-void Space::displayDesc()
-{}
-
-/*********************************************************************
-** Description: Virtual function that will initiate the derived class'
-** special action(s) - needs to be implemented by derived classes
-*********************************************************************/
-void Space::specialAction()
-{}
-
-
-/*********************************************************************
-** Description: Virtual function that will return the item(s) in the 
-** derived class' - needs to be implemented by derived classes
-*********************************************************************/
-Item* Space::getItem()
-{
-    return nullptr;
-}
-
-/*********************************************************************
 ** Description: Method that returns the name of the space
 *********************************************************************/
 string Space::getName()
 {
     return name;
 }
+
 
 
 

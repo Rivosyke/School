@@ -4,12 +4,17 @@
 #include "Player.hpp"
 #include "Item.hpp"
 #include "CryoChamber.hpp"
+#include "Game.hpp"
 
 //using namespace std;
 
 int main()
 {
-    Player player;
+    
+    Game game;
+    game.play();
+    
+   /* Player player;
     
     CryoChamber Cryo(nullptr, nullptr, nullptr, nullptr, "Cryo Chamber");
     
@@ -28,7 +33,7 @@ int main()
     //Item* temp = player.removeItem(3);
     player.printInventory();
     //delete temp;
-    
+    */
     
     return 0;
 }
