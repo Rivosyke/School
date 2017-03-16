@@ -33,7 +33,6 @@ class Player
         bool pressureSuitEquipped();
         void printInventory();
         bool pickUpItem(Item* newItem);
-        //bool putOnPressureSuit();
         Item* removeItem(int playerChoice);
 };
 

@@ -27,6 +27,7 @@ class Game
 {
     private:
         Player player;
+        Corridor* southCorridor;
         CryoChamber* cryoRoom;
         Space* currentRoom;
         void printBanner();
@@ -34,6 +35,7 @@ class Game
         void printStartingScene();
         void primaryDecisionLoop();
         void printUserInputMenu();
+        void changeRooms();
 
     public:
         Game();

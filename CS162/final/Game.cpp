@@ -14,7 +14,13 @@
 *********************************************************************/
 Game::Game()
 {
-    cryoRoom = new CryoChamber(nullptr, nullptr, nullptr, nullptr, "Cryo Chamber");
+	southCorridor = new Corridor(nullptr,nullptr, nullptr, nullptr, "Southern Corridor");
+    cryoRoom = new CryoChamber(southCorridor, nullptr, nullptr, nullptr, "Cryo Chamber");
+    southCorridor -> setDirectionPointer(cryoRoom, DOWN); 
+    
+    
+    
+    
     currentRoom = cryoRoom;
 }
 
@@ -25,6 +31,7 @@ Game::Game()
 Game::~Game()
 {
     delete cryoRoom;
+    delete southCorridor;
 }
 
 /*********************************************************************
@@ -47,7 +54,7 @@ void Game::printGameDesc()
 {
     cout << endl << endl;
     cout << "This game is the final project for CS162, written by Ryan McGinn. " << endl;
-    cout << endl << "The game's background is that you (the player) wakes up in a cryo chamber " << endl
+    cout << endl << "The game's background is that you (the player) wake up in a cryo chamber " << endl
                  << "on a spaceship with no knowledge of what's going on around you. The" << endl
                  << "intended goal is to repair various parts of the ship in order to use the" << endl
                  << "FTL (Faster Than Light) drive to escape the event horizon of a Black Hole." << endl;
@@ -61,7 +68,7 @@ void Game::printGameDesc()
 *********************************************************************/
 void Game::printStartingScene()
 {
-    cout << "You wake up in a cryo pod. Through the tiny glass at eye level, you can see" << endl;
+    cout << "You wake up in a cryo pod. Through the tiny viewport at eye level, you can see" << endl;
     cout << "red lights flashing in an otherwise dark room. Knowing that you need to get" << endl;
     cout << "out of the pod, you search the interior and see a button near your left shoulder" << endl;
     cout << "The button is labeled but your eyes can't quite focus on the writing. Finding" << endl;
@@ -96,7 +103,7 @@ void Game::printBanner()
 void Game::printUserInputMenu()
 {
     cout << endl;
-    printColor("*******************", RED, BOLD);
+    printColor("******************************", RED, BOLD);
     cout << endl;
     printColor("What will you do?", CYAN, BOLD);
     cout << endl;
@@ -140,7 +147,8 @@ void Game::primaryDecisionLoop()
         switch (userInput)
         {
 			// Change Rooms
-			case 1:	
+			case 1:
+				changeRooms();
 				pauseScreen();
 				break;
 			// Perform Special Action
@@ -155,14 +163,43 @@ void Game::primaryDecisionLoop()
 				break;
             // Pick up item in room
             case 4:
+				player.pickUpItem(currentRoom -> getItem());
                 pauseScreen();
                 break;
             // Use item from inventory
             case 5:
-                
+            {
+                if(currentRoom -> canUseItems())
+                {
+					
+				}
+				else
+				{
+					printColor("None of your items are needed in this room.\n", RED, BOLD);
+				}
                 pauseScreen();
                 break;
-		}	
+			}	
+		}
         clearScreen();
 	} while (userInput != 10);
+}
+
+/*********************************************************************
+** Description: Method that will print the available spaces connected
+** to the current space and then change the current room to the user
+** selection
+*********************************************************************/
+void Game::changeRooms()
+{
+	vector<Space*> availableRooms;
+	currentRoom -> fillSpaceVector(&availableRooms);
+	printColor("******************************\n", RED, BOLD);
+	printColor("Connected Spaces\n",CYAN,BOLD);
+	
+	for (unsigned int x = 0; x < availableRooms.size(); x++)
+	{
+		cout << x + 1 << ") " << availableRooms.at(x) -> getName();
+	}
+	cout << endl;	
 }

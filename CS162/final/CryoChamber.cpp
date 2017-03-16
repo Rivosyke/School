@@ -1,6 +1,6 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 18 February 2017
+** Date: 20 March 2017
 ** Description: This is the implementation file for the Vampire class.
 ** It contains the function definitions, the constructor, and the 
 ** destructor.
@@ -21,7 +21,7 @@ CryoChamber::CryoChamber(Space* tempUp,
 {
 	actionStatus = false;
     pressureSuit = new Item("Pressure Suit");
-    Up = nullptr;
+
     specialActionName = "Turn on emergency power";
 }
 
@@ -87,22 +87,32 @@ bool CryoChamber::specialAction()
 
 /*********************************************************************
 ** Description: Virtual function that will return the item(s) in the 
-** chamber
+** chamber.
 *********************************************************************/
 Item* CryoChamber::getItem()
 {
-    Item* temp = pressureSuit;
-    pressureSuit = nullptr;
-    return temp;
+	if (actionStatus)
+	{		
+		Item* temp = pressureSuit;
+		pressureSuit = nullptr;
+		return temp;
+	}
+	else
+	{
+		printColor("In the near-dark, you can't see anything worth picking up.\n",GREEN,BOLD);
+		printColor("Perhaps there is a way to restore power to the lights...\n",GREEN,BOLD);
+		return nullptr;
+	}
 }
 
 /*********************************************************************
-** Description: Virtual function that will return the item(s) in the 
-** chamber
+** Description: Virtual function that will return if the room has any
+** use for items in the player's inventory.
 *********************************************************************/
 bool CryoChamber::canUseItems()
 {
-    return true;
+	// The Cryo Chamber has no use for any of the player's items.
+    return false;
 }
 
 

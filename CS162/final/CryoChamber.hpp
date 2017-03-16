@@ -1,10 +1,11 @@
 /*********************************************************************
 ** Author: Ryan McGinn
-** Date: 18 February 2017
+** Date: 20 March 2017
 ** Description: This is the specification file for the Vampire class.
-** This class has two data members: two pointers to Die objects that 
-** represent attack and defense die. It inherits other data members
-** and methods from the Creature super class.
+** This class has three data members: A Item pointer for the item in
+** the chamber, a string to hold the name of the special action, and
+** a bool that represents if the action has been taken. It inherits 
+** other data members and methods from the Space super class.
 *********************************************************************/
 
 #include "Space.hpp"

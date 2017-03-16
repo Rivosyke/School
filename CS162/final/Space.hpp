@@ -13,10 +13,14 @@
 #include <string>
 #include <iostream>
 #include "utility.hpp"
+#include <vector>
 
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
+
+enum direction{UP,RIGHT,DOWN,LEFT};
 
 class Space
 {
@@ -33,12 +37,15 @@ class Space
               Space* tempDown, 
               Space* tempLeft, 
               string tempName);
+		void setDirectionPointer(Space* spaceToSet, direction position);
+		void fillSpaceVector(vector<Space*> *availableRooms);
         virtual ~Space();
         virtual void displayDesc() = 0;
         virtual bool specialAction() = 0;
         virtual Item* getItem() = 0;
         string getName();
         virtual bool canUseItems() = 0;
+        
 };
 
 #endif // SPACE_HPP

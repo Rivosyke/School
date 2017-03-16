@@ -44,15 +44,16 @@ void Player::printInventory()
 {
     if (!hasPressureSuit)
     {
-        cout << "You aren't wearing the pressure suit so you have no inventory." << endl;
+        printColor("You aren't wearing anything with pockets!\n",RED,BOLD);
     }
     else
     {
-        cout << "*************************" << endl;
-        cout << "Suit Inventory" << endl;
+        printColor("******************************\n", RED, BOLD);
+        printColor("Suit Inventory\n",CYAN,BOLD);
         if (suitInventory.size() == 0)
         {
             cout << " - The suit is empty!" << endl;
+            cout << endl;
         }
         else
         {
@@ -60,6 +61,7 @@ void Player::printInventory()
             {
                 cout << x + 1 << ") " << suitInventory.at(x) -> getName() << endl;
             }
+            cout << endl;
         }
     }
 }
@@ -70,8 +72,13 @@ void Player::printInventory()
 *********************************************************************/ 
 bool Player::pickUpItem(Item* newItem)
 {
-	if (newItem -> getName() == "Pressure Suit")
+	if (!newItem)
 	{
+		return false;
+	}
+	else if (newItem -> getName() == "Pressure Suit")
+	{
+		printColor("You take the pressure suit out of the locker and put it on.\n",GREEN,BOLD);
 		hasPressureSuit = true;
         delete newItem;
 		return true;
@@ -84,37 +91,10 @@ bool Player::pickUpItem(Item* newItem)
     }
     else
     {
-        if (newItem)
-        {
-            suitInventory.push_back(newItem);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+		suitInventory.push_back(newItem);
+		return true;
     }
 }
-
-
-/*********************************************************************
-** Description: Method that returns false if the player is already
-** wearing the pressure suit and if not, sets the pressure suit status
-** to true and returns true.
-********************************************************************* 
-bool Player::putOnPressureSuit()
-{
-    if (hasPressureSuit)
-    {
-        return false;
-    }
-    else
-    {
-        hasPressureSuit = true;
-        return true;
-    }
-}
-*/
 
 /*********************************************************************
 ** Description: Method that takes in an int that represents the index
