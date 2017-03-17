@@ -14,13 +14,18 @@
 *********************************************************************/
 Game::Game()
 {
-	southCorridor = new Corridor(nullptr,nullptr, nullptr, nullptr, "Southern Corridor");
+    northCorridor = new Corridor(nullptr,nullptr,nullptr,nullptr,"North Corridor");
+    westCorridor = new Corridor(nullptr,nullptr,nullptr,nullptr,"West Corridor");
+	southCorridor = new Corridor(nullptr,nullptr, nullptr, nullptr, "South Corridor");
     cryoRoom = new CryoChamber(southCorridor, nullptr, nullptr, nullptr, "Cryo Chamber");
+    commonArea = new CommonRoom(northCorridor, nullptr, southCorridor, westCorridor, "Common Area");
+    storageRoom = new StorageRoom(nullptr,westCorridor,nullptr,nullptr, "Storage Room");
+    
+    northCorridor -> setDirectionPointer(commonArea, DOWN);
+    westCorridor -> setDirectionPointer(commonArea, RIGHT);
+    westCorridor -> setDirectionPointer(storageRoom, LEFT);
     southCorridor -> setDirectionPointer(cryoRoom, DOWN); 
-    
-    
-    
-    
+    southCorridor -> setDirectionPointer(commonArea, UP);
     currentRoom = cryoRoom;
 }
 
@@ -31,7 +36,17 @@ Game::Game()
 Game::~Game()
 {
     delete cryoRoom;
+    cryoRoom = nullptr;
     delete southCorridor;
+    southCorridor = nullptr;
+    delete commonArea;
+    commonArea = nullptr;
+    delete storageRoom;
+    storageRoom = nullptr;
+    delete westCorridor;
+    westCorridor = nullptr;
+    delete northCorridor;
+    northCorridor = nullptr;
 }
 
 /*********************************************************************
@@ -59,6 +74,8 @@ void Game::printGameDesc()
                  << "intended goal is to repair various parts of the ship in order to use the" << endl
                  << "FTL (Faster Than Light) drive to escape the event horizon of a Black Hole." << endl;
     cout << endl << endl;
+    printStartingScene();
+    cout << endl << endl;
     pauseScreen();
 }
 
@@ -68,6 +85,7 @@ void Game::printGameDesc()
 *********************************************************************/
 void Game::printStartingScene()
 {
+    printColor("Game Introduction - The Starting Scene\n",YELLOW, BOLD);
     cout << "You wake up in a cryo pod. Through the tiny viewport at eye level, you can see" << endl;
     cout << "red lights flashing in an otherwise dark room. Knowing that you need to get" << endl;
     cout << "out of the pod, you search the interior and see a button near your left shoulder" << endl;
@@ -122,7 +140,6 @@ void Game::printUserInputMenu()
 void Game::primaryDecisionLoop()
 {
     clearScreen();
-    printStartingScene();
     
     int userInput = 0;	
 	
@@ -161,7 +178,7 @@ void Game::primaryDecisionLoop()
                 player.printInventory();
                 pauseScreen();
 				break;
-            // Pick up item in room
+            // Pick up an item in the room
             case 4:
 				player.pickUpItem(currentRoom -> getItem());
                 pauseScreen();
@@ -169,9 +186,27 @@ void Game::primaryDecisionLoop()
             // Use item from inventory
             case 5:
             {
+                
                 if(currentRoom -> canUseItems())
                 {
-					
+                    unsigned int playerInvChoice = 0;
+					player.printInventory();
+                    printColor("Choice: ", YELLOW, NORMAL);
+		
+                    playerInvChoice = getInt();
+                    
+                    while (playerInvChoice < 1 or (playerInvChoice > player.inventorySize()))
+                    {
+                        cout << endl << "Choice is not valid: Please choose 1-" << player.inventorySize() << ".";
+                        cout << endl << "Choice: ";
+                        playerInvChoice = getInt();
+                    }
+                    
+                    if (!(currentRoom -> placeItem(player.removeItem(playerInvChoice))))
+                    {
+                    }
+                    
+                    
 				}
 				else
 				{
@@ -182,7 +217,7 @@ void Game::primaryDecisionLoop()
 			}	
 		}
         clearScreen();
-	} while (userInput != 10);
+	} while (true);
 }
 
 /*********************************************************************
@@ -192,14 +227,45 @@ void Game::primaryDecisionLoop()
 *********************************************************************/
 void Game::changeRooms()
 {
+    unsigned int userInput = 0;
 	vector<Space*> availableRooms;
+    Space* userChoice = nullptr;
+    
+    // Populates the vector with the current room's connected spaces
 	currentRoom -> fillSpaceVector(&availableRooms);
+    
 	printColor("******************************\n", RED, BOLD);
 	printColor("Connected Spaces\n",CYAN,BOLD);
 	
 	for (unsigned int x = 0; x < availableRooms.size(); x++)
 	{
-		cout << x + 1 << ") " << availableRooms.at(x) -> getName();
+		cout << x + 1 << ") " << availableRooms.at(x) -> getName() << endl;
 	}
+    
 	cout << endl;	
+    printColor("Choice: ", YELLOW, NORMAL);
+    userInput = getInt();
+    
+    while (userInput < 1 or userInput > availableRooms.size())
+    {
+        cout << endl << "Choice is not valid: Please choose 1-" << availableRooms.size() << ".";
+        cout << endl << "Choice: ";
+        userInput = getInt();
+    }
+    
+    
+    userChoice = availableRooms.at(userInput -1);
+    
+    // Checks with the current room to see if a space change is possible
+    if (currentRoom -> canChangeRooms(userChoice))
+    {
+        currentRoom = availableRooms.at(userInput -1);
+        printColor("The door slides open with a whine from disuse. You step into the next room\n",GREEN,BOLD);
+        printColor("and the door grinds to a close behind you...\n",GREEN,BOLD);
+    }
+    else
+    {
+        cout << endl;
+        printColor("Something is preventing you from changing rooms, try exploring the room first\n",RED,BOLD);
+    }
 }

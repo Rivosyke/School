@@ -1,7 +1,7 @@
 /*********************************************************************
 ** Author: Ryan McGinn
 ** Date: 20 March 2017
-** Description: This is the specification file for the Vampire class.
+** Description: This is the specification file for the CryoChamber class.
 ** This class has three data members: A Item pointer for the item in
 ** the chamber, a string to hold the name of the special action, and
 ** a bool that represents if the action has been taken. It inherits 
@@ -31,6 +31,8 @@ class CryoChamber: public Space
 		bool specialAction();
         Item* getItem();
         bool canUseItems();
+        bool canChangeRooms(Space* newSpace);
+        bool placeItem(Item* itemToPlace);
 };
 
 #endif // CRYOCHAMBER_HPP

@@ -38,12 +38,12 @@ void Corridor::displayDesc()
     if (!actionStatus)
     {        
         cout << "You step into the corridor and peer into the darkness.\n"
-			 << "Perhaps there is a way to turn on the lights...\n" << endl;
+			 << "Perhaps there is a way to turn on the lights..." << endl;
     }
     else
     {
         cout << "The fluorescent lights reveal a long hallway with doors\n"
-			 << "leading to various locations.\n" << endl;
+			 << "leading to various locations." << endl;
     }
 }
 
@@ -97,4 +97,30 @@ bool Corridor::canUseItems()
     return false;
 }
 
+/*********************************************************************
+** Description: Virtual function will take in a Space pointer that
+** is where the player wants to move to. Returns a bool depending on 
+** if that move location is acceptable based on special actions.
+*********************************************************************/
+bool Corridor::canChangeRooms(Space* newSpace)
+{
+    if (!actionStatus)
+    {
+        printColor("The lack of light in the room prevents you from moving around safely.\n",GREEN,BOLD);
+        printColor("Perhaps there is a way to turn the lights on...\n",GREEN,BOLD);
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 
+/*********************************************************************
+** Description: Virtual function that will do nothing as this room
+** doesn't take in any items.
+*********************************************************************/
+bool Corridor::placeItem(Item* itemToPlace)
+{
+    return false;
+}

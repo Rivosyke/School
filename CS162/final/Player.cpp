@@ -103,7 +103,15 @@ bool Player::pickUpItem(Item* newItem)
 Item* Player::removeItem(int playerChoice)
 {
 	Item* temp = suitInventory.at(playerChoice - 1);
-	suitInventory.erase(suitInventory.begin()+(playerChoice -1));
+	suitInventory.erase(suitInventory.begin() + (playerChoice -1));
 	return temp;
+}
+
+/*********************************************************************
+** Description: Method that returns the size of the player's inventory.
+*********************************************************************/
+unsigned int Player::inventorySize()
+{
+    return suitInventory.size();
 }
 

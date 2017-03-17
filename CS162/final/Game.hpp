@@ -15,6 +15,7 @@
 #include "CargoHold.hpp"
 #include "O2Room.hpp"
 #include "StorageRoom.hpp"
+#include "CommonRoom.hpp"
 #include "Player.hpp"
 #include "Item.hpp"
 #include "utility.hpp"
@@ -28,8 +29,12 @@ class Game
     private:
         Player player;
         Corridor* southCorridor;
+        Corridor* northCorridor;
+        Corridor* westCorridor;
         CryoChamber* cryoRoom;
+        StorageRoom* storageRoom;
         Space* currentRoom;
+        CommonRoom* commonArea;
         void printBanner();
         void printGameDesc();
         void printStartingScene();

@@ -29,6 +29,8 @@ class Corridor: public Space
 		bool specialAction();
         Item* getItem();
         bool canUseItems();
+        bool canChangeRooms(Space* newSpace);
+        bool placeItem(Item* itemToPlace);
 };
 
 #endif // CORRIDOR_HPP

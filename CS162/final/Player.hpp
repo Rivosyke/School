@@ -34,6 +34,7 @@ class Player
         void printInventory();
         bool pickUpItem(Item* newItem);
         Item* removeItem(int playerChoice);
+        unsigned int inventorySize();
 };
 
 #endif // PLAYER_HPP

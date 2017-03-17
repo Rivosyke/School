@@ -1,7 +1,7 @@
 /*********************************************************************
 ** Author: Ryan McGinn
 ** Date: 20 March 2017
-** Description: This is the implementation file for the Vampire class.
+** Description: This is the implementation file for the CryoChamber class.
 ** It contains the function definitions, the constructor, and the 
 ** destructor.
 *********************************************************************/
@@ -53,9 +53,15 @@ void CryoChamber::displayDesc()
              << "cryo pod against a wall, some sort of console next to it, \n"
              << "and a door opposite the pod." << endl;
     }
+    else if (!pressureSuit)
+    {
+        cout << "With emergency power now on, the room is well lit. You see\n"
+             << "your empty cryo pod, the emergency power console, and the\n"
+             << "now empty storage locker." << endl;
+    }
     else
     {
-        cout << "With Emergency power now on, the room is well lit. You notice\n"
+        cout << "With emergency power now on, the room is well lit. You notice\n"
              << "a pressure suit in a storage locker against the wall." << endl;
     }
 }
@@ -91,6 +97,11 @@ bool CryoChamber::specialAction()
 *********************************************************************/
 Item* CryoChamber::getItem()
 {
+    if (!pressureSuit)
+    {
+        printColor("There are no more items to be picked up in this room.\n",RED,BOLD);
+        return nullptr;
+    }
 	if (actionStatus)
 	{		
 		Item* temp = pressureSuit;
@@ -115,4 +126,31 @@ bool CryoChamber::canUseItems()
     return false;
 }
 
+/*********************************************************************
+** Description: Virtual function will take in a Space pointer that
+** is where the player wants to move to. Returns a bool depending on 
+** if that move location is acceptable based on special actions.
+*********************************************************************/
+bool CryoChamber::canChangeRooms(Space* newSpace)
+{
+    if (!actionStatus)
+    {
+        printColor("During the brief periods of illumination provided by the flashing red lights\n",GREEN,BOLD);
+        printColor("you see the door controls; they do not appear to have power. Perhaps there is\n",GREEN,BOLD);
+        printColor("a way to restore power to the room...\n",GREEN,BOLD);
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 
+/*********************************************************************
+** Description: Virtual function that will do nothing as this room
+** doesn't take in any items.
+*********************************************************************/
+bool CryoChamber::placeItem(Item* itemToPlace)
+{
+    return false;
+}
