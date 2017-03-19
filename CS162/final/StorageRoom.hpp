@@ -17,7 +17,6 @@
 class StorageRoom: public Space
 {
 	private:
-		bool actionStatus;
         Item* pressureRegulator;
         string specialActionName;
 	public:

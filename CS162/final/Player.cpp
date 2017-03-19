@@ -83,12 +83,13 @@ bool Player::pickUpItem(Item* newItem)
         delete newItem;
 		return true;
 	}
+	/*
 	else if (!hasPressureSuit)
     {
         cout << "You haven't put on the pressure suit yet and therefore have no "
              << "pockets with which to store this item." << endl;
         return false;
-    }
+    }*/
     else
     {
 		suitInventory.push_back(newItem);

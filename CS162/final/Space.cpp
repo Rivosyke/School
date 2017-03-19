@@ -24,6 +24,7 @@ Space::Space(Space* tempUp,
     Down = tempDown;
     Left = tempLeft;
     name = tempName;
+    actionStatus = false;
 }
 
 /*********************************************************************
@@ -85,4 +86,13 @@ void Space::fillSpaceVector(vector<Space*> *availableRooms)
 	{
 		availableRooms -> push_back(Left);
 	}
+}
+
+/*********************************************************************
+** Description: Method that will return the status of the special
+** action. 
+*********************************************************************/
+bool Space::specialActionStatus()
+{
+	return actionStatus;
 }

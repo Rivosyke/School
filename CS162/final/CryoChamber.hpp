@@ -17,7 +17,6 @@
 class CryoChamber: public Space
 {
 	private:
-		bool actionStatus;
         Item* pressureSuit;
         string specialActionName;
 	public:

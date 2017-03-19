@@ -2,10 +2,9 @@
 ** Author: Ryan McGinn
 ** Date: 20 March 2017
 ** Description: This is the specification file for the CommonRoom class.
-** This class has three data members: A Item pointer for the item in
-** the chamber, a string to hold the name of the special action, and
-** a bool that represents if the action has been taken. It inherits 
-** other data members and methods from the Space super class.
+** This class has two data members: A Item pointer for the item in
+** the room and a string to hold the name of the special action. 
+** It inherits other data members and methods from the Space super class.
 *********************************************************************/
 
 #include "Space.hpp"
@@ -17,7 +16,6 @@
 class CommonRoom: public Space
 {
 	private:
-		bool actionStatus;
         Item* FTLFOB;
         string specialActionName;
 	public:

@@ -16,16 +16,23 @@ Game::Game()
 {
     northCorridor = new Corridor(nullptr,nullptr,nullptr,nullptr,"North Corridor");
     westCorridor = new Corridor(nullptr,nullptr,nullptr,nullptr,"West Corridor");
-	southCorridor = new Corridor(nullptr,nullptr, nullptr, nullptr, "South Corridor");
+	southCorridor = new Corridor(nullptr,nullptr,nullptr, nullptr, "South Corridor");
+	eastCorridor = new Corridor(nullptr,nullptr,nullptr,nullptr,"East Corridor");
     cryoRoom = new CryoChamber(southCorridor, nullptr, nullptr, nullptr, "Cryo Chamber");
-    commonArea = new CommonRoom(northCorridor, nullptr, southCorridor, westCorridor, "Common Area");
+    commonArea = new CommonRoom(northCorridor,eastCorridor,southCorridor,westCorridor, "Common Area");
     storageRoom = new StorageRoom(nullptr,westCorridor,nullptr,nullptr, "Storage Room");
+    cockpit = new Cockpit(nullptr,nullptr,northCorridor,nullptr, "Cockpit");
+    airlock = new Airlock(nullptr,nullptr,nullptr,eastCorridor,"Airlock");
+    
     
     northCorridor -> setDirectionPointer(commonArea, DOWN);
+    northCorridor -> setDirectionPointer(cockpit, UP);
     westCorridor -> setDirectionPointer(commonArea, RIGHT);
     westCorridor -> setDirectionPointer(storageRoom, LEFT);
     southCorridor -> setDirectionPointer(cryoRoom, DOWN); 
     southCorridor -> setDirectionPointer(commonArea, UP);
+    eastCorridor -> setDirectionPointer(commonArea, LEFT);
+    eastCorridor -> setDirectionPointer(airlock, RIGHT);
     currentRoom = cryoRoom;
 }
 
@@ -37,16 +44,22 @@ Game::~Game()
 {
     delete cryoRoom;
     cryoRoom = nullptr;
-    delete southCorridor;
-    southCorridor = nullptr;
+    delete cockpit;
+    cockpit = nullptr;
     delete commonArea;
     commonArea = nullptr;
     delete storageRoom;
     storageRoom = nullptr;
+    delete airlock;
+    airlock = nullptr; 
     delete westCorridor;
     westCorridor = nullptr;
     delete northCorridor;
     northCorridor = nullptr;
+	delete southCorridor;
+    southCorridor = nullptr;
+    delete eastCorridor;
+    eastCorridor = nullptr;
 }
 
 /*********************************************************************
@@ -88,7 +101,7 @@ void Game::printStartingScene()
     printColor("Game Introduction - The Starting Scene\n",YELLOW, BOLD);
     cout << "You wake up in a cryo pod. Through the tiny viewport at eye level, you can see" << endl;
     cout << "red lights flashing in an otherwise dark room. Knowing that you need to get" << endl;
-    cout << "out of the pod, you search the interior and see a button near your left shoulder" << endl;
+    cout << "out of the pod, you search the interior and see a button near your left shoulder." << endl;
     cout << "The button is labeled but your eyes can't quite focus on the writing. Finding" << endl;
     cout << "nothing else, you press the button and see the pod's hatch swing up and out of" << endl;
     cout << "the way. You peel yourself out of the pod and step onto the cold floor. Taking" << endl;
@@ -170,7 +183,7 @@ void Game::primaryDecisionLoop()
 				break;
 			// Perform Special Action
 			case 2:
-                currentRoom -> specialAction();
+				performSpecialAction();
 				pauseScreen();
 				break;
 			// Check Player Inventory
@@ -180,42 +193,15 @@ void Game::primaryDecisionLoop()
 				break;
             // Pick up an item in the room
             case 4:
-				player.pickUpItem(currentRoom -> getItem());
+				getItemFromRoom();
                 pauseScreen();
                 break;
             // Use item from inventory
-            case 5:
-            {
-                
-                if(currentRoom -> canUseItems())
-                {
-                    unsigned int playerInvChoice = 0;
-					player.printInventory();
-                    printColor("Choice: ", YELLOW, NORMAL);
-		
-                    playerInvChoice = getInt();
-                    
-                    while (playerInvChoice < 1 or (playerInvChoice > player.inventorySize()))
-                    {
-                        cout << endl << "Choice is not valid: Please choose 1-" << player.inventorySize() << ".";
-                        cout << endl << "Choice: ";
-                        playerInvChoice = getInt();
-                    }
-                    
-                    if (!(currentRoom -> placeItem(player.removeItem(playerInvChoice))))
-                    {
-                    }
-                    
-                    
-				}
-				else
-				{
-					printColor("None of your items are needed in this room.\n", RED, BOLD);
-				}
+            case 5:             
+				useItem();
                 pauseScreen();
                 break;
-			}	
-		}
+		}	
         clearScreen();
 	} while (true);
 }
@@ -254,8 +240,7 @@ void Game::changeRooms()
     }
     
     
-    userChoice = availableRooms.at(userInput -1);
-    
+    userChoice = availableRooms.at(userInput -1);   
     // Checks with the current room to see if a space change is possible
     if (currentRoom -> canChangeRooms(userChoice))
     {
@@ -268,4 +253,92 @@ void Game::changeRooms()
         cout << endl;
         printColor("Something is preventing you from changing rooms, try exploring the room first\n",RED,BOLD);
     }
+}
+
+/*********************************************************************
+** Description: Method that will perform the room's special action.
+** There is a check in case the player tries to depressurize the 
+** airlock while not wearing the pressure suit.
+*********************************************************************/
+void Game::performSpecialAction()
+{
+	if (currentRoom -> getName() == "Airlock" and !(player.pressureSuitEquipped()))
+	{
+		printColor("Without a pressure suit, cycling the airlock will kill you. Find\n",RED,BOLD);
+		printColor("a pressure suit to proceed to the Cargo Hold.\n",RED,BOLD);
+	}
+	else
+	{					
+		currentRoom -> specialAction();
+	}
+}
+
+/*********************************************************************
+** Description: Method that will attempt to pickup an item from the
+** current room.
+*********************************************************************/
+void Game::getItemFromRoom()
+{
+	// Special first case to let the player get the pressure suit
+	if (currentRoom -> getName() == "Cryo Chamber")
+	{
+		player.pickUpItem(currentRoom -> getItem());
+	}
+	// If the player has the suit equipped, get the item.
+	else if (player.pressureSuitEquipped())
+	{
+		player.pickUpItem(currentRoom -> getItem());
+	}
+	else
+	{
+		printColor("You aren't wearing anything with pockets!\n",RED,BOLD);
+	}
+}
+
+/*********************************************************************
+** Description: Method that will attempt to use an item in the player's
+** inventory in the current room. Various checks are performed to 
+** determined if any of the items can be used in that room.
+*********************************************************************/
+void Game::useItem()
+{
+	if(currentRoom -> canUseItems())
+	{
+		if (player.inventorySize() == 0)
+		{
+			player.printInventory();
+		}
+		else
+		{						
+			unsigned int playerInvChoice = 0;
+			player.printInventory();
+			printColor("Choice: ", YELLOW, NORMAL);
+
+			playerInvChoice = getInt();
+			
+			while (playerInvChoice < 1 or (playerInvChoice > player.inventorySize()))
+			{
+				cout << endl << "Choice is not valid: Please choose 1-" << player.inventorySize() << ".";
+				cout << endl << "Choice: ";
+				playerInvChoice = getInt();
+			}
+			
+			/* This block of code will take an item off the player's inventory and
+			 * push it to the current room to see if the item is used in that room.
+			 * If it is not, the item will be pushed back onto the player's inventory.
+			 */
+			Item* tempItem = player.removeItem(playerInvChoice);
+			if (!(currentRoom -> placeItem(tempItem)))
+			{
+				printColor("This item is not used in this room.\n",RED,BOLD);
+				player.pickUpItem(tempItem);
+			}
+
+			tempItem = nullptr;						
+		}                 
+	}
+	else
+	{
+		printColor("None of your items are needed in this room.\n", RED, BOLD);
+	}
 }

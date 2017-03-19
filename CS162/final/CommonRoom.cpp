@@ -19,7 +19,6 @@ CommonRoom::CommonRoom(Space* tempUp,
                          string tempName)
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
-	actionStatus = false;
     FTLFOB = new Item("FTL Engagement FOB on a fuzzy dice keychain");
 
     specialActionName = "Turn on lights";
@@ -76,7 +75,8 @@ bool CommonRoom::specialAction()
     // Lights can be turned to illuminate the passage
     if (actionStatus)
     {
-        printColor("The lights are already on and they don't appear to turn off, no matter how many times you mash the button.\n",RED,ITALIC);
+        printColor("The lights are already on and they don't appear to turn off,\n",RED,BOLD);
+        printColor("no matter how many times you mash the button.\n",RED,BOLD);
         return false;
     }
     else

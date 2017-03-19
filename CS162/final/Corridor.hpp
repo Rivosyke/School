@@ -15,7 +15,6 @@
 class Corridor: public Space
 {
 	private:
-		bool actionStatus;
         string specialActionName;
         
 	public:

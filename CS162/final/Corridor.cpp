@@ -19,7 +19,6 @@ Corridor::Corridor(Space* tempUp,
                          string tempName)
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
-	actionStatus = false;
     specialActionName = "Turn on the lights";
 }
 
@@ -57,7 +56,8 @@ bool Corridor::specialAction()
     // Lights can be turned to illuminate the passage
     if (actionStatus)
     {
-        printColor("The lights are already on and they don't appear to turn off, no matter how many times you mash the button.\n",RED,ITALIC);
+        printColor("The lights are already on and they don't appear to turn off,\n",RED,BOLD);
+        printColor("no matter how many times you mash the button.",RED,BOLD);
         return false;
     }
     else

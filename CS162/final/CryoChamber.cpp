@@ -19,7 +19,6 @@ CryoChamber::CryoChamber(Space* tempUp,
                          string tempName)
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
-	actionStatus = false;
     pressureSuit = new Item("Pressure Suit");
 
     specialActionName = "Turn on emergency power";

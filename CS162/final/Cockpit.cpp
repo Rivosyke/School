@@ -20,7 +20,6 @@ Cockpit::Cockpit(Space* tempUp,
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
     FTLFOB = nullptr;
-	actionStatus = false;
     specialActionName = "Engage FTL";
 }
 
@@ -38,8 +37,8 @@ Cockpit::~Cockpit()
 }
 
 /*********************************************************************
-** Description: Method that will display the description of the Cryo 
-** Chamber based on the special action status.
+** Description: Method that will display the description of the cockpit
+** based on the special action status.
 *********************************************************************/ 
 void Cockpit::displayDesc()
 {
@@ -51,16 +50,17 @@ void Cockpit::displayDesc()
              << "\n"
              << "" << endl;
     }
-    else if (!pressureSuit)
+    // Description based on if the FTLFOB is not present in the cockpit
+    else if (!FTLFOB)
     {
-        cout << "With emergency power now on, the room is well lit. You see\n"
-             << "your empty cryo pod, the emergency power console, and the\n"
-             << "now empty storage locker." << endl;
+        cout << "Place Holder Text\n"
+             << "Place Holder Text\n"
+             << "Place Holder Text." << endl;
     }
     else
     {
-        cout << "With emergency power now on, the room is well lit. You notice\n"
-             << "a pressure suit in a storage locker against the wall." << endl;
+        cout << "Place Holder Text\n"
+             << "Place Holder Text" << endl;
     }
 }
 
@@ -74,15 +74,15 @@ bool Cockpit::specialAction()
     // The cockpit can engage FTL to escape the black hole, provided the ship is fixed
     if (actionStatus)
     {
-        printColor("You've already turned on emergency power; this console has no further function.\n",RED,ITALIC);
+        printColor("Place holder text \n",RED,ITALIC);
         return false;
     }
-    else
+    else 
     {
-        printColor("The console appears to control emergency power. You briefly wonder why the ship\n", GREEN, ITALIC); 
-        printColor("designers would put this console in this room. As you engage emergency power, the\n", GREEN, ITALIC); 
-        printColor("red lights stop flashing and the room's normal lighting returns. Now that the room\n",GREEN, ITALIC);
-        printColor("is fully illuminated, you see a pressure suit in a storage locker against a wall.\n", GREEN, ITALIC);
+        printColor("Place Holder Text\n", GREEN, ITALIC); 
+        printColor("Place Holder Text\n", GREEN, ITALIC); 
+        printColor("Place Holder Text\n",GREEN, ITALIC);
+        printColor("Place Holder Text\n", GREEN, ITALIC);
         actionStatus = true;
         return true;
     }

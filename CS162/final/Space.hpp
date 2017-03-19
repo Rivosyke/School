@@ -30,6 +30,7 @@ class Space
         Space* Down;
         Space* Left;
         string name;
+        bool actionStatus;
     
     public:
         Space(Space* tempUp, 
@@ -39,14 +40,16 @@ class Space
               string tempName);
 		void setDirectionPointer(Space* spaceToSet, direction position);
 		void fillSpaceVector(vector<Space*> *availableRooms);
+		string getName();
+		bool specialActionStatus();
         virtual ~Space();
         virtual void displayDesc() = 0;
         virtual bool specialAction() = 0;
         virtual Item* getItem() = 0;
-        string getName();
         virtual bool canUseItems() = 0;
         virtual bool canChangeRooms(Space* newSpace) = 0;
         virtual bool placeItem(Item* itemToPlace) = 0;
+       
 };
 
 #endif // SPACE_HPP

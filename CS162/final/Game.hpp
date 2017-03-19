@@ -31,16 +31,22 @@ class Game
         Corridor* southCorridor;
         Corridor* northCorridor;
         Corridor* westCorridor;
+        Corridor* eastCorridor;
         CryoChamber* cryoRoom;
         StorageRoom* storageRoom;
         Space* currentRoom;
         CommonRoom* commonArea;
+        Cockpit* cockpit;
+        Airlock* airlock;
         void printBanner();
         void printGameDesc();
         void printStartingScene();
         void primaryDecisionLoop();
         void printUserInputMenu();
         void changeRooms();
+        void useItem();
+        void getItemFromRoom();
+        void performSpecialAction();
 
     public:
         Game();
