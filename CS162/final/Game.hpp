@@ -19,6 +19,7 @@
 #include "Player.hpp"
 #include "Item.hpp"
 #include "utility.hpp"
+#include "Engineering.hpp"
 
 
 #ifndef GAME_HPP
@@ -38,6 +39,9 @@ class Game
         CommonRoom* commonArea;
         Cockpit* cockpit;
         Airlock* airlock;
+        CargoHold* cargoHold;
+        O2Room* o2Room;
+        Engineering* engineering;
         void printBanner();
         void printGameDesc();
         void printStartingScene();

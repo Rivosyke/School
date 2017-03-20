@@ -44,26 +44,52 @@ CargoHold::~CargoHold()
 *********************************************************************/ 
 void CargoHold::displayDesc()
 {
-    if (!actionStatus)
+    if (!actionStatus and !emFieldRegulator)
     {        
-        cout <<"You step into an expansive space filled with machinery designed\n"
-			 <<"for loading / offloading cargo containers. There are no containers\n"
-			 <<"in the hold now, possibly due to the cargo door being open and the\n
-			 <<"room being decompressed. The door needs to be closed if the ship is\n
-			 <<"to perform an FTL jump." << endl;
+        cout <<"You are in an expansive space filled with machinery designed\n"
+			 <<"for loading / offloading cargo containers. A lone box fastened to\n"
+             <<"a wall with metal straps near the door now sits alone and empty. \n"
+             <<"There are no containers in the hold now, possibly due to the cargo\n"
+             <<"door being suddenly opened, resulting in a violent decompression.\n"
+             <<"Through the open door, the vastness of space looms...\n\n"
+             <<"The door needs to be closed if the ship is to perform an FTL jump." << endl;
     }
-    else if (!emFieldRegulator)
-    {
-        cout << "With the lights on, you can see that the room is large and\n"
-             << "must be used for recreation and eating as there are tables\n"
-             << "and chairs, vid screens, and a food dispensary." << endl;
+    else if (!actionStatus)
+    {        
+        cout <<"You are in an expansive space filled with machinery designed\n"
+			 <<"for loading / offloading cargo containers. A lone box fastened to\n"
+             <<"a wall with metal straps near the door has a cylindrical object \n"
+             <<"in it. There are no containers in the hold now, possibly due to\n"
+             <<"the cargo door being suddenly opened, resulting in a violent\n"
+             <<"decompression. Through the open door, the vastness of space looms.\n"
+             <<"The door needs to be closed if the ship is to perform an FTL jump." << endl;
     }
-    else
+
+    else if (!emFieldRegulator and !actionStatus)
     {
-        cout << "With the lights on, you can see that the room is large and\n"
-             << "must be used for recreation and eating as there are tables\n"
-             << "and chairs, vid screens, and a food dispensary. You see what\n"
-             << "look like a pair of fuzzy dice on a nearby table."  << endl;
+        cout <<"You are in an expansive space filled with machinery designed\n"
+			 <<"for loading / offloading cargo containers. A lone box fastened to\n"
+             <<"a wall with metal straps near the door now sits empty and alone. \n"
+             <<"There are no containers in the hold now, possibly due to the cargo\n"
+             <<"door being suddenly opened, resulting in a violent decompression.\n"
+             <<"Through the open door, the vastness of space looms...\n\n"
+             <<"The door needs to be closed if the ship is to perform an FTL jump." << endl;
+    }
+    else if (actionStatus and !emFieldRegulator)
+    {
+        cout <<"You are in an expansive space filled with machinery designed\n"
+			 <<"for loading / offloading cargo containers. A lone box fastened to\n"
+             <<"a wall with metal straps near the door now sits empty and alone. \n"
+             <<"There are no containers in the hold and while the cargo door is \n"
+             <<"now closed, the room is still depressurized." << endl;
+    }
+    else if (actionStatus)
+    {
+        cout <<"You are in an expansive space filled with machinery designed\n"
+			 <<"for loading / offloading cargo containers. A lone box fastened to\n"
+             <<"a wall with metal straps near the door has a cylindrical object\n"
+             <<"in it. There are no containers in the hold and while the cargo \n"
+             <<"door is now closed, the room is still depressurized." << endl;
     }
 }
 
@@ -74,17 +100,19 @@ void CargoHold::displayDesc()
 *********************************************************************/
 bool CargoHold::specialAction()
 {
-    // Lights can be turned to illuminate the passage
+    // The cargo hold door can be closed 
     if (actionStatus)
     {
-        printColor("The lights are already on and they don't appear to turn off,\n",RED,BOLD);
-        printColor("no matter how many times you mash the button.\n",RED,BOLD);
+        printColor("The cargo hold door is already closed. There's no need to open it at this time.\n",RED,BOLD);
         return false;
     }
     else
     {
-        printColor("The common room's overhead fluorescents flicker to life, revealing the\n", GREEN, ITALIC);
-        printColor("room's contents.\n", GREEN, ITALIC); 
+        printColor("You approach the gaping hole left by the open cargo door and try to avoid\n", GREEN, BOLD);
+        printColor("looking into the void. The lever to close the door is on the right hand side\n", GREEN, BOLD); 
+        printColor("of the hold, near the exit. You grip the lever with both hands and force it\n",GREEN,BOLD);
+        printColor("down into the closed position. The two halves of the door mechanism slowly\n",GREEN,BOLD);
+        printColor("come together and form a seal against the vacuum of space.\n",GREEN,BOLD);
         actionStatus = true;
         return true;
     }
@@ -96,19 +124,21 @@ bool CargoHold::specialAction()
 *********************************************************************/
 Item* CargoHold::getItem()
 {
-	if (actionStatus)
+	if (emFieldRegulator)
 	{	
-        printColor("You approach the table and pick up the object on the table. It appears\n",GREEN,BOLD);
-        printColor("to be two pink fuzzy dice on a keychain. On the keychain is a key.\n",GREEN,BOLD);
-        printColor("You don't know what this key is for.\n",GREEN,BOLD);
+        printColor("Pulling open the flaps of the box reveals a cylindrical object resting\n",GREEN,BOLD);
+        printColor("in a form-fitting slot in the box. It has a handle on one end of the \n",GREEN,BOLD);
+        printColor("cylinder and two metal prongs on the other. It looks like it is meant\n",GREEN,BOLD);
+        printColor("to be inserted into a receptacle. Along one side, in faded letters, is\n",GREEN,BOLD);
+        printColor("printed 'EM Field Regulator'.\n",GREEN,BOLD);
         Item* temp = emFieldRegulator;
         emFieldRegulator = nullptr;
         return temp;
 	}
 	else
 	{
-		printColor("In the near-dark, you can't see anything worth picking up.\n",GREEN,BOLD);
-		printColor("Perhaps there is a way to turn on the lights...\n",GREEN,BOLD);
+		printColor("The box is now empty and there doesn't seem to be anything else of use\n",RED,BOLD);
+		printColor("in the cargo hold.\n",RED,BOLD);
 		return nullptr;
 	}
 }

@@ -23,14 +23,19 @@ Game::Game()
     storageRoom = new StorageRoom(nullptr,westCorridor,nullptr,nullptr, "Storage Room");
     cockpit = new Cockpit(nullptr,nullptr,northCorridor,nullptr, "Cockpit");
     airlock = new Airlock(nullptr,nullptr,nullptr,eastCorridor,"Airlock");
+    cargoHold = new CargoHold(nullptr,nullptr,nullptr,airlock,"Cargo Hold");
+    o2Room = new O2Room(nullptr,southCorridor,nullptr,nullptr,"O2 Room");
+    engineering = new Engineering(nullptr,nullptr,nullptr,southCorridor,"Engineering");
     
-    
+    airlock -> setDirectionPointer(cargoHold,RIGHT);
     northCorridor -> setDirectionPointer(commonArea, DOWN);
     northCorridor -> setDirectionPointer(cockpit, UP);
     westCorridor -> setDirectionPointer(commonArea, RIGHT);
     westCorridor -> setDirectionPointer(storageRoom, LEFT);
     southCorridor -> setDirectionPointer(cryoRoom, DOWN); 
     southCorridor -> setDirectionPointer(commonArea, UP);
+    southCorridor -> setDirectionPointer(o2Room,LEFT);
+    southCorridor -> setDirectionPointer(engineering,RIGHT);
     eastCorridor -> setDirectionPointer(commonArea, LEFT);
     eastCorridor -> setDirectionPointer(airlock, RIGHT);
     currentRoom = cryoRoom;
@@ -52,6 +57,12 @@ Game::~Game()
     storageRoom = nullptr;
     delete airlock;
     airlock = nullptr; 
+    delete cargoHold;
+    cargoHold = nullptr;
+    delete o2Room;
+    o2Room = nullptr;
+    delete engineering;
+    engineering = nullptr;
     delete westCorridor;
     westCorridor = nullptr;
     delete northCorridor;
@@ -154,10 +165,13 @@ void Game::primaryDecisionLoop()
 {
     clearScreen();
     
+    bool loopGame = true;
+    
     int userInput = 0;	
 	
 	do
 	{   
+
         cout << endl;
         printColor("Current Location: ", RED, BOLD);
 		cout << currentRoom -> getName();
@@ -183,6 +197,11 @@ void Game::primaryDecisionLoop()
 				break;
 			// Perform Special Action
 			case 2:
+                if (currentRoom -> getName == "Cockpit" and
+                    engineering -> specialActionStatus() and
+                    o2Room      -> specialActionStatus() and
+                    cargoHold   -> specialActionStatus())
+                    {}
 				performSpecialAction();
 				pauseScreen();
 				break;
@@ -203,7 +222,7 @@ void Game::primaryDecisionLoop()
                 break;
 		}	
         clearScreen();
-	} while (true);
+	} while (loopGame);
 }
 
 /*********************************************************************
@@ -306,8 +325,8 @@ void Game::useItem()
 	{
 		if (player.inventorySize() == 0)
 		{
-			player.printInventory();
-		}
+			printColor("You have nothing in your inventory to use!\n",RED,BOLD);
+        }
 		else
 		{						
 			unsigned int playerInvChoice = 0;

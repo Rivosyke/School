@@ -7,11 +7,11 @@ CXXFLAGS += -pedantic-errors #Strictly enforce the standard
 CXXFLAGS += -g #Debugging info
 #CXXFLAGS += O3 #Optimation option
 
-OBJS = utility.o Space.o CryoChamber.o Item.o Player.o Game.o Corridor.o CommonRoom.o StorageRoom.o Cockpit.o Airlock.o final.o
+OBJS = utility.o Space.o CryoChamber.o Item.o Player.o Game.o Corridor.o CommonRoom.o StorageRoom.o Cockpit.o Airlock.o final.o CargoHold.o O2Room.o Engineering.o
 	
-HEADERS = utility.hpp Space.hpp CryoChamber.hpp Item.hpp Player.hpp Game.hpp Corridor.hpp CommonRoom.hpp StorageRoom.hpp Cockpit.hpp Airlock.hpp
+HEADERS = utility.hpp Space.hpp CryoChamber.hpp Item.hpp Player.hpp Game.hpp Corridor.hpp CommonRoom.hpp StorageRoom.hpp Cockpit.hpp Airlock.hpp CargoHold.hpp O2Room.hpp Engineering.hpp
 
-SRCS = utility.cpp Space.cpp final.cpp CryoChamber.cpp Item.cpp Player.cpp Game.cpp Corridor.cpp CommonRoom.cpp StorageRoom.cpp Cockpit.cpp Airlock.cpp
+SRCS = utility.cpp Space.cpp final.cpp CryoChamber.cpp Item.cpp Player.cpp Game.cpp Corridor.cpp CommonRoom.cpp StorageRoom.cpp Cockpit.cpp Airlock.cpp CargoHold.cpp O2Room.cpp Engineering.cpp
 
 
 #target: dependencies

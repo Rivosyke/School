@@ -57,7 +57,7 @@ bool Corridor::specialAction()
     if (actionStatus)
     {
         printColor("The lights are already on and they don't appear to turn off,\n",RED,BOLD);
-        printColor("no matter how many times you mash the button.",RED,BOLD);
+        printColor("no matter how many times you mash the button.\n",RED,BOLD);
         return false;
     }
     else
