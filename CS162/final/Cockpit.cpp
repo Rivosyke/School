@@ -45,14 +45,26 @@ void Cockpit::displayDesc()
     // Description based on if the FTLFOB is not present in the cockpit
 	if (!FTLFOB)
     {
-        cout << "Place Holder Text\n"
-             << "Place Holder Text\n"
-             << "Place Holder Text." << endl;
+        cout << "You are in the cockpit, surrounded by a dizzying array of monitors\n"
+			 << "and consoles providing readouts from every part of the ship. Through\n"
+			 << "the viewscreen, all you see is a starfield. Off to the left,\n"
+			 << "though, you see a section of space where the stars are elongated\n"
+			 << "and curved. Perhaps this is how you can see the effects of the\n"
+			 << "black hole you are near. Between the consoles at hand-level,\n" 
+			 << "there appears to be a slot for a small key. It strikes you as odd\n"
+			 << "that an advanced piece of technology such as this ship would still\n"
+			 << "require a simple key to function." << endl;
     }
     else
     {
-        cout << "Place Holder Text\n"
-             << "Place Holder Text" << endl;
+        cout << "You are in the cockpit, surrounded by a dizzying array of monitors\n"
+			 << "and consoles providing readouts from every part of the ship. Through\n"
+			 << "the viewscreen, all you see is a starfield. Off to the left,\n"
+			 << "though, you see a section of space where the stars are elongated\n"
+			 << "and curved. Perhaps this is how you can see the effects of the\n"
+			 << "black hole you are near. Now that the key is inserted into the\n"
+			 << "slot, the fuzzy dice it is attached to are resting on adjoining\n"
+			 << "consoles." << endl;
     }
 }
 
@@ -63,22 +75,33 @@ void Cockpit::displayDesc()
 *********************************************************************/
 bool Cockpit::specialAction()
 {
-    // The cockpit can engage FTL to escape the black hole, provided the ship is fixed
-    if (actionStatus)
-    {
-        printColor("Place holder text \n",RED,ITALIC);
-        return false;
-    }
-    else 
-    {
-        printColor("Place Holder Text\n", GREEN, ITALIC); 
-        printColor("Place Holder Text\n", GREEN, ITALIC); 
-        printColor("Place Holder Text\n",GREEN, ITALIC);
-        printColor("Place Holder Text\n", GREEN, ITALIC);
-        actionStatus = true;
-        return true;
-    }
-    
+    // The cockpit can engage the FTL drive to escape the black hole, 
+    // provided the ship is fixed and the key is in the slot
+	printColor("With everything fixed and the key inserted, the ship is ready\n", MAGENTA,BOLD); 
+	printColor("to FTL away from the black hole. Praying to whatever deity will\n",MAGENTA,BOLD);
+	printColor("listen, you press the 'Emergency FTL' button on the navigation\n",MAGENTA,BOLD);
+	printColor("console, a move that will make a short range jump in the direction\n",MAGENTA,BOLD);
+	printColor("the ship is currently facing. You hope that the ship is not pointed\n",MAGENTA,BOLD);
+	printColor("in the wrong direction...\n",MAGENTA,BOLD);
+	cout << endl;
+	printColor("You hear a hum emanate from the rear of the ship and feel the deck\n",MAGENTA,BOLD);
+	printColor("plates start to vibrate. You quickly sit at one of the crew stations\n",MAGENTA,BOLD);
+	printColor("and strap yourself in. As you fasten the last restraint, you see the\n",MAGENTA,BOLD);
+	printColor("the starfield start to blur and feel an indescribable acceleration\n",MAGENTA,BOLD);
+	printColor("slamming you into your chair. You shy away from thinking what would\n",MAGENTA,BOLD);
+	printColor("have happened had you not sat down and restrained yourself...\n",MAGENTA,BOLD);
+	cout << endl;
+	printColor("And then it was all over. The ship dropped out of FTL travel and\n",MAGENTA,BOLD);
+	printColor("started slowly drifting in the direction it exited from FTL in.\n",MAGENTA,BOLD);
+	printColor("You can no longer feel the constant pull in one direction of the\n",MAGENTA,BOLD);
+	printColor("black hole and the automated countdown has ceased. It appears you\n",MAGENTA,BOLD);
+	printColor("are you safe, for the time being.\n",MAGENTA,BOLD);
+	cout << endl;
+	printColor("Now that you have escaped the black hole, you need to decide what\n",MAGENTA,BOLD);
+	printColor("your next move is..\n",MAGENTA,BOLD);
+
+	actionStatus = true;
+	return true;
 }
 
 /*********************************************************************

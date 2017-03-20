@@ -75,15 +75,15 @@ bool CryoChamber::specialAction()
     // Emergency Power can be turned on in this room: turn it on
     if (actionStatus)
     {
-        printColor("You've already turned on emergency power; this console has no further function.\n",RED,ITALIC);
+        printColor("You've already turned on emergency power; this console has no further function.\n",RED,BOLD);
         return false;
     }
     else
     {
-        printColor("The console appears to control emergency power. You briefly wonder why the ship\n", GREEN, ITALIC); 
-        printColor("designers would put this console in this room. As you engage emergency power, the\n", GREEN, ITALIC); 
-        printColor("red lights stop flashing and the room's normal lighting returns. Now that the room\n",GREEN, ITALIC);
-        printColor("is fully illuminated, you see a pressure suit in a storage locker against a wall.\n", GREEN, ITALIC);
+        printColor("The console appears to control emergency power. You briefly wonder why the ship\n", GREEN, BOLD); 
+        printColor("designers would put this console in this room. As you engage emergency power, the\n", GREEN, BOLD); 
+        printColor("red lights stop flashing and the room's normal lighting returns. Now that the room\n",GREEN, BOLD);
+        printColor("is fully illuminated, you see a pressure suit in a storage locker against a wall.\n", GREEN, BOLD);
         actionStatus = true;
         return true;
     }

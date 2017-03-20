@@ -41,7 +41,7 @@ Game::Game()
     currentRoom = cryoRoom;
     playerWins = false;
     loopGame = true;
-    moveCount = 30;
+    moveCount = 40;
 }
 
 /*********************************************************************
@@ -99,7 +99,9 @@ void Game::printGameDesc()
     cout << endl << "The game's background is that you (the player) wake up in a cryo chamber " << endl
                  << "on a spaceship with no knowledge of what's going on around you. The" << endl
                  << "intended goal is to repair various parts of the ship in order to use the" << endl
-                 << "FTL (Faster Than Light) drive to escape the event horizon of a Black Hole." << endl;
+                 << "FTL (Faster Than Light) drive to escape the event horizon of a Black Hole." << endl
+                 << "Every room change will take 1 minute and you start with 40 minutes until" << endl
+                 << "you pass the event horizon." << endl;
     cout << endl << endl;
     printStartingScene();
     cout << endl << endl;
@@ -113,13 +115,17 @@ void Game::printGameDesc()
 void Game::printStartingScene()
 {
     printColor("Game Introduction - The Starting Scene\n",YELLOW, BOLD);
-    cout << "You wake up in a cryo pod. Through the tiny viewport at eye level, you can see" << endl;
-    cout << "red lights flashing in an otherwise dark room. Knowing that you need to get" << endl;
-    cout << "out of the pod, you search the interior and see a button near your left shoulder." << endl;
-    cout << "The button is labeled but your eyes can't quite focus on the writing. Finding" << endl;
-    cout << "nothing else, you press the button and see the pod's hatch swing up and out of" << endl;
-    cout << "the way. You peel yourself out of the pod and step onto the cold floor. Taking" << endl;
-    cout << "your first real look at your surroundings, you need to decide what the next move is..." << endl;
+    cout << "You wake up in a cryo pod. You can faintly hear an automated voice repeating" << endl
+		 << "a message every minute but can't quite make out what the message is. " << endl
+		 << "Through the tiny viewport at eye level, you can see red lights flashing" << endl
+		 << "in an otherwise dark room." << endl << endl
+		 << "Knowing that you need to get out of the pod, you search the interior and see" << endl
+		 << "a button near your left shoulder. The button is labeled but your eyes can't " << endl
+		 << "quite focus on the writing. Finding nothing else, you press the button and see" << endl
+		 << "the pod's hatch swing up and out of the way. You peel yourself out of the pod" << endl
+		 << "and step onto the cold floor. " << endl << endl
+		 << "Taking your first real look at your surroundings, you need to decide what your" << endl
+		 << "next move is..." << endl;
 }
 
 
@@ -179,7 +185,8 @@ void Game::primaryDecisionLoop()
 		}
 		else
 		{
-			cout << "Moves left: " << moveCount;
+			printColor("Time until event horizon: ",MAGENTA,BOLD);
+			cout << moveCount << " minutes" << endl;
 			cout << endl;
 			printColor("Current Location: ", RED, BOLD);
 			cout << currentRoom -> getName();
@@ -251,8 +258,7 @@ void Game::changeRooms()
 	{
 		cout << x + 1 << ") " << availableRooms.at(x) -> getName() << endl;
 	}
-    
-	cout << endl;	
+    	
     printColor("Choice: ", YELLOW, NORMAL);
     userInput = getInt();
     

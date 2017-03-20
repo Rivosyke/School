@@ -79,8 +79,8 @@ bool StorageRoom::specialAction()
     }
     else
     {
-        printColor("The storage room's overhead fluorescents flicker to life, revealing the\n", GREEN, ITALIC);
-        printColor("room's contents.\n", GREEN, ITALIC); 
+        printColor("The storage room's overhead fluorescents flicker to life, revealing the\n", GREEN, BOLD);
+        printColor("room's contents.\n", GREEN, BOLD); 
         actionStatus = true;
         return true;
     }

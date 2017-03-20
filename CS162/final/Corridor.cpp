@@ -62,7 +62,7 @@ bool Corridor::specialAction()
     }
     else
     {
-        printColor("The corridor's overhead fluorescents flicker to life, shedding light on the long passageway.\n", GREEN, ITALIC); 
+        printColor("The corridor's overhead fluorescents flicker to life, shedding light on the long passageway.\n", GREEN,BOLD); 
         actionStatus = true;
         return true;
     }

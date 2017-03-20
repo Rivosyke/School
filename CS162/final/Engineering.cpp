@@ -37,7 +37,7 @@ Engineering::~Engineering()
 }
 
 /*********************************************************************
-** Description: Method that will display the description of the cockpit
+** Description: Method that will display the description of Engineering
 ** based on the special action status.
 *********************************************************************/ 
 void Engineering::displayDesc()
@@ -48,7 +48,7 @@ void Engineering::displayDesc()
              << "spanning across a chamber that contains a single, giant cylinder in\n"
              << "the center. The catwalk connects the door to a console and maintenance\n"
              << "panel on the cylinder. The panel says 'Fusion Reactor Maintenance' and\n"
-             << "the panel is labeled 'Reactor Operations'. The reactor appears to be \n"
+             << "the console is labeled 'Reactor Operations'. The reactor appears to be \n"
              << "dormant and the maintenance panel appears to be missing a part." << endl;
         
     }
@@ -59,7 +59,7 @@ void Engineering::displayDesc()
              << "spanning across a chamber that contains a single, giant cylinder in\n"
              << "the center. The catwalk connects the door to a console and maintenance\n"
              << "panel on the cylinder. The panel says 'Fusion Reactor Maintenance' and\n"
-             << "the panel is labeled 'Reactor Operations'. Though the EM Field Regulator\n"
+             << "the console is labeled 'Reactor Operations'. Though the EM Field Regulator\n"
              << "has been installed, the reactor is still dormant." << endl;
     }
     else
@@ -68,7 +68,7 @@ void Engineering::displayDesc()
              << "spanning across a chamber that contains a single, giant cylinder in\n"
              << "the center. The catwalk connects the door to a console and maintenance\n"
              << "panel on the cylinder. The panel says 'Fusion Reactor Maintenance' and\n"
-             << "the panel is labeled 'Reactor Operations'. The room hums as the reactor\n"
+             << "the panel is console 'Reactor Operations'. The room hums as the reactor\n"
              << "is now active and you can feel a faint vibration if you touch the cylinder." << endl;
     }
 }
