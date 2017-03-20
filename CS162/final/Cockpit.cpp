@@ -42,16 +42,8 @@ Cockpit::~Cockpit()
 *********************************************************************/ 
 void Cockpit::displayDesc()
 {
-    if (!actionStatus)
-    {        
-        cout << "\n" 
-             << "\n"
-             << "\n"
-             << "\n"
-             << "" << endl;
-    }
     // Description based on if the FTLFOB is not present in the cockpit
-    else if (!FTLFOB)
+	if (!FTLFOB)
     {
         cout << "Place Holder Text\n"
              << "Place Holder Text\n"
@@ -134,3 +126,20 @@ bool Cockpit::placeItem(Item* itemToPlace)
         return true;
     }
 }
+
+/*********************************************************************
+** Description: Method that will check, and return an appropriate value,
+** if the FTLFOB is in the cockpit or not.
+*********************************************************************/
+bool Cockpit::hasFOB()
+{
+	if (FTLFOB)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+

@@ -31,6 +31,7 @@ class Cockpit: public Space
         bool canUseItems();
         bool canChangeRooms(Space* newSpace);
         bool placeItem(Item* itemToPlace);
+        bool hasFOB();
 };
 
 #endif // COCKPIT_HPP

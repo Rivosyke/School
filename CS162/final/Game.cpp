@@ -39,6 +39,9 @@ Game::Game()
     eastCorridor -> setDirectionPointer(commonArea, LEFT);
     eastCorridor -> setDirectionPointer(airlock, RIGHT);
     currentRoom = cryoRoom;
+    playerWins = false;
+    loopGame = true;
+    moveCount = 30;
 }
 
 /*********************************************************************
@@ -164,65 +167,67 @@ void Game::printUserInputMenu()
 void Game::primaryDecisionLoop()
 {
     clearScreen();
-    
-    bool loopGame = true;
-    
+       
     int userInput = 0;	
 	
 	do
-	{   
-
-        cout << endl;
-        printColor("Current Location: ", RED, BOLD);
-		cout << currentRoom -> getName();
-        cout << endl;
-        currentRoom -> displayDesc();
-        printUserInputMenu();
-		printColor("Choice: ", YELLOW, NORMAL);
-		
-		userInput = getInt();
-		
-		while (userInput < 1 or userInput > 5)
-        {
-            cout << endl << "Choice is not valid: Please choose 1-5.";
-            cout << endl << "Choice: ";
-            userInput = getInt();
-		}	
-        switch (userInput)
-        {
-			// Change Rooms
-			case 1:
-				changeRooms();
-				pauseScreen();
-				break;
-			// Perform Special Action
-			case 2:
-                if (currentRoom -> getName == "Cockpit" and
-                    engineering -> specialActionStatus() and
-                    o2Room      -> specialActionStatus() and
-                    cargoHold   -> specialActionStatus())
-                    {}
-				performSpecialAction();
-				pauseScreen();
-				break;
-			// Check Player Inventory
-			case 3:
-                player.printInventory();
-                pauseScreen();
-				break;
-            // Pick up an item in the room
-            case 4:
-				getItemFromRoom();
-                pauseScreen();
-                break;
-            // Use item from inventory
-            case 5:             
-				useItem();
-                pauseScreen();
-                break;
-		}	
-        clearScreen();
+	{ 
+		if (moveCount == 0)
+		{
+			playerWins = false;
+			loopGame = false;
+		}
+		else
+		{
+			cout << "Moves left: " << moveCount;
+			cout << endl;
+			printColor("Current Location: ", RED, BOLD);
+			cout << currentRoom -> getName();
+			cout << endl;
+			currentRoom -> displayDesc();
+			printUserInputMenu();
+			printColor("Choice: ", YELLOW, NORMAL);
+			
+			userInput = getInt();
+			
+			while (userInput < 1 or userInput > 5)
+			{
+				cout << endl << "Choice is not valid: Please choose 1-5.";
+				cout << endl << "Choice: ";
+				userInput = getInt();
+			}	
+			switch (userInput)
+			{
+				// Change Rooms
+				case 1:
+					changeRooms();
+					pauseScreen();
+					break;
+				// Perform Special Action
+				case 2:			
+					performSpecialAction();
+					pauseScreen();
+					break;
+				// Check Player Inventory
+				case 3:
+					player.printInventory();
+					pauseScreen();
+					break;
+				// Pick up an item in the room
+				case 4:
+					getItemFromRoom();
+					pauseScreen();
+					break;
+				// Use item from inventory
+				case 5:             
+					useItem();
+					pauseScreen();
+					break;
+			}	
+			clearScreen();   
+		 }
 	} while (loopGame);
+	gameResults();
 }
 
 /*********************************************************************
@@ -266,6 +271,7 @@ void Game::changeRooms()
         currentRoom = availableRooms.at(userInput -1);
         printColor("The door slides open with a whine from disuse. You step into the next room\n",GREEN,BOLD);
         printColor("and the door grinds to a close behind you...\n",GREEN,BOLD);
+        moveCount--;
     }
     else
     {
@@ -281,7 +287,24 @@ void Game::changeRooms()
 *********************************************************************/
 void Game::performSpecialAction()
 {
-	if (currentRoom -> getName() == "Airlock" and !(player.pressureSuitEquipped()))
+	if (currentRoom -> getName() == "Cockpit")
+	{
+		if(engineering -> specialActionStatus() and
+		   o2Room      -> specialActionStatus() and
+		   cargoHold   -> specialActionStatus() and
+		   cockpit	   -> hasFOB()) 
+		{					
+			playerWins = true;
+			loopGame = false;
+			currentRoom -> specialAction();
+		}
+		else
+		{
+			printColor("You can see a red flashing light next to the 'FTL Drive' label.\n",RED,BOLD);
+			printColor("Something must still need fixing on the ship before you can use it.\n",RED,BOLD);
+		}
+	}
+	else if (currentRoom -> getName() == "Airlock" and !(player.pressureSuitEquipped()))
 	{
 		printColor("Without a pressure suit, cycling the airlock will kill you. Find\n",RED,BOLD);
 		printColor("a pressure suit to proceed to the Cargo Hold.\n",RED,BOLD);
@@ -360,4 +383,33 @@ void Game::useItem()
 	{
 		printColor("None of your items are needed in this room.\n", RED, BOLD);
 	}
+}
+
+void Game::gameResults()
+{
+	clearScreen();
+	printColor("Ending Scene: \n",YELLOW,BOLD);
+	if (playerWins)
+	{
+		cout << "You have FTL'd to safety, just in the nick of time, too. Humanity\n"
+			 << "is not sure what happens if a person is sucked into a black hole,\n"
+			 << "but you breathe a sigh of relief that you won't be finding out \n"
+			 << "any time soon!" << endl;
+	}
+	else
+	{
+		cout << "Time has run out, the ship has drifted past the event horizon of\n"
+			 << "the black hole. No amount of thrust or efforts on your part will\n"
+			 << "be able to save you from the gravitational grip of the anomaly.\n"
+			 << "It looks like you'll be finding out first-hand just what happens\n"
+			 << "to a human that gets sucked into a black hole. If only there was\n"
+			 << "way to record the event, for posterity's sake." << endl;
+	}
+	 
+	cout << endl;
+	cout << "This ends Ryan McGinn's final project for 162. I hope you found this to be\n"
+		 << "an enjoyable experience! Lots of thought and energy went into the making.\n"
+		 << endl;
+		 
+	pauseScreen();
 }

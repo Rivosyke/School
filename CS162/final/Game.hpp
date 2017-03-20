@@ -28,6 +28,9 @@
 class Game
 {
     private:
+		bool loopGame;
+		bool playerWins;
+		int moveCount;
         Player player;
         Corridor* southCorridor;
         Corridor* northCorridor;
@@ -51,6 +54,8 @@ class Game
         void useItem();
         void getItemFromRoom();
         void performSpecialAction();
+        void gameResults();
+        
 
     public:
         Game();
