@@ -91,8 +91,8 @@ bool Cockpit::specialAction()
 	printColor("slamming you into your chair. You shy away from thinking what would\n",MAGENTA,BOLD);
 	printColor("have happened had you not sat down and restrained yourself...\n",MAGENTA,BOLD);
 	cout << endl;
-	printColor("And then it was all over. The ship dropped out of FTL travel and\n",MAGENTA,BOLD);
-	printColor("started slowly drifting in the direction it exited from FTL in.\n",MAGENTA,BOLD);
+	printColor("And then it was all over. The ship dropped out of FTL and\n",MAGENTA,BOLD);
+	printColor("starts slowly drifting in the direction it exited from FTL.\n",MAGENTA,BOLD);
 	printColor("You can no longer feel the constant pull in one direction of the\n",MAGENTA,BOLD);
 	printColor("black hole and the automated countdown has ceased. It appears you\n",MAGENTA,BOLD);
 	printColor("are you safe, for the time being.\n",MAGENTA,BOLD);
