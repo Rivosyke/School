@@ -17,7 +17,6 @@ class CargoHold: public Space
 {
 	private:
         Item* emFieldRegulator;
-        string specialActionName;
 	public:
 		CargoHold(Space* tempUp, 
                     Space* tempRight, 

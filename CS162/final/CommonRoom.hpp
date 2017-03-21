@@ -17,7 +17,7 @@ class CommonRoom: public Space
 {
 	private:
         Item* FTLFOB;
-        string specialActionName;
+        
 	public:
 		CommonRoom(Space* tempUp, 
                     Space* tempRight, 

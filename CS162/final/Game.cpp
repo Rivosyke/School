@@ -10,7 +10,11 @@
 
 /*********************************************************************
 ** Description: Constructor that will initialize and allocate memory
-** for all the appropriate Spaces.
+** for all the appropriate Spaces as well as call the Space method
+** setDirectionPointer to set the directional pointers of objects
+** declared after the calling object's declaration. It also sets the
+** currentRoom to cryoChamber, moveCount to 40, playerWins to false,
+** and loopGame to true.
 *********************************************************************/
 Game::Game()
 {
@@ -96,12 +100,12 @@ void Game::printGameDesc()
 {
     cout << endl << endl;
     cout << "This game is the final project for CS162, written by Ryan McGinn. " << endl;
-    cout << endl << "The game's background is that you (the player) wake up in a cryo chamber " << endl
-                 << "on a spaceship with no knowledge of what's going on around you. The" << endl
-                 << "intended goal is to repair various parts of the ship in order to use the" << endl
-                 << "FTL (Faster Than Light) drive to escape the event horizon of a Black Hole." << endl
-                 << "Every room change will take 1 minute and you start with 40 minutes until" << endl
-                 << "you pass the event horizon." << endl;
+    cout << endl << "The game's background is that you (the player) wake up in a cryo chamber\n"
+                 << "on a spaceship with no knowledge of what's going on around you. The\n"
+                 << "intended goal is to repair various parts of the ship in order to use the\n"
+                 << "FTL (Faster Than Light) drive to escape the event horizon of a black hole.\n"
+                 << "Every room change will take 1 minute and you start with 40 minutes until\n"
+                 << "the ship slips past the event horizon." << endl;
     cout << endl << endl;
     printStartingScene();
     cout << endl << endl;
@@ -167,8 +171,11 @@ void Game::printUserInputMenu()
 }
 
 /*********************************************************************
-** Description: Method that will print the banner (title) of the game.
-** ASCII Art obtained from http://patorjk.com/software/taag
+** Description: Method that performs the primary loop of the game. Each
+** loop will output the moves remaining, the current room's name, the
+** current room's description, and then a list of user options. The
+** user options are controlled by a switch, which will call the 
+** appropriate Game method for that option.
 *********************************************************************/
 void Game::primaryDecisionLoop()
 {
@@ -289,7 +296,10 @@ void Game::changeRooms()
 /*********************************************************************
 ** Description: Method that will perform the room's special action.
 ** There is a check in case the player tries to depressurize the 
-** airlock while not wearing the pressure suit.
+** airlock while not wearing the pressure suit. There is also a special
+** check when trying to do engage the FTL drive from the cockpit that 
+** checks to make sure the other room's special actions are done and 
+** that the key is inserted.
 *********************************************************************/
 void Game::performSpecialAction()
 {
@@ -323,7 +333,9 @@ void Game::performSpecialAction()
 
 /*********************************************************************
 ** Description: Method that will attempt to pickup an item from the
-** current room.
+** current room. There is a check that lets the player pickup the 
+** pressure suit as well as a check to see if the player is going to 
+** exceed the max of two items at a time.
 *********************************************************************/
 void Game::getItemFromRoom()
 {
@@ -335,7 +347,14 @@ void Game::getItemFromRoom()
 	// If the player has the suit equipped, get the item.
 	else if (player.pressureSuitEquipped())
 	{
-		player.pickUpItem(currentRoom -> getItem());
+        if (player.inventorySize() == 2)
+        {
+            printColor("The suit only has two pockets; you can't carry any more items!\n",CYAN,BOLD);
+        }
+        else
+        {
+            player.pickUpItem(currentRoom -> getItem());
+        }
 	}
 	else
 	{
@@ -346,7 +365,7 @@ void Game::getItemFromRoom()
 /*********************************************************************
 ** Description: Method that will attempt to use an item in the player's
 ** inventory in the current room. Various checks are performed to 
-** determined if any of the items can be used in that room.
+** determine if any of the items can be used in that room.
 *********************************************************************/
 void Game::useItem()
 {
@@ -391,6 +410,10 @@ void Game::useItem()
 	}
 }
 
+/*********************************************************************
+** Description: Method that will check if the player wins and output
+** an appropriate message based on that bool.
+*********************************************************************/
 void Game::gameResults()
 {
 	clearScreen();

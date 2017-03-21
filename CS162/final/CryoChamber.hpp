@@ -18,7 +18,6 @@ class CryoChamber: public Space
 {
 	private:
         Item* pressureSuit;
-        string specialActionName;
 	public:
 		CryoChamber(Space* tempUp, 
                     Space* tempRight, 

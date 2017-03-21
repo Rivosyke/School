@@ -19,7 +19,6 @@ Airlock::Airlock(Space* tempUp,
                          string tempName)
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
-    specialActionName = "Turn on the lights";
 }
 
 /*********************************************************************

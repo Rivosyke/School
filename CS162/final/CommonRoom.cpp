@@ -21,7 +21,6 @@ CommonRoom::CommonRoom(Space* tempUp,
 {
     FTLFOB = new Item("FTL Engagement FOB on a fuzzy dice keychain");
 
-    specialActionName = "Turn on lights";
 }
 
 /*********************************************************************

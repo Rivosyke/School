@@ -20,7 +20,6 @@ Engineering::Engineering(Space* tempUp,
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
     emFieldRegulator = nullptr;
-    specialActionName = "Restore Main Power";
 }
 
 /*********************************************************************
@@ -46,10 +45,10 @@ void Engineering::displayDesc()
     {        
         cout << "You are in a room that has a catwalk with metal grating floor plates\n"
              << "spanning across a chamber that contains a single, giant cylinder in\n"
-             << "the center. The catwalk connects the door to a console and maintenance\n"
+             << "the center. The catwalk connects the door to a console and a maintenance\n"
              << "panel on the cylinder. The panel says 'Fusion Reactor Maintenance' and\n"
              << "the console is labeled 'Reactor Operations'. The reactor appears to be \n"
-             << "dormant and the maintenance panel appears to be missing a part." << endl;
+             << "dormant and the maintenance panel is missing a part." << endl;
         
     }
     // Description based on if the EM Field Regulator is not present in Engineering

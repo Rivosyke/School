@@ -13,10 +13,7 @@
 #define CORRIDOR_HPP
 
 class Corridor: public Space
-{
-	private:
-        string specialActionName;
-        
+{        
 	public:
 		Corridor(Space* tempUp, 
                     Space* tempRight, 

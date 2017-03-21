@@ -17,7 +17,6 @@ class Cockpit: public Space
 {
 	private:
         Item* FTLFOB;
-        string specialActionName;
 	public:
 		Cockpit(Space* tempUp, 
                     Space* tempRight, 

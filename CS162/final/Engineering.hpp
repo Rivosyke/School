@@ -17,7 +17,6 @@ class Engineering: public Space
 {
 	private:
         Item* emFieldRegulator;
-        string specialActionName;
 	public:
 		Engineering(Space* tempUp, 
                     Space* tempRight, 

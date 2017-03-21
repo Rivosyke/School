@@ -20,7 +20,6 @@ O2Room::O2Room(Space* tempUp,
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
     pressureRegulator = nullptr;
-    specialActionName = "Tune Oxygen/Nitrogen Mixture";
 }
 
 /*********************************************************************

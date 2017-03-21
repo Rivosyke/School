@@ -17,7 +17,6 @@ class O2Room: public Space
 {
 	private:
         Item* pressureRegulator;
-        string specialActionName;
 	public:
 		O2Room(Space* tempUp, 
                     Space* tempRight, 

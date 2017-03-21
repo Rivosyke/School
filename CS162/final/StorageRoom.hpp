@@ -18,7 +18,7 @@ class StorageRoom: public Space
 {
 	private:
         Item* pressureRegulator;
-        string specialActionName;
+        
 	public:
 		StorageRoom(Space* tempUp, 
                     Space* tempRight, 

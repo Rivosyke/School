@@ -55,7 +55,6 @@ class Game
         void getItemFromRoom();
         void performSpecialAction();
         void gameResults();
-        
 
     public:
         Game();

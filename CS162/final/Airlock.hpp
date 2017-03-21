@@ -14,9 +14,6 @@
 
 class Airlock: public Space
 {
-	private:
-        string specialActionName;
-        
 	public:
 		Airlock(Space* tempUp, 
                     Space* tempRight, 

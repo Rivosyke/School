@@ -20,8 +20,6 @@ CargoHold::CargoHold(Space* tempUp,
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
     emFieldRegulator = new Item("EM Field Regulator");
-
-    specialActionName = "Close Cargo Hold Door";
 }
 
 /*********************************************************************

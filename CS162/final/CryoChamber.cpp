@@ -21,7 +21,6 @@ CryoChamber::CryoChamber(Space* tempUp,
 {
     pressureSuit = new Item("Pressure Suit");
 
-    specialActionName = "Turn on emergency power";
 }
 
 /*********************************************************************

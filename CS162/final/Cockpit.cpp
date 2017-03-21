@@ -20,7 +20,6 @@ Cockpit::Cockpit(Space* tempUp,
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
 {
     FTLFOB = nullptr;
-    specialActionName = "Engage FTL";
 }
 
 /*********************************************************************

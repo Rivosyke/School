@@ -18,9 +18,7 @@ Corridor::Corridor(Space* tempUp,
                          Space* tempLeft,
                          string tempName)
 			:Space(tempUp, tempRight, tempDown, tempLeft, tempName)
-{
-    specialActionName = "Turn on the lights";
-}
+{}
 
 /*********************************************************************
 ** Description: Destructor that does nothing

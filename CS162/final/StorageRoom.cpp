@@ -21,7 +21,6 @@ StorageRoom::StorageRoom(Space* tempUp,
 {
     pressureRegulator = new Item("Oxygen Pressure Regulator");
 
-    specialActionName = "Turn on lights";
 }
 
 /*********************************************************************
